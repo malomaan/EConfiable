@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EConfiableModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Pais">
+          <Key>
+            <PropertyRef Name="pai_codigo" />
+          </Key>
+          <Property Name="pai_codigo" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="pai_nombre" Type="varchar" MaxLength="250" />
+          <Property Name="pai_codigointernacional" Type="varchar" MaxLength="20" />
+          <Property Name="pai_predeterminado" Type="bit" />
+        </EntityType>
+        <Function Name="Pais_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pai_codigo" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Pais_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pai_codigo" Type="varchar" Mode="In" />
+          <Parameter Name="pai_nombre" Type="varchar" Mode="In" />
+          <Parameter Name="pai_codigointernacional" Type="varchar" Mode="In" />
+          <Parameter Name="pai_predeterminado" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="Pais_List" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pai_codigo" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Pais_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pai_codigo" Type="varchar" Mode="In" />
+          <Parameter Name="pai_nombre" Type="varchar" Mode="In" />
+          <Parameter Name="pai_codigointernacional" Type="varchar" Mode="In" />
+          <Parameter Name="pai_predeterminado" Type="bit" Mode="In" />
+        </Function>
+        <EntityContainer Name="EConfiableModelStoreContainer">
+          <EntitySet Name="Pais" EntityType="Self.Pais" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EConfiableModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Pais">
+          <Key>
+            <PropertyRef Name="pai_codigo" />
+          </Key>
+          <Property Name="pai_codigo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pai_nombre" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="pai_codigointernacional" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="pai_predeterminado" Type="Boolean" />
+        </EntityType>
+        <EntityContainer Name="EConfiableEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Pais" EntityType="Self.Pais" />
+          <FunctionImport Name="Pais_Delete">
+            <Parameter Name="pai_codigo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Pais_Insert">
+            <Parameter Name="pai_codigo" Mode="In" Type="String" />
+            <Parameter Name="pai_nombre" Mode="In" Type="String" />
+            <Parameter Name="pai_codigointernacional" Mode="In" Type="String" />
+            <Parameter Name="pai_predeterminado" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Pais_List" ReturnType="Collection(EConfiableModel.Pais_List_Result)">
+            <Parameter Name="pai_codigo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Pais_Update">
+            <Parameter Name="pai_codigo" Mode="In" Type="String" />
+            <Parameter Name="pai_nombre" Mode="In" Type="String" />
+            <Parameter Name="pai_codigointernacional" Mode="In" Type="String" />
+            <Parameter Name="pai_predeterminado" Mode="In" Type="Boolean" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="Pais_List_Result">
+          <Property Type="String" Name="pai_codigo" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="pai_nombre" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="pai_codigointernacional" Nullable="true" MaxLength="20" />
+          <Property Type="Boolean" Name="pai_predeterminado" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EConfiableModelStoreContainer" CdmEntityContainer="EConfiableEntities">
+          <EntitySetMapping Name="Pais">
+            <EntityTypeMapping TypeName="EConfiableModel.Pais">
+              <MappingFragment StoreEntitySet="Pais">
+                <ScalarProperty Name="pai_codigo" ColumnName="pai_codigo" />
+                <ScalarProperty Name="pai_nombre" ColumnName="pai_nombre" />
+                <ScalarProperty Name="pai_codigointernacional" ColumnName="pai_codigointernacional" />
+                <ScalarProperty Name="pai_predeterminado" ColumnName="pai_predeterminado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Pais_Delete" FunctionName="EConfiableModel.Store.Pais_Delete" />
+          <FunctionImportMapping FunctionImportName="Pais_Insert" FunctionName="EConfiableModel.Store.Pais_Insert" />
+          <FunctionImportMapping FunctionImportName="Pais_List" FunctionName="EConfiableModel.Store.Pais_List">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EConfiableModel.Pais_List_Result">
+                <ScalarProperty Name="pai_codigo" ColumnName="pai_codigo" />
+                <ScalarProperty Name="pai_nombre" ColumnName="pai_nombre" />
+                <ScalarProperty Name="pai_codigointernacional" ColumnName="pai_codigointernacional" />
+                <ScalarProperty Name="pai_predeterminado" ColumnName="pai_predeterminado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Pais_Update" FunctionName="EConfiableModel.Store.Pais_Update" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
