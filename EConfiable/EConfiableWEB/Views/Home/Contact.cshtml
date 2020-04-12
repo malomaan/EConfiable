@@ -1,17 +1,45 @@
 ﻿@{
     ViewBag.Title = "Contact";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<div class="modal fade" id="exampleModal" tabindex="-1" data-backdrop="false" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalCenterTitle"><i class="fas fa-question-circle" style="color:white;"></i> @ViewBag.Title.</h4>
+                <a class='close' href="@Url.Action("Index","Home")">
+                    <i class="far fa-times-circle fa-lg" style="color:#000000;"></i>
+                </a>
+            </div>
+            <div class="modal-body">
+                <h2>@ViewBag.Title.</h2>
+                <h3>@ViewBag.Message</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+                <address>
+                    One Microsoft Way<br />
+                    Redmond, WA 98052-6399<br />
+                    <abbr title="Phone">P:</abbr>
+                    425.555.0100
+                </address>
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+                <address>
+                    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
+                    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+                </address>
+
+
+            </div>
+            <div class="modal-footer">
+                <a class='btn btn-outline-danger btn-sm' href="@Url.Action("Index","Home")">
+                    <span class="glyphicon glyphicon-share-alt"></span> Cancelar
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $('#exampleModal').modal("show")
+    </script>
+}

@@ -1,6 +1,24 @@
 ﻿body {
-    padding-top: 50px;
+    padding-top: 75px;
     padding-bottom: 20px;
+    font-family: 'Roboto', sans-serif;
+    background-image: url("Imagenes/background.jpg");
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-attachment: fixed
+}
+
+.esalid {
+    /*font-family: 'Oleo Script', cursive;*/
+    /*font-family: 'Pattaya', sans-serif;
+    font-size: 30px;
+    text-shadow: 2px 2px 2px blue;*/
+    color: #FFF;
+    margin: 0 auto;
+    text-align: center;
+    font-family: 'Pattaya', sans-serif;
+    font-size: 30px;
+    text-shadow: -4px 3px 0 #808080, -8px 7px 0 #0a0e27;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -21,4 +39,23 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+
+
+
+.modal-header {
+    background-color: #6aa01c;
+    color: #fff;
+    border-color: #6aa01c;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px 5px 0px 0px;
+    height: 55px;
+}
+
+.modal-footer {
+    padding: 15px;
+    border-top: 1px solid #e5e5e5;
+    text-align: right;
 }
