@@ -2,6 +2,7 @@
     padding-top: 75px;
     padding-bottom: 20px;
     font-family: 'Roboto', sans-serif;
+    font-size:14px;
     background-image: url("Imagenes/background.jpg");
     background-repeat: no-repeat;
     background-position: right center;
@@ -25,6 +26,7 @@
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    background-color:#FFF;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -38,10 +40,16 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+    max-width: 99%;
 }
 
+.form-control{
+    max-width: 95%;
+}
 
+.form-group {
+    margin-bottom: 0;
+}
 
 
 .modal-header {

@@ -69,6 +69,7 @@
       <DependentUpon>EConfiableModel.tt</DependentUpon>
     </Compile>
     <Compile Include="PaisBD.cs" />
+    <Compile Include="PaisMetadata.cs" />
     <Compile Include="Pais_List_Result.cs">
       <DependentUpon>EConfiableModel.tt</DependentUpon>
     </Compile>

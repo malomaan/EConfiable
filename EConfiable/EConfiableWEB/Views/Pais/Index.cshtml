@@ -1,0 +1,188 @@
+﻿@model EConfiableBD.Pais
+
+@{
+    ViewBag.Title = "Pais";
+}
+
+    <div class="form-group">
+        <h2>@ViewBag.Title</h2>
+
+    </div>
+<div class="form-group">
+    <button type="button" id="btnSubmit" onclick="addview()" class="btn btn-outline-success btn-sm">
+        <i class="far fa-file"></i> Nuevo
+    </button>
+</div>
+<div class="shadow p-3 mb-5 bg-white rounded">
+    <table id="Data" class="table table-striped table-bordered table-hover table-responsive" width="100%">
+        <thead>
+            <tr>
+                <th>
+                    Acciones
+                </th>
+                <th>
+                    Codigo
+                </th>
+                <th>
+                    Nombre
+                </th>
+                <th>
+                    CodigoInternacional
+                </th>
+                <th>
+                    Predeterminado
+                </th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+
+<div class="modal fade" id="WindowsModal" tabindex="-1" data-backdrop="false" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalCenterTitle"><i class="far fa-file" style="color:white;"></i> @ViewBag.Title</h4>
+                    <a class='close' href="@Url.Action("Index", "Home")">
+                        <i class="fas fa-times" style="color:#000000;"></i>
+                    </a>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal">
+
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <label class="sr-only" for="inlineFormInputGroupUsername2">Username</label>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.pai_codigo, htmlAttributes: new { @class = "control-label" })
+                            <div class="input-group mb-2 mr-sm-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="far fa-file"></i></div>
+                                </div>
+                                @Html.EditorFor(model => model.pai_codigo, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.pai_codigo) + " *" } })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.pai_codigo, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.pai_nombre, htmlAttributes: new { @class = "control-label" })
+                            <div class="input-group mb-2 mr-sm-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="far fa-file"></i></div>
+                                </div>
+                                @Html.EditorFor(model => model.pai_nombre, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.pai_nombre) + " *" } })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.pai_nombre, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.pai_codigointernacional, htmlAttributes: new { @class = "control-label" })
+                            <div class="input-group mb-2 mr-sm-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="far fa-file"></i></div>
+                                </div>
+                                @Html.EditorFor(model => model.pai_codigointernacional, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.pai_codigointernacional) + " *" } })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.pai_codigointernacional, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.pai_predeterminado, htmlAttributes: new { @class = "control-label" })
+                            <div class="input-group mb-2 mr-sm-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="far fa-file"></i></div>
+                                </div>
+                                @Html.EditorFor(model => model.pai_predeterminado, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.pai_predeterminado, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="form-group">
+                        <button type="submit" id="btnSubmit" class="btn btn-outline-success btn-sm">
+                            <i class="fas fa-check"></i> Guardar
+                        </button>
+                        <a class='btn btn-outline-danger btn-sm' href="@Url.Action("Index")">
+                            <i class="fas fa-times"></i> Cancelar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        //Metodo que permite mostrar la ventana popup new
+        function addview() {
+            $('#WindowsModal').modal('show');
+            $(document).on('shown.bs.modal', '#WindowsModal', function () {
+                document.getElementById('pai_codigo').focus();
+            });
+        }
+
+        //LLenar datos de la tabla Pais con AJAX
+        $(document).ready(function () {
+            function convertJsonDateToShortDate(data) {
+                const dateValue = new Date(parseInt(data.substr(6)));
+                return dateValue.toLocaleDateString();
+            }
+            $('#Data').DataTable({
+                "ajax": {
+                    "type": "GET",
+                    "url": "@Url.Action("GetData", "Pais")",
+                    "datatype":"JSON",
+                },
+                "columns": [
+                    {
+                        "data": "tra_id", "render": function (data) {
+                            return "<a class='btn btn-success btn-sm btn-grid' onclick='editterow(" + data + ")'><span class='glyphicon glyphicon-folder-open'></span> Editar</a> <a class='btn btn-danger btn-sm btn-grid' onclick='deleterow(" + data + ")'><span class='glyphicon glyphicon-trash'></span> Eliminar</a>";
+                        },
+                        "orderable": false,
+                        "width": "170px"
+                    },
+                    { "data": "pai_codigo" },
+                    { "data": "pai_nombre" },
+                    { "data": "pai_codigointernacional" },
+                    { "data": "pai_predeterminado" }
+                ],
+                "lengthMenu": [5, 10, 25, 50, 75, 100],
+                "pageLength": 5,
+                "records": 5,
+                "recordsFiltered": 10,
+                "language": {
+                    "processing": "<img src='/Content/Imagenes/Loading.gif' />",
+                    "sProcessing": "Procesando...",
+                    "sLengthMenu": "Mostrar _MENU_ Registros",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sEmptyTable": "Ningún dato disponible en esta tabla",
+                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ Registros",
+                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 Registros",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ Registros)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Buscar:",
+                    "sUrl": "",
+                    "sInfoThousands": ",",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    }
+
+                },
+                processing: true
+            });
+        });
+
+
+
+
+    </script>
+}
