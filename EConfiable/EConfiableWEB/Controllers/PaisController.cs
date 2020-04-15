@@ -12,7 +12,7 @@ namespace EConfiableWEB.Controllers
     public class PaisController : Controller
     {
 
-        PaisBD db = new PaisBD();
+        PaisPRC db = new PaisPRC();
 
 
         public ActionResult Index()
@@ -22,13 +22,62 @@ namespace EConfiableWEB.Controllers
 
 
         /// <summary>
-        /// Obtener el listado de la tabla Pais
+        /// Metodos que permite obtener el listado de la tabla Pais
         /// </summary>
         /// <returns></returns>
         public ActionResult GetData()
         {
             List<Pais_List_Result> TPais = db.Pais_List(null).ToList();
             return Json(new { data = TPais }, JsonRequestBehavior.AllowGet);
+        }
+
+
+        /// <summary>
+        /// Metodo que permite Insertar o Actualizar datos en la tabla Pais
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public JsonResult PostData(Pais data)
+        {
+            string Respuesta = string.Empty;
+            if (data.pai_codigo != "")
+            {
+                if (ModelState.IsValid)
+                {
+                    db.Pais_Insert(data.pai_codigo, data.pai_nombre, data.pai_codigointernacional, data.pai_predeterminado);
+                    Respuesta = "success";
+                }
+                else
+                {
+                    Respuesta = "Debe registrar información";
+                }
+            }
+            else
+            {
+                if (ModelState.IsValid)
+                {
+                    db.Pais_Update(data.pai_codigo, data.pai_nombre, data.pai_codigointernacional, data.pai_predeterminado);
+                    Respuesta = "success";
+                }
+                else
+                {
+                    Respuesta = "Debe registrar información";
+                }
+
+            }
+            return Json(Respuesta, JsonRequestBehavior.AllowGet);
+        }
+
+
+        /// <summary>
+        /// Metodo que permite Eliminar registos de la tabla Paise
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public JsonResult DeleteRow(string id)
+        {
+            db.Pais_Delete(id);
+            return Json("success", JsonRequestBehavior.AllowGet);
         }
 
     }

@@ -48,7 +48,7 @@ namespace EConfiablePRC
         /// Método que permite insertar en la tabla Pais capa PRC
         /// </summary>
         // ******************* = Método Insert = ******************************
-        public void Pais_Insert(string pai_codigo, string pai_nombre, string pai_codigointernacional, bool pai_predeterminado)
+        public void Pais_Insert(string pai_codigo, string pai_nombre, string pai_codigointernacional, bool? pai_predeterminado)
         {
             try
             {
@@ -66,7 +66,7 @@ namespace EConfiablePRC
         /// Método que permite actualizar en la tabla Pais capa PRC
         /// </summary>
         // ******************* = Método Update = ******************************
-        public void Pais_Update(string pai_codigo, string pai_nombre, string pai_codigointernacional, bool pai_predeterminado)
+        public void Pais_Update(string pai_codigo, string pai_nombre, string pai_codigointernacional, bool? pai_predeterminado)
         {
             try
             {

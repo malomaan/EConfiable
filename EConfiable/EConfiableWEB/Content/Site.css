@@ -2,7 +2,7 @@
     padding-top: 75px;
     padding-bottom: 20px;
     font-family: 'Roboto', sans-serif;
-    font-size:14px;
+    font-size:12px;
     background-image: url("Imagenes/background.jpg");
     background-repeat: no-repeat;
     background-position: right center;
@@ -67,3 +67,30 @@ textarea {
     border-top: 1px solid #e5e5e5;
     text-align: right;
 }
+
+/*Boton Grid*/
+.btn-grid {
+    width: 90px;
+    font-size: 12px;
+}
+
+
+
+/*Formato Personalizado de Tabla*/
+
+table {
+    color: #333;
+    font-family: Helvetica, Arial, sans-serif;
+    width: 640px;
+    border-collapse: collapse;
+    font-size:12px;
+}
+
+th {
+    border: 1px solid transparent;
+    height: 30px;
+    background-color:#eef1dd;
+}
+
+
+

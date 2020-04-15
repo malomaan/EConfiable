@@ -36,17 +36,16 @@
         </thead>
     </table>
 </div>
-
-
 <div class="modal fade" id="WindowsModal" tabindex="-1" data-backdrop="false" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        @using (Html.BeginForm())
+        @*@using (Html.BeginForm())*@
+        @using (Html.BeginForm("PostData", "Pais", FormMethod.Post, new { @id = "formsubmit" }))
         {
             @Html.AntiForgeryToken()
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="exampleModalCenterTitle"><i class="far fa-file" style="color:white;"></i> @ViewBag.Title</h4>
-                    <a class='close' href="@Url.Action("Index", "Home")">
+                    <a class='close' href="@Url.Action("Index", "Pais")">
                         <i class="fas fa-times" style="color:#000000;"></i>
                     </a>
                 </div>
@@ -101,12 +100,10 @@
                 </div>
                 <div class="modal-footer">
                     <div class="form-group">
-                        <button type="submit" id="btnSubmit" class="btn btn-outline-success btn-sm">
-                            <i class="fas fa-check"></i> Guardar
-                        </button>
-                        <a class='btn btn-outline-danger btn-sm' href="@Url.Action("Index")">
-                            <i class="fas fa-times"></i> Cancelar
-                        </a>
+                        <button type="button" id="submitdata" class="btn btn-outline-success btn-sm btn-grid" onclick="btnsubmit()"> <span class="fas fa-check"></span> Guardar</button>
+                        <button type="button" class="btn btn-outline-danger btn-sm btn-grid" data-dismiss="modal"> <span class="fas fa-times"></span> Cancelar</button>
+                        @Html.ActionLink("Back to List", "Index",null, new { @class = "btn btn-outline-danger btn-sm btn-grid" })
+
                     </div>
                 </div>
             </div>
@@ -117,17 +114,9 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
-    <script type="text/javascript">
-        //Metodo que permite mostrar la ventana popup new
-        function addview() {
-            $('#WindowsModal').modal('show');
-            $(document).on('shown.bs.modal', '#WindowsModal', function () {
-                document.getElementById('pai_codigo').focus();
-            });
-        }
-
-        //LLenar datos de la tabla Pais con AJAX
-        $(document).ready(function () {
+<script type="text/javascript">
+    //LLenar datos de la tabla Pais con AJAX
+    $(document).ready(function () {
             function convertJsonDateToShortDate(data) {
                 const dateValue = new Date(parseInt(data.substr(6)));
                 return dateValue.toLocaleDateString();
@@ -139,15 +128,20 @@
                     "datatype":"JSON",
                 },
                 "columns": [
-                    {
-                        "data": "tra_id", "render": function (data) {
-                            return "<a class='btn btn-success btn-sm btn-grid' onclick='editterow(" + data + ")'><span class='glyphicon glyphicon-folder-open'></span> Editar</a> <a class='btn btn-danger btn-sm btn-grid' onclick='deleterow(" + data + ")'><span class='glyphicon glyphicon-trash'></span> Eliminar</a>";
+                    {       
+                        "data": "pai_codigo", "render": function (data) {                                                                                                                                                                       
+                            return "<a class='btn btn-success btn-sm btn-grid' onclick='editterow(" + data + ")'><span class='glyphicon glyphicon-folder-open'></span> Editar</a> <a class='btn btn-danger btn-sm btn-grid' onclick='deleterow(\"" + data + "\")'><span class='glyphicon glyphicon-trash'></span> Eliminar</a>";
                         },
                         "orderable": false,
                         "width": "170px"
                     },
-                    { "data": "pai_codigo" },
-                    { "data": "pai_nombre" },
+                    {
+                        "data": "pai_codigo"
+                    },
+                    {
+                        "data": "pai_nombre",
+                        "width": "70%"
+                    },
                     { "data": "pai_codigointernacional" },
                     { "data": "pai_predeterminado" }
                 ],
@@ -183,6 +177,77 @@
 
 
 
+    //Metodo que permite mostrar la ventana popup new
+    function addview() {
+            $('#WindowsModal').modal('show');
+            $(document).on('shown.bs.modal', '#WindowsModal', function () {
+                document.getElementById('pai_codigo').focus();
+            });
+        }
 
-    </script>
+    //Metodo que permite Insertar o Actualizar Registros en la tabla Paises
+    function btnsubmit() {
+            if ($("#formsubmit").valid()) {
+                    var Data = $("#formsubmit").serialize();
+                    $.ajax({
+                        type: 'POST',
+                        url: '@Url.Action("PostData", "Pais")',
+                        data: Data,
+                        datatype: 'JSON',
+
+                        success: function (response) {
+                            if (response == "success") {
+                                $('#ModalAddNew').modal('hide');
+                                $.notify("Registro Almacenado", {
+                                    className: 'info',
+                                    clickToHide: false,
+                                    autoHide: false,
+                                    globalPosition: 'top center'
+                                });
+                                setTimeout(function () { window.location.reload(); }, 1000);
+                            }
+                            else {
+                                $.notify("Error en en formulario", {
+                                    className: 'error',
+                                    globalPosition: 'top center'
+                                });
+                                $("#tra_accountnumber").focus();
+                            }
+                        },
+                        error: function (msg) {
+                            alert(msg.responseText);
+                            $("#accountnumber").focus();
+                        }
+                    })
+            }
+        }
+
+    //Metodo que permite Eliminar Registros de la tabla Pais
+    function deleterow(pai_codigo) {
+        if (confirm("Deseas eliminar este registro")) {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("DeleteRow", "Pais")/' + pai_codigo,
+                datatype: 'JSON',
+                success: function (response) {
+                    if (response == "success") {
+                        $.notify("Registro Eliminado", {
+                            className: 'error',
+                            clickToHide: false,
+                            autoHide: false,
+                            globalPosition: 'top center'
+                        });
+
+                        setTimeout(function () { window.location.reload(); }, 900);
+                    }
+                },
+                error: function (msg) {
+                    alert(alert(msg.responseText));
+                }
+            })
+        }
+    }
+
+
+</script>
 }
