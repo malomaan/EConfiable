@@ -3,58 +3,41 @@
 @{
     ViewBag.Title = "Iniciar sesión";
 }
-
 @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
-    <div class="modal fade in" role="dialog" id="myModal" tabindex="-1" data-backdrop="false" data-keyboard="false" aria-labelledby="myModalLabel" style="display: block;overflow-y: scroll;">
+    <div class="modal fade" id="WindowsModal" tabindex="-1" data-backdrop="false" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    @Html.ActionLink(" ", "Index", "Home", null, new { @class = "close boxclose" })
-                    <h4 class="modal-title" id="myModalLabel"><span class="fa fa-key"></span> @ViewBag.Title</h4>
+                    <h4 class="modal-title" id="exampleModalCenterTitle"><i class="fas fa-info-circle" style="color:white;"></i> @ViewBag.Title.</h4>
+                    <a class='close' href="@Url.Action("Index","Home")">
+                        <i class="fas fa-window-close" style="color:white;"></i>
+                    </a>
                 </div>
                 <div class="modal-body">
-                    <div id="divLoader" class="modal fade in Loading" role="dialog" style="display:none;">
-                        <center class="centrado">
-                            Procesando
-                            <p></p>
-                            <img src="~/Content/Imagenes/Imagen/Loading.gif" alt="Loader" />
-                        </center>
-                    </div>
                     <div class="form-horizontal">
                         <section id="loginForm">
                             @Html.AntiForgeryToken()
                             @Html.ValidationSummary("", new { @class = "text-danger" })
-
                             <div class="form-group">
-                                @Html.Label("Correo", new { @class = "col-md-2 control-label" })
-                                <div class="col-md-10">
-                                    <div class="form-group col-md-12">
-                                        <div class="input-group">
-                                            <div class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></div>
-                                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control Wc3Input" })
-                                        </div>
-                                        <div class="input-group">
-                                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                                        </div>
-
+                                @Html.Label("Correo", htmlAttributes: new { @class = "control-label" })
+                                <div class="input-group mb-2 mr-sm-2">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text"><i class="far fa-envelope"></i></div>
                                     </div>
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control Wc3Input" })
                                 </div>
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-group">
-                                @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                                <div class="col-md-10">
-                                    <div class="form-group col-md-12">
-                                        <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
-                                        <div class="input-group">
-                                            <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
-                                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                                        </div>
-                                        <div class="input-group">
-                                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                                        </div>
+                                @Html.Label("Clave", htmlAttributes: new { @class = "control-label" })
+                                <div class="input-group mb-2 mr-sm-2">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text"><i class="fas fa-key"></i></div>
                                     </div>
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
                                 </div>
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-group">
                                 <div class="col-md-offset-2 col-md-10">
@@ -66,26 +49,26 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <a class='btn btn-info btn-sm' href="@Url.Action("ForgotPassword")">
-                        <span class="glyphicon glyphicon-share-alt"></span> Restablecer Contraseña
-                    </a>
-
-
-                    <button type="submit" id="btnSubmit" class="btn btn-success btn-sm">
-                        <span class="glyphicon glyphicon-lock"></span> Ingresar
-                    </button>
+                    <a class='btn btn-outline-warning btn-sm ' href="@Url.Action("ForgotPassword")"><span class="fas fa-unlock"></span> Restablecer Contraseña</a>
+                    <button type="submit" id="btnSubmit" class="btn btn-outline-success btn-sm btn-grid"><span class="fas fa-user-lock"></span> Ingresar</button>
+                    <button type="button" id="my-button" class="btn btn-outline-danger btn-sm btn-grid" onclick="location.href='@Url.Action("Index","Home")'"><span class="fas fa-times"></span> Cancelar</button>
                 </div>
             </div>
         </div>
     </div>
-
 }
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
     <script type="text/javascript">
-        $('#myModal').modal('show');
-                document.getElementById('Email').focus();
+        $('#WindowsModal').modal('show');
+
+        $(document).on('shown.bs.modal', '#WindowsModal', function () {
+            document.getElementById('Email').focus();
+        });
+
+        //$('[data-toggle="tooltip"]').tooltip();
+
     </script>
 }
