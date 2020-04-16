@@ -7,7 +7,7 @@
             <div class="modal-header">
                 <h4 class="modal-title" id="exampleModalCenterTitle"><i class="fas fa-question-circle" style="color:white;"></i> @ViewBag.Title.</h4>
                 <a class='close' href="@Url.Action("Index","Home")">
-                    <i class="far fa-times-circle fa-lg" style="color:#000000;"></i>
+                    <i class="fas fa-window-close" style="color:#FFF;"></i>
                 </a>
             </div>
             <div class="modal-body">
@@ -29,9 +29,7 @@
 
             </div>
             <div class="modal-footer">
-                <a class='btn btn-outline-danger btn-sm' href="@Url.Action("Index","Home")">
-                    <span class="glyphicon glyphicon-share-alt"></span> Cancelar
-                </a>
+                <button type="button" id="my-button" class="btn btn-outline-danger btn-sm btn-grid" onclick="location.href='@Url.Action("Index")'"><span class="fas fa-times"></span> Cancelar</button>
             </div>
         </div>
     </div>

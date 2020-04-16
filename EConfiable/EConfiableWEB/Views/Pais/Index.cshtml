@@ -4,36 +4,43 @@
     ViewBag.Title = "Pais";
 }
 
-    <div class="form-group">
+<div class="card">
+    <div class="card-header bg-success" style="color:white;">
         <h2>@ViewBag.Title</h2>
-
     </div>
-<div class="form-group">
-    <button type="button" id="btnSubmit" onclick="addview()" class="btn btn-outline-success btn-sm">
-        <i class="far fa-file"></i> Nuevo
-    </button>
+    <div class="card-body">
+            <div class="form-group">
+                <button type="button" id="btnSubmit" onclick="addview()" class="btn btn-outline-success btn-sm">
+                    <i class="far fa-file"></i> Nuevo
+                </button>
+            </div>
+            <br />
+        <table id="Data" class="table table-striped table-bordered table-hover table-responsive" width="100%">
+            <thead>
+                <tr>
+                    <th>
+                        Acciones
+                    </th>
+                    <th>
+                        Codigo
+                    </th>
+                    <th>
+                        Nombre
+                    </th>
+                    <th>
+                        CodigoInternacional
+                    </th>
+                    <th>
+                        Predeterminado
+                    </th>
+                </tr>
+            </thead>
+        </table>
+    </div>
 </div>
-<table id="Data" class="table table-striped table-bordered table-hover table-responsive" width="100%">
-        <thead>
-            <tr>
-                <th>
-                    Acciones
-                </th>
-                <th>
-                    Codigo
-                </th>
-                <th>
-                    Nombre
-                </th>
-                <th>
-                    CodigoInternacional
-                </th>
-                <th>
-                    Predeterminado
-                </th>
-            </tr>
-        </thead>
-    </table>
+<br />
+
+
 <div class="modal fade" id="WindowsModal" tabindex="-1" data-backdrop="false" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         @*@using (Html.BeginForm())*@
@@ -42,9 +49,9 @@
             @Html.AntiForgeryToken()
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalCenterTitle"><i class="far fa-file" style="color:white;"></i> @ViewBag.Title</h4>
+                    <h5 class="modal-title" id="exampleModalCenterTitle"><i class="far fa-file" style="color:white;"></i> @ViewBag.Title</h5>
                     <a class='close' href="@Url.Action("Index", "Pais")">
-                        <i class="fas fa-times" style="color:#000000;"></i>
+                        <i class="fas fa-window-close" style="color:white;"></i>
                     </a>
                 </div>
                 <div class="modal-body">
@@ -98,8 +105,8 @@
                 </div>
                 <div class="modal-footer">
                     <div class="form-group">
-                        <button type="button" id="submitdata" class="btn btn-outline-success btn-sm btn-grid" onclick="btnsubmit(0)"> <span class="fas fa-check"></span> Guardar</button>
-                        <button type="button" id="updatedata" class="btn btn-outline-success btn-sm btn-grid" onclick="btnsubmit(1)"> <span class="fas fa-check"></span> Actualizar</button>
+                        <button type="button" id="submitdata" class="btn btn-outline-success btn-sm" onclick="btnsubmit(0)"> <span class="fas fa-check"></span> Guardar</button>
+                        <button type="button" id="updatedata" class="btn btn-outline-success btn-sm" onclick="btnsubmit(1)"> <span class="fas fa-check"></span> Actualizar</button>
                         <button type="button" id="my-button" class="btn btn-outline-danger btn-sm btn-grid" onclick="location.href='@Url.Action("Index", "Pais")'"><span class="fas fa-times"></span> Cancelar</button>
                     </div>
                 </div>
@@ -111,7 +118,7 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
-<script type="text/javascript">
+    <script type="text/javascript">
     //LLenar datos de la tabla Pais con AJAX
     $(document).ready(function () {
             function convertJsonDateToShortDate(data) {
@@ -128,18 +135,17 @@
 
                     {
                         "data": "pai_codigo", "render": function (data) {
-                            return "<a class='btn btn-outline-success btn-sm btn-grid' style='color: gray;' onclick='editterow(\"" + data + "\")'><span class='far fa-edit'></span> Editar</a> <a class='btn btn-outline-danger btn-sm btn-grid' onclick='deleterow(\"" + data + "\")'><span class='far fa-trash-alt'></span> Eliminar</a>";
+                            return "<button type='button' id='btnSubmit' onclick='editterow(\"" + data + "\")' class='btn btn-outline-success btn-sm'><i class='far fa-edit'></i> Editar</button> <button type='button' id='btnSubmit' onclick='deleterow(\"" + data + "\")' class='btn btn-outline-danger btn-sm'><i class='far fa-trash-alt'></i> Eliminar</button>";
                         },
                         "orderable": false,
-                        "width": "30%"
+                        "width": "40%"
                     },
-
                     {
                         "data": "pai_codigo"
                     },
                     {
                         "data": "pai_nombre",
-                        "width": "70%"
+                        "width": "60%"
                     },
                     { "data": "pai_codigointernacional" },
                     { "data": "pai_predeterminado" }
@@ -275,5 +281,5 @@
         }
 
 
-</script>
+    </script>
 }

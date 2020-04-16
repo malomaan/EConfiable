@@ -90,10 +90,10 @@ namespace EConfiableWEB.Controllers
         [HttpGet]
         public ActionResult GetEdit(string id)
         {
-            EConfiableEntities bd = new EConfiableEntities();
-            //List<Pais_List_Result> TPais = db.Pais_List(id).ToList();
-            Pais tPais = bd.Pais.Find(id);
-            return Json(tPais, JsonRequestBehavior.AllowGet);
+            //EConfiableEntities bd = new EConfiableEntities();
+            List<Pais_List_Result> tPais = db.Pais_List(id).ToList();
+            //Pais tPais = bd.Pais.Find(id);
+            return Json(tPais.FirstOrDefault(), JsonRequestBehavior.AllowGet);
         }
 
 
