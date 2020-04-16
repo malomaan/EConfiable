@@ -37,10 +37,10 @@ namespace EConfiableWEB.Controllers
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        public JsonResult PostData(Pais data)
+        public JsonResult PostData(Pais data,int id)
         {
             string Respuesta = string.Empty;
-            if (data.pai_codigo != "")
+            if (id != 1)
             {
                 if (ModelState.IsValid)
                 {
@@ -79,6 +79,23 @@ namespace EConfiableWEB.Controllers
             db.Pais_Delete(id);
             return Json("success", JsonRequestBehavior.AllowGet);
         }
+
+
+        /// <summary>
+        /// Metodo que permite obtener un registro de la tabla Pais
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+
+        [HttpGet]
+        public ActionResult GetEdit(string id)
+        {
+            EConfiableEntities bd = new EConfiableEntities();
+            //List<Pais_List_Result> TPais = db.Pais_List(id).ToList();
+            Pais tPais = bd.Pais.Find(id);
+            return Json(tPais, JsonRequestBehavior.AllowGet);
+        }
+
 
     }
 }

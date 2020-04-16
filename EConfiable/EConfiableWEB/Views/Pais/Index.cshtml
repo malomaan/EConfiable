@@ -13,8 +13,7 @@
         <i class="far fa-file"></i> Nuevo
     </button>
 </div>
-<div class="shadow p-3 mb-5 bg-white rounded">
-    <table id="Data" class="table table-striped table-bordered table-hover table-responsive" width="100%">
+<table id="Data" class="table table-striped table-bordered table-hover table-responsive" width="100%">
         <thead>
             <tr>
                 <th>
@@ -35,7 +34,6 @@
             </tr>
         </thead>
     </table>
-</div>
 <div class="modal fade" id="WindowsModal" tabindex="-1" data-backdrop="false" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         @*@using (Html.BeginForm())*@
@@ -100,10 +98,9 @@
                 </div>
                 <div class="modal-footer">
                     <div class="form-group">
-                        <button type="button" id="submitdata" class="btn btn-outline-success btn-sm btn-grid" onclick="btnsubmit()"> <span class="fas fa-check"></span> Guardar</button>
-                        <button type="button" class="btn btn-outline-danger btn-sm btn-grid" data-dismiss="modal"> <span class="fas fa-times"></span> Cancelar</button>
-                        @Html.ActionLink("Back to List", "Index",null, new { @class = "btn btn-outline-danger btn-sm btn-grid" })
-
+                        <button type="button" id="submitdata" class="btn btn-outline-success btn-sm btn-grid" onclick="btnsubmit(0)"> <span class="fas fa-check"></span> Guardar</button>
+                        <button type="button" id="updatedata" class="btn btn-outline-success btn-sm btn-grid" onclick="btnsubmit(1)"> <span class="fas fa-check"></span> Actualizar</button>
+                        <button type="button" id="my-button" class="btn btn-outline-danger btn-sm btn-grid" onclick="location.href='@Url.Action("Index", "Pais")'"><span class="fas fa-times"></span> Cancelar</button>
                     </div>
                 </div>
             </div>
@@ -128,13 +125,15 @@
                     "datatype":"JSON",
                 },
                 "columns": [
-                    {       
-                        "data": "pai_codigo", "render": function (data) {                                                                                                                                                                       
-                            return "<a class='btn btn-success btn-sm btn-grid' onclick='editterow(" + data + ")'><span class='glyphicon glyphicon-folder-open'></span> Editar</a> <a class='btn btn-danger btn-sm btn-grid' onclick='deleterow(\"" + data + "\")'><span class='glyphicon glyphicon-trash'></span> Eliminar</a>";
+
+                    {
+                        "data": "pai_codigo", "render": function (data) {
+                            return "<a class='btn btn-outline-success btn-sm btn-grid' style='color: gray;' onclick='editterow(\"" + data + "\")'><span class='far fa-edit'></span> Editar</a> <a class='btn btn-outline-danger btn-sm btn-grid' onclick='deleterow(\"" + data + "\")'><span class='far fa-trash-alt'></span> Eliminar</a>";
                         },
                         "orderable": false,
-                        "width": "170px"
+                        "width": "30%"
                     },
+
                     {
                         "data": "pai_codigo"
                     },
@@ -176,49 +175,51 @@
         });
 
 
-
     //Metodo que permite mostrar la ventana popup new
     function addview() {
-            $('#WindowsModal').modal('show');
+        $('#WindowsModal').modal('show');
+        $('#submitdata').show();
+        $('#updatedata').hide();
+
             $(document).on('shown.bs.modal', '#WindowsModal', function () {
                 document.getElementById('pai_codigo').focus();
             });
         }
 
     //Metodo que permite Insertar o Actualizar Registros en la tabla Paises
-    function btnsubmit() {
+    function btnsubmit(id) {
             if ($("#formsubmit").valid()) {
-                    var Data = $("#formsubmit").serialize();
-                    $.ajax({
-                        type: 'POST',
-                        url: '@Url.Action("PostData", "Pais")',
-                        data: Data,
-                        datatype: 'JSON',
+                var Data = $("#formsubmit").serialize();
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("PostData", "Pais")/' + id,
+                    data: Data,
+                    datatype: 'JSON',
 
-                        success: function (response) {
-                            if (response == "success") {
-                                $('#ModalAddNew').modal('hide');
-                                $.notify("Registro Almacenado", {
-                                    className: 'info',
-                                    clickToHide: false,
-                                    autoHide: false,
-                                    globalPosition: 'top center'
-                                });
-                                setTimeout(function () { window.location.reload(); }, 1000);
-                            }
-                            else {
-                                $.notify("Error en en formulario", {
-                                    className: 'error',
-                                    globalPosition: 'top center'
-                                });
-                                $("#tra_accountnumber").focus();
-                            }
-                        },
-                        error: function (msg) {
-                            alert(msg.responseText);
-                            $("#accountnumber").focus();
+                    success: function (response) {
+                        if (response == "success") {
+                            $('#ModalAddNew').modal('hide');
+                            $.notify("Registro Almacenado", {
+                                className: 'info',
+                                clickToHide: false,
+                                autoHide: false,
+                                globalPosition: 'top center'
+                            });
+                            setTimeout(function () { window.location.reload(); }, 1000);
                         }
-                    })
+                        else {
+                            $.notify("Error en en formulario", {
+                                className: 'error',
+                                globalPosition: 'top center'
+                            });
+                            $("#tra_accountnumber").focus();
+                        }
+                    },
+                    error: function (msg) {
+                        alert(msg.responseText);
+                        $("#accountnumber").focus();
+                    }
+                })
             }
         }
 
@@ -247,6 +248,31 @@
             })
         }
     }
+
+
+    //Metodo que permite editar registros en la Tabla Pais
+    function editterow(id) {
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("GetEdit", "Pais")/' + id,
+            datatype: 'JSON',
+            success: function (rs) {
+                $("#pai_codigo").val(rs.pai_codigo);
+                $("#pai_nombre").val(rs.pai_nombre);
+                $("#pai_codigointernacional").val(rs.pai_codigointernacional);
+                $("#pai_predeterminado").val(rs.pai_predeterminado.toString());
+                $('#WindowsModal').modal('show');
+                //$("#WindowsModal").text("Editar");
+                //$('#WindowsModal').modal('show');
+                $('#submitdata').hide();
+                $('#updatedata').show();
+                //$("#WindowsModal").html("<span class='glyphicon glyphicon-file'></span> Editar");
+            },
+            error: function (msg) {
+                alert(msg.responseText);
+            }
+        });
+        }
 
 
 </script>
