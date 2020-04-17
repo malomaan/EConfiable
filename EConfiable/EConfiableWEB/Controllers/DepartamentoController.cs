@@ -14,9 +14,10 @@ namespace EConfiableWEB.Controllers
 
         DepartamentoPRC db = new DepartamentoPRC();
 
-
+        private EConfiableEntities Bd = new EConfiableEntities();
         public ActionResult Index()
         {
+            ViewBag.pai_codigo = new SelectList(Bd.Pais, "pai_codigo", "pai_nombre");
             return View();
         }
 
