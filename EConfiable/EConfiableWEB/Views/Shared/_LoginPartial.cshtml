@@ -4,21 +4,23 @@
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
         @Html.AntiForgeryToken()
+    <ul class="nav navbar-nav navbar-right">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span style="color:yellow;" class="fas fa-user-circle fa-2x"></span> @User.Identity.GetUserName()
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="~/Account/myaccount"><span class="fas fa-user"></span> Mi Cuenta</a>
+                <a class="dropdown-item" href="~/Account/ForgotPassword"><span class="fas fa-key"></span> Cambiar Contraseña</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="~/Role/Index"><i class="fa fa-users" aria-hidden="true"></i> Roles</a>
+                <a class="dropdown-item" href="~/Account/Index"><i class="fa fa-user-plus" aria-hidden="true"></i> Usuarios</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()"><span class="fas fa-unlock-alt"></span> Cerrar Sesión</a>
+            </div>
+        </li>
 
-        <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown uno">
-                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="far fa-user fa-2x icon-menu2"></span> @User.Identity.GetUserName() <span class="glyphicon glyphicon-chevron-down icon-menu-derecha"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a href="~/Account/myaccount"><span class="glyphicon glyphicon-user icon-menu"></span> Mi Cuenta</a></li>
-                    <li><a href="~/Account/ForgotPassword"><span class="glyphicon glyphicon-lock icon-menu"></span> Cambiar Contraseña</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="~/Role/Index"><i class="fa fa-users" aria-hidden="true"></i> Roles</a></li>
-                    <li><a href="~/Account/Index"><i class="fa fa-user-plus" aria-hidden="true"></i> Usuarios</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="javascript:document.getElementById('logoutForm').submit()"><span class="glyphicon glyphicon-remove-circle icon-menu"></span>Cerrar Sesión</a></li>
-                </ul>
-            </li>
-        </ul>
+    </ul>
     }
 }
 else
@@ -26,8 +28,8 @@ else
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item">
-                <a class="nav-link" href="~/Account/Login" data-toggle="tooltip" data-placement="top" title="Iniciar Sesión" ><i class="fas fa-lock fa-2x" style="color:magenta;"></i> <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="~/Account/Login" data-toggle="tooltip" data-placement="top" title="Iniciar Sesión"><i class="fas fa-lock fa-2x" style="color:dodgerblue;"></i> <span class="sr-only">(current)</span>Iniciar Sesión</a>
             </li>
         </ul>
     </div>
- }
+}

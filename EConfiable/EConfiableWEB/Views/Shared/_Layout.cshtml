@@ -17,6 +17,27 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
+        @*<div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Nombre de la aplicación", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>*@
+
     <nav class="navbar navbar-dark bg-dark navbar-expand-sm navbar-light fixed-top ">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -33,10 +54,13 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/Home/Contact"><i class="fas fa-question-circle fa-2x" style="color:#ff6a00;"></i> Contacto</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fas fa-question-circle fa-2x" style="color:#ff6a00;"></i>Pricing</a>
+                </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
+            <ul class="nav navbar-nav navbar-right">
                 @Html.Partial("_LoginPartial")
-            </form>
+            </ul>
         </div>
     </nav>
     <div class="container body-content">

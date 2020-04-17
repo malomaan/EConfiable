@@ -81,11 +81,12 @@ th{
 .masthead {
     padding: 3rem 0 7rem;
     position: relative;
-    background-color: #dd3d31;
-    background-image: url(https://startbootstrap.com/assets/img/overlay.svg), linear-gradient(45deg, #dd3d31 0%, #d22f23 100%);
+    background-color: #16cc00;
+    background-image: url(https://startbootstrap.com/assets/img/overlay.svg), linear-gradient(45deg, rgba(46, 78, 56, 0.5) 0%, #14ca11 100%);
     background-size: cover;
-    z-index: 0
+    z-index: 0;
 }
+
 
     .masthead svg.wave {
         position: absolute;
@@ -221,6 +222,27 @@ th{
 .border-0 {
     border: 0 !important;
 }
-          
-/*Tabla*/
+
+/*NAV DROP*/
+/*.dropdown-menu {
+    text-decoration:none;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 10rem;
+    padding: 0.5rem 0;
+    margin: 0.125rem 0 0;
+    font-size: 1rem;
+    color: #f8f9fa;
+    text-align: left;
+    list-style: none;
+    background-color: #495057;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+    padding: 10px;
+}*/
 
