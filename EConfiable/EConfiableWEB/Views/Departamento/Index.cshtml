@@ -38,14 +38,13 @@
 <br />
 <div class="modal fade" id="WindowsModal" tabindex="-1" data-backdrop="false" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        @*@using (Html.BeginForm())*@
-        @using (Html.BeginForm("PostData", "Pais", FormMethod.Post, new { @id = "formsubmit" }))
+        @using (Html.BeginForm("PostData", "Departamento", FormMethod.Post, new { @id = "formsubmit" }))
         {
             @Html.AntiForgeryToken()
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalCenterTitle"><i class="far fa-file" style="color:white;"></i> @ViewBag.Title</h5>
-                    <a class='close' href="@Url.Action("Index", "Pais")">
+                    <a class='close' href="@Url.Action("Index", "Departamento")">
                         <i class="fas fa-window-close" style="color:white;"></i>
                     </a>
                 </div>
@@ -55,14 +54,14 @@
 
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         <div class="form-group">
-                            @Html.LabelFor(model => model.pai_codigo, htmlAttributes: new { @class = "control-label" })
+                            @Html.LabelFor(model => model.dep_codigo, htmlAttributes: new { @class = "control-label" })
                             <div class="input-group mb-2 mr-sm-2">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text"><i class="fas fa-barcode"></i></div>
                                 </div>
-                                @Html.EditorFor(model => model.pai_codigo, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.dep_codigo) + " *" } })
+                                @Html.EditorFor(model => model.dep_codigo, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.dep_codigo) + " *" } })
                             </div>
-                            @Html.ValidationMessageFor(model => model.pai_codigo, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.dep_codigo, "", new { @class = "text-danger" })
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(model => model.dep_nombre, htmlAttributes: new { @class = "control-label" })
@@ -90,7 +89,7 @@
                     <div class="form-group">
                         <button type="button" id="submitdata" class="btn btn-outline-success btn-sm" onclick="btnsubmit(0)"> <span class="fas fa-check"></span> Guardar</button>
                         <button type="button" id="updatedata" class="btn btn-outline-success btn-sm" onclick="btnsubmit(1)"> <span class="fas fa-check"></span> Actualizar</button>
-                        <button type="button" id="my-button" class="btn btn-outline-danger btn-sm btn-grid" onclick="location.href='@Url.Action("Index", "Pais")'"><span class="fas fa-times"></span> Cancelar</button>
+                        <button type="button" id="my-button" class="btn btn-outline-danger btn-sm btn-grid" onclick="location.href='@Url.Action("Index", "Departamento")'"><span class="fas fa-times"></span> Cancelar</button>
                     </div>
                 </div>
             </div>
@@ -111,7 +110,7 @@
             $('#Data').DataTable({
                 "ajax": {
                     "type": "GET",
-                    "url": "@Url.Action("GetData", "Pais")",
+                    "url": "@Url.Action("GetData", "Departamento")",
                     "datatype":"JSON",
                 },
                 "columns": [
@@ -180,7 +179,7 @@
                 var Data = $("#formsubmit").serialize();
                 $.ajax({
                     type: 'POST',
-                    url: '@Url.Action("PostData", "Pais")/' + id,
+                    url: '@Url.Action("PostData", "Departamento")/' + id,
                     data: Data,
                     datatype: 'JSON',
 
@@ -216,7 +215,7 @@
         if (confirm("Deseas eliminar este registro")) {
             $.ajax({
                 type: 'POST',
-                url: '@Url.Action("DeleteRow", "Pais")/' + pai_codigo,
+                url: '@Url.Action("DeleteRow", "Departamento")/' + pai_codigo,
                 datatype: 'JSON',
                 success: function (response) {
                     if (response == "success") {
@@ -242,7 +241,7 @@
     function editterow(id) {
         $.ajax({
             type: 'GET',
-            url: '@Url.Action("GetEdit", "Pais")/' + id,
+            url: '@Url.Action("GetEdit", "Departamento")/' + id,
             datatype: 'JSON',
             success: function (rs) {
                 $("#dep_codigo").val(rs.dep_codigo);
