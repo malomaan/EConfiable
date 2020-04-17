@@ -5,6 +5,14 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="EConfiableModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Departamento">
+          <Key>
+            <PropertyRef Name="dep_codigo" />
+          </Key>
+          <Property Name="dep_codigo" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="dep_nombre" Type="varchar" MaxLength="250" />
+          <Property Name="pai_codigo" Type="varchar" MaxLength="20" />
+        </EntityType>
         <EntityType Name="Pais">
           <Key>
             <PropertyRef Name="pai_codigo" />
@@ -14,6 +22,34 @@
           <Property Name="pai_codigointernacional" Type="varchar" MaxLength="20" />
           <Property Name="pai_predeterminado" Type="bit" />
         </EntityType>
+        <Association Name="FK_Departamento_Pais">
+          <End Role="Pais" Type="Self.Pais" Multiplicity="0..1" />
+          <End Role="Departamento" Type="Self.Departamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pais">
+              <PropertyRef Name="pai_codigo" />
+            </Principal>
+            <Dependent Role="Departamento">
+              <PropertyRef Name="pai_codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="Departamento_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dep_codigo" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Departamento_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dep_codigo" Type="varchar" Mode="In" />
+          <Parameter Name="dep_nombre" Type="varchar" Mode="In" />
+          <Parameter Name="pai_codigo" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Departamento_List" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dep_codigo" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Departamento_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dep_codigo" Type="varchar" Mode="In" />
+          <Parameter Name="dep_nombre" Type="varchar" Mode="In" />
+          <Parameter Name="pai_codigo" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="Pais_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="pai_codigo" Type="varchar" Mode="In" />
         </Function>
@@ -33,7 +69,12 @@
           <Parameter Name="pai_predeterminado" Type="bit" Mode="In" />
         </Function>
         <EntityContainer Name="EConfiableModelStoreContainer">
+          <EntitySet Name="Departamento" EntityType="Self.Departamento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pais" EntityType="Self.Pais" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Departamento_Pais" Association="Self.FK_Departamento_Pais">
+            <End Role="Pais" EntitySet="Pais" />
+            <End Role="Departamento" EntitySet="Departamento" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -47,11 +88,12 @@
           <Property Name="pai_nombre" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="pai_codigointernacional" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="pai_predeterminado" Type="Boolean" />
+          <NavigationProperty Name="Departamento" Relationship="EConfiableModel.FK_Departamento_Pais" FromRole="Pais" ToRole="Departamento" />
         </EntityType>
         <EntityContainer Name="EConfiableEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Pais" EntityType="Self.Pais" />
           <FunctionImport Name="Pais_Delete">
-            <Parameter Name="pai_codigo" Mode="In" Type="String" />
+          <Parameter Name="pai_codigo" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Pais_Insert">
             <Parameter Name="pai_codigo" Mode="In" Type="String" />
@@ -60,7 +102,7 @@
             <Parameter Name="pai_predeterminado" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="Pais_List" ReturnType="Collection(EConfiableModel.Pais_List_Result)">
-            <Parameter Name="pai_codigo" Mode="In" Type="String" />
+          <Parameter Name="pai_codigo" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Pais_Update">
             <Parameter Name="pai_codigo" Mode="In" Type="String" />
@@ -68,12 +110,59 @@
             <Parameter Name="pai_codigointernacional" Mode="In" Type="String" />
             <Parameter Name="pai_predeterminado" Mode="In" Type="Boolean" />
           </FunctionImport>
+          <EntitySet Name="Departamento" EntityType="EConfiableModel.Departamento" />
+          <AssociationSet Name="FK_Departamento_Pais" Association="EConfiableModel.FK_Departamento_Pais">
+            <End Role="Pais" EntitySet="Pais" />
+            <End Role="Departamento" EntitySet="Departamento" />
+          </AssociationSet>
+          <FunctionImport Name="Departamento_Delete">
+            <Parameter Name="dep_codigo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Departamento_Insert">
+            <Parameter Name="dep_codigo" Mode="In" Type="String" />
+            <Parameter Name="dep_nombre" Mode="In" Type="String" />
+            <Parameter Name="pai_codigo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Departamento_List" ReturnType="Collection(EConfiableModel.Departamento_List_Result)">
+            <Parameter Name="dep_codigo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Departamento_Update">
+            <Parameter Name="dep_codigo" Mode="In" Type="String" />
+            <Parameter Name="dep_nombre" Mode="In" Type="String" />
+            <Parameter Name="pai_codigo" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Pais_List_Result">
           <Property Type="String" Name="pai_codigo" Nullable="false" MaxLength="20" />
           <Property Type="String" Name="pai_nombre" Nullable="true" MaxLength="250" />
           <Property Type="String" Name="pai_codigointernacional" Nullable="true" MaxLength="20" />
           <Property Type="Boolean" Name="pai_predeterminado" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="Departamento">
+          <Key>
+            <PropertyRef Name="dep_codigo" />
+          </Key>
+          <Property Name="dep_codigo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="dep_nombre" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="pai_codigo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Pais" Relationship="EConfiableModel.FK_Departamento_Pais" FromRole="Departamento" ToRole="Pais" />
+        </EntityType>
+        <Association Name="FK_Departamento_Pais">
+          <End Type="EConfiableModel.Pais" Role="Pais" Multiplicity="0..1" />
+          <End Type="EConfiableModel.Departamento" Role="Departamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pais">
+              <PropertyRef Name="pai_codigo" />
+            </Principal>
+            <Dependent Role="Departamento">
+              <PropertyRef Name="pai_codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="Departamento_List_Result">
+          <Property Type="String" Name="dep_codigo" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="dep_nombre" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="pai_codigo" Nullable="true" MaxLength="20" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -104,6 +193,27 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Pais_Update" FunctionName="EConfiableModel.Store.Pais_Update" />
+          <EntitySetMapping Name="Departamento">
+            <EntityTypeMapping TypeName="EConfiableModel.Departamento">
+              <MappingFragment StoreEntitySet="Departamento">
+                <ScalarProperty Name="pai_codigo" ColumnName="pai_codigo" />
+                <ScalarProperty Name="dep_nombre" ColumnName="dep_nombre" />
+                <ScalarProperty Name="dep_codigo" ColumnName="dep_codigo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Departamento_Delete" FunctionName="EConfiableModel.Store.Departamento_Delete" />
+          <FunctionImportMapping FunctionImportName="Departamento_Insert" FunctionName="EConfiableModel.Store.Departamento_Insert" />
+          <FunctionImportMapping FunctionImportName="Departamento_List" FunctionName="EConfiableModel.Store.Departamento_List">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EConfiableModel.Departamento_List_Result">
+                <ScalarProperty Name="dep_codigo" ColumnName="dep_codigo" />
+                <ScalarProperty Name="dep_nombre" ColumnName="dep_nombre" />
+                <ScalarProperty Name="pai_codigo" ColumnName="pai_codigo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Departamento_Update" FunctionName="EConfiableModel.Store.Departamento_Update" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

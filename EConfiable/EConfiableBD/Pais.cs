@@ -14,9 +14,18 @@ namespace EConfiableBD
     
     public partial class Pais
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Pais()
+        {
+            this.Departamento = new HashSet<Departamento>();
+        }
+    
         public string pai_codigo { get; set; }
         public string pai_nombre { get; set; }
         public string pai_codigointernacional { get; set; }
         public Nullable<bool> pai_predeterminado { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Departamento> Departamento { get; set; }
     }
 }

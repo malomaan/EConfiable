@@ -28,6 +28,7 @@ namespace EConfiableBD
         }
     
         public virtual DbSet<Pais> Pais { get; set; }
+        public virtual DbSet<Departamento> Departamento { get; set; }
     
         public virtual int Pais_Delete(string pai_codigo)
         {
@@ -87,6 +88,58 @@ namespace EConfiableBD
                 new ObjectParameter("pai_predeterminado", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Pais_Update", pai_codigoParameter, pai_nombreParameter, pai_codigointernacionalParameter, pai_predeterminadoParameter);
+        }
+    
+        public virtual int Departamento_Delete(string dep_codigo)
+        {
+            var dep_codigoParameter = dep_codigo != null ?
+                new ObjectParameter("dep_codigo", dep_codigo) :
+                new ObjectParameter("dep_codigo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Departamento_Delete", dep_codigoParameter);
+        }
+    
+        public virtual int Departamento_Insert(string dep_codigo, string dep_nombre, string pai_codigo)
+        {
+            var dep_codigoParameter = dep_codigo != null ?
+                new ObjectParameter("dep_codigo", dep_codigo) :
+                new ObjectParameter("dep_codigo", typeof(string));
+    
+            var dep_nombreParameter = dep_nombre != null ?
+                new ObjectParameter("dep_nombre", dep_nombre) :
+                new ObjectParameter("dep_nombre", typeof(string));
+    
+            var pai_codigoParameter = pai_codigo != null ?
+                new ObjectParameter("pai_codigo", pai_codigo) :
+                new ObjectParameter("pai_codigo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Departamento_Insert", dep_codigoParameter, dep_nombreParameter, pai_codigoParameter);
+        }
+    
+        public virtual ObjectResult<Departamento_List_Result> Departamento_List(string dep_codigo)
+        {
+            var dep_codigoParameter = dep_codigo != null ?
+                new ObjectParameter("dep_codigo", dep_codigo) :
+                new ObjectParameter("dep_codigo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Departamento_List_Result>("Departamento_List", dep_codigoParameter);
+        }
+    
+        public virtual int Departamento_Update(string dep_codigo, string dep_nombre, string pai_codigo)
+        {
+            var dep_codigoParameter = dep_codigo != null ?
+                new ObjectParameter("dep_codigo", dep_codigo) :
+                new ObjectParameter("dep_codigo", typeof(string));
+    
+            var dep_nombreParameter = dep_nombre != null ?
+                new ObjectParameter("dep_nombre", dep_nombre) :
+                new ObjectParameter("dep_nombre", typeof(string));
+    
+            var pai_codigoParameter = pai_codigo != null ?
+                new ObjectParameter("pai_codigo", pai_codigo) :
+                new ObjectParameter("pai_codigo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Departamento_Update", dep_codigoParameter, dep_nombreParameter, pai_codigoParameter);
         }
     }
 }

@@ -50,6 +50,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Departamento.cs">
+      <DependentUpon>EConfiableModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DepartamentoBD.cs" />
+    <Compile Include="Departamento_List_Result.cs">
+      <DependentUpon>EConfiableModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EConfiableModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

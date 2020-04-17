@@ -6,6 +6,8 @@
     <edmx:Diagrams>
       <Diagram DiagramId="3507301c2cf54063a59748a957402642" Name="Diagram1">
         <EntityTypeShape EntityType="EConfiableModel.Pais" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EConfiableModel.Departamento" Width="1.5" PointX="3" PointY="0.875" />
+        <AssociationConnector Association="EConfiableModel.FK_Departamento_Pais" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
