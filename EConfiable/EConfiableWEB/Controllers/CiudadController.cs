@@ -19,7 +19,7 @@ namespace EConfiableWEB.Controllers
 
         public ActionResult Index()
         {
-            ViewBag.pai_codigo = new SelectList(db2.Departamento, "dep_codigo", "dep_nombre");
+            ViewBag.dep_codigo = new SelectList(db2.Departamento, "dep_codigo", "dep_nombre");
             return View();
         }
 
@@ -96,8 +96,5 @@ namespace EConfiableWEB.Controllers
             List<Ciudad_List_Result> TCiudad = db.Ciudad_List(id).ToList();
             return Json(TCiudad.FirstOrDefault(), JsonRequestBehavior.AllowGet);
         }
-
-
-
     }
 }

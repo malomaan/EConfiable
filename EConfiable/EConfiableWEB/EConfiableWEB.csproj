@@ -349,10 +349,10 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Pais\Index.cshtml" />
     <Content Include="Views\Departamento\Index.cshtml" />
+    <Content Include="Views\Ciudad\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Ciudad\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
