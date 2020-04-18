@@ -50,6 +50,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ciudad.cs">
+      <DependentUpon>EConfiableModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CiudadBD.cs" />
+    <Compile Include="Ciudad_List_Result.cs">
+      <DependentUpon>EConfiableModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Departamento.cs">
       <DependentUpon>EConfiableModel.tt</DependentUpon>
     </Compile>

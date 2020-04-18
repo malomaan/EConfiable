@@ -29,6 +29,7 @@ namespace EConfiableBD
     
         public virtual DbSet<Pais> Pais { get; set; }
         public virtual DbSet<Departamento> Departamento { get; set; }
+        public virtual DbSet<Ciudad> Ciudad { get; set; }
     
         public virtual int Pais_Delete(string pai_codigo)
         {
@@ -140,6 +141,82 @@ namespace EConfiableBD
                 new ObjectParameter("pai_codigo", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Departamento_Update", dep_codigoParameter, dep_nombreParameter, pai_codigoParameter);
+        }
+    
+        public virtual int Ciudad_Delete(string ciu_codigo)
+        {
+            var ciu_codigoParameter = ciu_codigo != null ?
+                new ObjectParameter("ciu_codigo", ciu_codigo) :
+                new ObjectParameter("ciu_codigo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Ciudad_Delete", ciu_codigoParameter);
+        }
+    
+        public virtual int Ciudad_Insert(string ciu_codigo, string ciu_nombre, Nullable<bool> ciu_predeterminado, Nullable<double> ciu_longitud, Nullable<double> ciu_latitud, string dep_codigo)
+        {
+            var ciu_codigoParameter = ciu_codigo != null ?
+                new ObjectParameter("ciu_codigo", ciu_codigo) :
+                new ObjectParameter("ciu_codigo", typeof(string));
+    
+            var ciu_nombreParameter = ciu_nombre != null ?
+                new ObjectParameter("ciu_nombre", ciu_nombre) :
+                new ObjectParameter("ciu_nombre", typeof(string));
+    
+            var ciu_predeterminadoParameter = ciu_predeterminado.HasValue ?
+                new ObjectParameter("ciu_predeterminado", ciu_predeterminado) :
+                new ObjectParameter("ciu_predeterminado", typeof(bool));
+    
+            var ciu_longitudParameter = ciu_longitud.HasValue ?
+                new ObjectParameter("ciu_longitud", ciu_longitud) :
+                new ObjectParameter("ciu_longitud", typeof(double));
+    
+            var ciu_latitudParameter = ciu_latitud.HasValue ?
+                new ObjectParameter("ciu_latitud", ciu_latitud) :
+                new ObjectParameter("ciu_latitud", typeof(double));
+    
+            var dep_codigoParameter = dep_codigo != null ?
+                new ObjectParameter("dep_codigo", dep_codigo) :
+                new ObjectParameter("dep_codigo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Ciudad_Insert", ciu_codigoParameter, ciu_nombreParameter, ciu_predeterminadoParameter, ciu_longitudParameter, ciu_latitudParameter, dep_codigoParameter);
+        }
+    
+        public virtual ObjectResult<Ciudad_List_Result> Ciudad_List(string ciu_codigo)
+        {
+            var ciu_codigoParameter = ciu_codigo != null ?
+                new ObjectParameter("ciu_codigo", ciu_codigo) :
+                new ObjectParameter("ciu_codigo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Ciudad_List_Result>("Ciudad_List", ciu_codigoParameter);
+        }
+    
+        public virtual int Ciudad_Update(string ciu_codigo, string ciu_nombre, Nullable<bool> ciu_predeterminado, Nullable<double> ciu_longitud, Nullable<double> ciu_latitud, string dep_codigo)
+        {
+            var ciu_codigoParameter = ciu_codigo != null ?
+                new ObjectParameter("ciu_codigo", ciu_codigo) :
+                new ObjectParameter("ciu_codigo", typeof(string));
+    
+            var ciu_nombreParameter = ciu_nombre != null ?
+                new ObjectParameter("ciu_nombre", ciu_nombre) :
+                new ObjectParameter("ciu_nombre", typeof(string));
+    
+            var ciu_predeterminadoParameter = ciu_predeterminado.HasValue ?
+                new ObjectParameter("ciu_predeterminado", ciu_predeterminado) :
+                new ObjectParameter("ciu_predeterminado", typeof(bool));
+    
+            var ciu_longitudParameter = ciu_longitud.HasValue ?
+                new ObjectParameter("ciu_longitud", ciu_longitud) :
+                new ObjectParameter("ciu_longitud", typeof(double));
+    
+            var ciu_latitudParameter = ciu_latitud.HasValue ?
+                new ObjectParameter("ciu_latitud", ciu_latitud) :
+                new ObjectParameter("ciu_latitud", typeof(double));
+    
+            var dep_codigoParameter = dep_codigo != null ?
+                new ObjectParameter("dep_codigo", dep_codigo) :
+                new ObjectParameter("dep_codigo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Ciudad_Update", ciu_codigoParameter, ciu_nombreParameter, ciu_predeterminadoParameter, ciu_longitudParameter, ciu_latitudParameter, dep_codigoParameter);
         }
     }
 }

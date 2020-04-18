@@ -5,6 +5,17 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="EConfiableModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Ciudad">
+          <Key>
+            <PropertyRef Name="ciu_codigo" />
+          </Key>
+          <Property Name="ciu_codigo" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ciu_nombre" Type="varchar" MaxLength="250" />
+          <Property Name="ciu_predeterminado" Type="bit" />
+          <Property Name="ciu_longitud" Type="float" />
+          <Property Name="ciu_latitud" Type="float" />
+          <Property Name="dep_codigo" Type="varchar" MaxLength="20" />
+        </EntityType>
         <EntityType Name="Departamento">
           <Key>
             <PropertyRef Name="dep_codigo" />
@@ -22,6 +33,18 @@
           <Property Name="pai_codigointernacional" Type="varchar" MaxLength="20" />
           <Property Name="pai_predeterminado" Type="bit" />
         </EntityType>
+        <Association Name="FK_Ciudad_Departamento">
+          <End Role="Departamento" Type="Self.Departamento" Multiplicity="0..1" />
+          <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamento">
+              <PropertyRef Name="dep_codigo" />
+            </Principal>
+            <Dependent Role="Ciudad">
+              <PropertyRef Name="dep_codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Departamento_Pais">
           <End Role="Pais" Type="Self.Pais" Multiplicity="0..1" />
           <End Role="Departamento" Type="Self.Departamento" Multiplicity="*" />
@@ -34,6 +57,28 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="Ciudad_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ciu_codigo" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Ciudad_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ciu_codigo" Type="varchar" Mode="In" />
+          <Parameter Name="ciu_nombre" Type="varchar" Mode="In" />
+          <Parameter Name="ciu_predeterminado" Type="bit" Mode="In" />
+          <Parameter Name="ciu_longitud" Type="float" Mode="In" />
+          <Parameter Name="ciu_latitud" Type="float" Mode="In" />
+          <Parameter Name="dep_codigo" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Ciudad_List" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ciu_codigo" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Ciudad_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ciu_codigo" Type="varchar" Mode="In" />
+          <Parameter Name="ciu_nombre" Type="varchar" Mode="In" />
+          <Parameter Name="ciu_predeterminado" Type="bit" Mode="In" />
+          <Parameter Name="ciu_longitud" Type="float" Mode="In" />
+          <Parameter Name="ciu_latitud" Type="float" Mode="In" />
+          <Parameter Name="dep_codigo" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="Departamento_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="dep_codigo" Type="varchar" Mode="In" />
         </Function>
@@ -69,8 +114,13 @@
           <Parameter Name="pai_predeterminado" Type="bit" Mode="In" />
         </Function>
         <EntityContainer Name="EConfiableModelStoreContainer">
+          <EntitySet Name="Ciudad" EntityType="Self.Ciudad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Departamento" EntityType="Self.Departamento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pais" EntityType="Self.Pais" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Ciudad_Departamento" Association="Self.FK_Ciudad_Departamento">
+            <End Role="Departamento" EntitySet="Departamento" />
+            <End Role="Ciudad" EntitySet="Ciudad" />
+          </AssociationSet>
           <AssociationSet Name="FK_Departamento_Pais" Association="Self.FK_Departamento_Pais">
             <End Role="Pais" EntitySet="Pais" />
             <End Role="Departamento" EntitySet="Departamento" />
@@ -116,7 +166,7 @@
             <End Role="Departamento" EntitySet="Departamento" />
           </AssociationSet>
           <FunctionImport Name="Departamento_Delete">
-            <Parameter Name="dep_codigo" Mode="In" Type="String" />
+          <Parameter Name="dep_codigo" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Departamento_Insert">
             <Parameter Name="dep_codigo" Mode="In" Type="String" />
@@ -124,12 +174,39 @@
             <Parameter Name="pai_codigo" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Departamento_List" ReturnType="Collection(EConfiableModel.Departamento_List_Result)">
-            <Parameter Name="dep_codigo" Mode="In" Type="String" />
+          <Parameter Name="dep_codigo" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Departamento_Update">
             <Parameter Name="dep_codigo" Mode="In" Type="String" />
             <Parameter Name="dep_nombre" Mode="In" Type="String" />
             <Parameter Name="pai_codigo" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Ciudad" EntityType="EConfiableModel.Ciudad" />
+          <AssociationSet Name="FK_Ciudad_Departamento" Association="EConfiableModel.FK_Ciudad_Departamento">
+            <End Role="Departamento" EntitySet="Departamento" />
+            <End Role="Ciudad" EntitySet="Ciudad" />
+          </AssociationSet>
+          <FunctionImport Name="Ciudad_Delete">
+            <Parameter Name="ciu_codigo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Ciudad_Insert">
+            <Parameter Name="ciu_codigo" Mode="In" Type="String" />
+            <Parameter Name="ciu_nombre" Mode="In" Type="String" />
+            <Parameter Name="ciu_predeterminado" Mode="In" Type="Boolean" />
+            <Parameter Name="ciu_longitud" Mode="In" Type="Double" />
+            <Parameter Name="ciu_latitud" Mode="In" Type="Double" />
+            <Parameter Name="dep_codigo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Ciudad_List" ReturnType="Collection(EConfiableModel.Ciudad_List_Result)">
+            <Parameter Name="ciu_codigo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Ciudad_Update">
+            <Parameter Name="ciu_codigo" Mode="In" Type="String" />
+            <Parameter Name="ciu_nombre" Mode="In" Type="String" />
+            <Parameter Name="ciu_predeterminado" Mode="In" Type="Boolean" />
+            <Parameter Name="ciu_longitud" Mode="In" Type="Double" />
+            <Parameter Name="ciu_latitud" Mode="In" Type="Double" />
+            <Parameter Name="dep_codigo" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Pais_List_Result">
@@ -146,6 +223,7 @@
           <Property Name="dep_nombre" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="pai_codigo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Pais" Relationship="EConfiableModel.FK_Departamento_Pais" FromRole="Departamento" ToRole="Pais" />
+          <NavigationProperty Name="Ciudad" Relationship="EConfiableModel.FK_Ciudad_Departamento" FromRole="Departamento" ToRole="Ciudad" />
         </EntityType>
         <Association Name="FK_Departamento_Pais">
           <End Type="EConfiableModel.Pais" Role="Pais" Multiplicity="0..1" />
@@ -163,6 +241,38 @@
           <Property Type="String" Name="dep_codigo" Nullable="false" MaxLength="20" />
           <Property Type="String" Name="dep_nombre" Nullable="true" MaxLength="250" />
           <Property Type="String" Name="pai_codigo" Nullable="true" MaxLength="20" />
+        </ComplexType>
+        <EntityType Name="Ciudad">
+          <Key>
+            <PropertyRef Name="ciu_codigo" />
+          </Key>
+          <Property Name="ciu_codigo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ciu_nombre" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ciu_predeterminado" Type="Boolean" />
+          <Property Name="ciu_longitud" Type="Double" />
+          <Property Name="ciu_latitud" Type="Double" />
+          <Property Name="dep_codigo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Departamento" Relationship="EConfiableModel.FK_Ciudad_Departamento" FromRole="Ciudad" ToRole="Departamento" />
+        </EntityType>
+        <Association Name="FK_Ciudad_Departamento">
+          <End Type="EConfiableModel.Departamento" Role="Departamento" Multiplicity="0..1" />
+          <End Type="EConfiableModel.Ciudad" Role="Ciudad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamento">
+              <PropertyRef Name="dep_codigo" />
+            </Principal>
+            <Dependent Role="Ciudad">
+              <PropertyRef Name="dep_codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="Ciudad_List_Result">
+          <Property Type="String" Name="ciu_codigo" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="ciu_nombre" Nullable="true" MaxLength="250" />
+          <Property Type="Boolean" Name="ciu_predeterminado" Nullable="true" />
+          <Property Type="Double" Name="ciu_longitud" Nullable="true" />
+          <Property Type="Double" Name="ciu_latitud" Nullable="true" />
+          <Property Type="String" Name="dep_codigo" Nullable="true" MaxLength="20" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -214,6 +324,33 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Departamento_Update" FunctionName="EConfiableModel.Store.Departamento_Update" />
+          <EntitySetMapping Name="Ciudad">
+            <EntityTypeMapping TypeName="EConfiableModel.Ciudad">
+              <MappingFragment StoreEntitySet="Ciudad">
+                <ScalarProperty Name="dep_codigo" ColumnName="dep_codigo" />
+                <ScalarProperty Name="ciu_latitud" ColumnName="ciu_latitud" />
+                <ScalarProperty Name="ciu_longitud" ColumnName="ciu_longitud" />
+                <ScalarProperty Name="ciu_predeterminado" ColumnName="ciu_predeterminado" />
+                <ScalarProperty Name="ciu_nombre" ColumnName="ciu_nombre" />
+                <ScalarProperty Name="ciu_codigo" ColumnName="ciu_codigo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Ciudad_Delete" FunctionName="EConfiableModel.Store.Ciudad_Delete" />
+          <FunctionImportMapping FunctionImportName="Ciudad_Insert" FunctionName="EConfiableModel.Store.Ciudad_Insert" />
+          <FunctionImportMapping FunctionImportName="Ciudad_List" FunctionName="EConfiableModel.Store.Ciudad_List">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EConfiableModel.Ciudad_List_Result">
+                <ScalarProperty Name="ciu_codigo" ColumnName="ciu_codigo" />
+                <ScalarProperty Name="ciu_nombre" ColumnName="ciu_nombre" />
+                <ScalarProperty Name="ciu_predeterminado" ColumnName="ciu_predeterminado" />
+                <ScalarProperty Name="ciu_longitud" ColumnName="ciu_longitud" />
+                <ScalarProperty Name="ciu_latitud" ColumnName="ciu_latitud" />
+                <ScalarProperty Name="dep_codigo" ColumnName="dep_codigo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Ciudad_Update" FunctionName="EConfiableModel.Store.Ciudad_Update" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

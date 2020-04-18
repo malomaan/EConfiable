@@ -8,6 +8,8 @@
         <EntityTypeShape EntityType="EConfiableModel.Pais" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="EConfiableModel.Departamento" Width="1.5" PointX="3" PointY="0.875" />
         <AssociationConnector Association="EConfiableModel.FK_Departamento_Pais" />
+        <EntityTypeShape EntityType="EConfiableModel.Ciudad" Width="1.5" PointX="5.25" PointY="5" />
+        <AssociationConnector Association="EConfiableModel.FK_Ciudad_Departamento" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
