@@ -145,7 +145,16 @@
                         "width": "60%"
                     },
                     { "data": "pai_codigointernacional" },
-                    { "data": "pai_predeterminado" }
+                    {
+                        "data": "pai_predeterminado", "render": function (data) {
+                            if (data == true) {
+                                return "SI"
+                            }
+                            else {
+                                return "NO"
+                            }
+                        }
+                    }
                 ],
                 "lengthMenu": [5, 10, 25, 50, 75, 100],
                 "pageLength": 5,

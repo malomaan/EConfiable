@@ -80,8 +80,6 @@
                                     <div class="input-group-text"><i class="fas fa-globe-americas"></i></div>
                                 </div>
                                 @Html.DropDownList("pai_codigo", null, htmlAttributes: new { @class = "form-control" })
-
-                                @*@Html.EditorFor(model => model.pai_codigo, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.pai_codigo) + " *" } })*@
                             </div>
                             @Html.ValidationMessageFor(model => model.pai_codigo, "", new { @class = "text-danger" })
                         </div>
@@ -206,7 +204,6 @@
                     },
                     error: function (msg) {
                         alert(msg.responseText);
-                        $("#accountnumber").focus();
                     }
                 })
             }

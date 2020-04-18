@@ -169,7 +169,16 @@
                         "data": "ciu_nombre",
                         "width": "60%"
                     },
-                    { "data": "ciu_predeterminado" },
+                    {
+                        "data": "ciu_predeterminado", "render": function (data) {
+                            if (data == true) {
+                                return "SI"
+                            }
+                            else {
+                                return "NO"
+                            }
+                        }
+                    },
                     { "data": "ciu_longitud" },
                     { "data": "ciu_latitud" },
                     { "data": "dep_codigo" }

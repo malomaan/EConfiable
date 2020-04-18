@@ -1,0 +1,9 @@
+﻿@Html.DropDownList("", new SelectList(new[] {
+new { Value = "true", Text = "SI" },
+new { Value = "false", Text = "NO" },
+        },
+        "Value",
+        "Text",
+
+        Model
+    ), new { @class = "form-control" })
