@@ -54,6 +54,7 @@
       <DependentUpon>EConfiableModel.tt</DependentUpon>
     </Compile>
     <Compile Include="CiudadBD.cs" />
+    <Compile Include="CiudadMetadata.cs" />
     <Compile Include="Ciudad_List_Result.cs">
       <DependentUpon>EConfiableModel.tt</DependentUpon>
     </Compile>

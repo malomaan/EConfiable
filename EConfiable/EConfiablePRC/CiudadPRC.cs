@@ -54,7 +54,7 @@ namespace EConfiablePRC
         /// Método que permite insertar en la tabla Ciudad capa PRC
         /// </summary>
         // ******************* = Método Insert = ******************************
-        public void Ciudad_Insert(string ciu_codigo, string ciu_nombre, bool ciu_predeterminado, double ciu_longitud, double ciu_latitud, string dep_codigo)
+        public void Ciudad_Insert(string ciu_codigo, string ciu_nombre, bool? ciu_predeterminado, double? ciu_longitud, double? ciu_latitud, string dep_codigo)
         {
             try
             {
@@ -72,7 +72,7 @@ namespace EConfiablePRC
         /// Método que permite actualizar en la tabla Ciudad capa PRC
         /// </summary>
         // ******************* = Método Update = ******************************
-        public void Ciudad_Update(string ciu_codigo, string ciu_nombre, bool ciu_predeterminado, double ciu_longitud, double ciu_latitud, string dep_codigo)
+        public void Ciudad_Update(string ciu_codigo, string ciu_nombre, bool? ciu_predeterminado, double? ciu_longitud, double? ciu_latitud, string dep_codigo)
         {
             try
             {

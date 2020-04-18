@@ -14,11 +14,12 @@ namespace EConfiableWEB.Controllers
 
 
         private EConfiableEntities db2 = new EConfiableEntities();
-        private Ciuda db = new DepartamentoPRC();
+        private CiudadPRC db = new CiudadPRC();
+
 
         public ActionResult Index()
         {
-            ViewBag.pai_codigo = new SelectList(Bd.Pais, "pai_codigo", "pai_nombre");
+            ViewBag.pai_codigo = new SelectList(db2.Departamento, "dep_codigo", "dep_nombre");
             return View();
         }
 
@@ -29,8 +30,8 @@ namespace EConfiableWEB.Controllers
         /// <returns></returns>
         public ActionResult GetData()
         {
-            List<Departamento_List_Result> TDepartamento = db.Departamento_List(null).ToList();
-            return Json(new { data = TDepartamento }, JsonRequestBehavior.AllowGet);
+            List<Ciudad_List_Result> TCiudad = db.Ciudad_List(null).ToList();
+            return Json(new { data = TCiudad }, JsonRequestBehavior.AllowGet);
         }
 
 
@@ -39,14 +40,14 @@ namespace EConfiableWEB.Controllers
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        public JsonResult PostData(Departamento data, int id)
+        public JsonResult PostData(Ciudad data, int id)
         {
             string Respuesta = string.Empty;
             if (id != 1)
             {
                 if (ModelState.IsValid)
                 {
-                    db.Departamento_Insert(data.dep_codigo, data.dep_nombre, data.pai_codigo);
+                    db.Ciudad_Insert(data.ciu_codigo, data.ciu_nombre, data.ciu_predeterminado, data.ciu_latitud, data.ciu_latitud, data.dep_codigo);
                     Respuesta = "success";
                 }
                 else
@@ -58,7 +59,7 @@ namespace EConfiableWEB.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    db.Departamento_Update(data.dep_codigo, data.dep_nombre, data.pai_codigo);
+                    db.Ciudad_Update(data.ciu_codigo, data.ciu_nombre, data.ciu_predeterminado, data.ciu_latitud, data.ciu_latitud, data.dep_codigo); ;
                     Respuesta = "success";
                 }
                 else
@@ -78,7 +79,7 @@ namespace EConfiableWEB.Controllers
         /// <returns></returns>
         public JsonResult DeleteRow(string id)
         {
-            db.Departamento_Delete(id);
+            db.Ciudad_Delete(id);
             return Json("success", JsonRequestBehavior.AllowGet);
         }
 
@@ -92,8 +93,8 @@ namespace EConfiableWEB.Controllers
         [HttpGet]
         public ActionResult GetEdit(string id)
         {
-            List<Departamento_List_Result> tDepartamento = db.Departamento_List(id).ToList();
-            return Json(tDepartamento.FirstOrDefault(), JsonRequestBehavior.AllowGet);
+            List<Ciudad_List_Result> TCiudad = db.Ciudad_List(id).ToList();
+            return Json(TCiudad.FirstOrDefault(), JsonRequestBehavior.AllowGet);
         }
 
 
