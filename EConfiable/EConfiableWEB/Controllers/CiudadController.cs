@@ -16,7 +16,6 @@ namespace EConfiableWEB.Controllers
         private EConfiableEntities db2 = new EConfiableEntities();
         private CiudadPRC db = new CiudadPRC();
 
-
         public ActionResult Index()
         {
             ViewBag.dep_codigo = new SelectList(db2.Departamento, "dep_codigo", "dep_nombre");

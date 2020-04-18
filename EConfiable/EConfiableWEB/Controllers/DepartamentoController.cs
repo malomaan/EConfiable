@@ -12,12 +12,14 @@ namespace EConfiableWEB.Controllers
     public class DepartamentoController : Controller
     {
 
-        private DepartamentoPRC db = new DepartamentoPRC();
-        private EConfiableEntities Bd = new EConfiableEntities();
+        private DepartamentoBD db = new DepartamentoBD();
+        private PaisPRC db3 = new PaisPRC();
 
         public ActionResult Index()
         {
-            ViewBag.pai_codigo = new SelectList(Bd.Pais, "pai_codigo", "pai_nombre");
+            List<Pais_List_Result> LPais = new List<Pais_List_Result>();
+            LPais = db3.Pais_List(null).ToList();
+            ViewBag.pai_codigo = new SelectList(LPais, "pai_codigo", "pai_nombre");
             return View();
         }
 

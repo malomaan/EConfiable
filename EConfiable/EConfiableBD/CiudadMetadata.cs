@@ -29,10 +29,12 @@ namespace EConfiableBD
             [Required(ErrorMessage = "Debe ingresar el {0}")]
             public Nullable<bool> ciu_predeterminado { get; set; }
 
+            [DataType(DataType.Text)]
             [DisplayName("Longitud")]
             [Required(ErrorMessage = "Debe ingresar el {0}")]
             public Nullable<double> ciu_longitud { get; set; }
 
+            [DataType(DataType.Text)]
             [DisplayName("Latitud")]
             [Required(ErrorMessage = "Debe ingresar el {0}")]
             public Nullable<double> ciu_latitud { get; set; }

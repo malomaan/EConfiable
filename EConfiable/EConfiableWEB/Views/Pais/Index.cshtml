@@ -215,7 +215,6 @@
                                 className: 'error',
                                 globalPosition: 'top center'
                             });
-                            $("#tra_accountnumber").focus();
                         }
                     },
                     error: function (msg) {
@@ -265,11 +264,8 @@
                 $("#pai_codigointernacional").val(rs.pai_codigointernacional);
                 $("#pai_predeterminado").val(rs.pai_predeterminado.toString());
                 $('#WindowsModal').modal('show');
-                //$("#WindowsModal").text("Editar");
-                //$('#WindowsModal').modal('show');
                 $('#submitdata').hide();
                 $('#updatedata').show();
-                //$("#WindowsModal").html("<span class='glyphicon glyphicon-file'></span> Editar");
             },
             error: function (msg) {
                 alert(msg.responseText);

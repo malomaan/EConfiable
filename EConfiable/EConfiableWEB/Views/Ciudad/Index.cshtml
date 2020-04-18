@@ -285,9 +285,13 @@
             url: '@Url.Action("GetEdit", "Ciudad")/' + id,
             datatype: 'JSON',
             success: function (rs) {
+                $("#ciu_codigo").val(rs.ciu_codigo);
+                $("#ciu_nombre").val(rs.ciu_nombre);
+                $("#ciu_predeterminado").val(rs.ciu_predeterminado.toString());
+                $("#ciu_longitud").val(rs.ciu_longitud);
+                $("#ciu_latitud").val(rs.ciu_latitud);
                 $("#dep_codigo").val(rs.dep_codigo);
-                $("#dep_nombre").val(rs.dep_nombre);
-                $("#pai_codigo").val(rs.pai_codigo);
+
                 $('#WindowsModal').modal('show');
                 $('#submitdata').hide();
                 $('#updatedata').show();
