@@ -8,14 +8,8 @@
     background-attachment: fixed;
 }
 
-.cardheader {
-    background: rgb(0,212,255);
-    background: linear-gradient(90deg, rgba(0,212,255,1) 0%, rgba(9,39,121,0.865983893557423) 48%, rgba(12,41,45,1) 94%);
-}
-
 .card-header {
-    background: rgb(0,212,255);
-    background: linear-gradient(90deg, rgba(0,212,255,1) 0%, rgba(9,39,121,0.865983893557423) 48%, rgba(12,41,45,1) 94%);
+    background-color: #2092ed;
 }
 /*Navbar*/
 .esalid {
@@ -53,9 +47,9 @@
 .nav-link:hover {
     display: block;
     padding: 0.5rem 1rem;
-    background-color: #808080;
+    background-color: #4d9cf0;
     color: white;
-    border-radius: 10px 10px 10px 10px;
+    border-radius: 5px 5px 5px 5px;
 }
 
 .dropdown-menu.show {
@@ -64,12 +58,12 @@
 }
 
 .dropdown-item:hover {
-    background-color: #1765d1;
+    background-color: #0070e8;
 }
 
-.navbar{
-    background-color:#1765d1;
-    height:70px;
+.navbar {
+    background-color: #0070e8;
+    height: 70px;
 }
 
 .navbar-light .navbar-nav .nav-link {
@@ -82,7 +76,7 @@
 
 
 .navbar-collapse {
-    background-color: #1765d1;
+    background-color: #0070e8;
 }
 
 /*Fin Navbar*/
@@ -112,13 +106,12 @@ textarea {
 
 .modal-header {
     color: #fff;
-    /*border-color: #6aa01c;*/
+    border-color: #2092ed;
     border-style: solid;
     border-width: 1px;
     border-radius: 5px 5px 0px 0px;
     height: 55px;
-    background: rgb(0,212,255);
-    background: linear-gradient(90deg, rgba(0,212,255,1) 0%, rgba(9,39,121,0.865983893557423) 48%, rgba(12,41,45,1) 94%);
+    background-color: #2092ed;
 }
 
 .modal-footer {
@@ -139,14 +132,34 @@ th{
 }
 
 /*Formato de Menu Panel*/
-.masthead {
+/*RED*/
+/*.masthead {
+    padding: 3rem 0 7rem;
+    position: relative;
+    background-color: #dd3d31;
+    background-image: url(https://startbootstrap.com/assets/img/overlay.svg), linear-gradient(45deg, #dd3d31 0%, #d22f23 100%);
+    background-size: cover;
+    z-index: 0
+}*/
+
+/*Greeen*/
+/*.masthead {
     padding: 3rem 0 7rem;
     position: relative;
     background-color: #16cc00;
     background-image: url(https://startbootstrap.com/assets/img/overlay.svg), linear-gradient(45deg, rgba(46, 78, 56, 0.5) 0%, #14ca11 100%);
     background-size: cover;
     z-index: 0;
+}*/
+.masthead {
+    padding: 3rem 0 7rem;
+    position: relative;
+    background-color: #0062cc;
+    background-image: url(https://startbootstrap.com/assets/img/overlay.svg), linear-gradient(45deg, rgba(0, 123, 255, 0.5) 0%, #007bff 100%);
+    background-size: cover;
+    z-index: 0;
 }
+
 
 
     .masthead svg.wave {
