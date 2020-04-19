@@ -8,13 +8,23 @@
     background-attachment: fixed;
 }
 
+.cardheader {
+    background: rgb(0,212,255);
+    background: linear-gradient(90deg, rgba(0,212,255,1) 0%, rgba(9,39,121,0.865983893557423) 48%, rgba(12,41,45,1) 94%);
+}
+
+.card-header {
+    background: rgb(0,212,255);
+    background: linear-gradient(90deg, rgba(0,212,255,1) 0%, rgba(9,39,121,0.865983893557423) 48%, rgba(12,41,45,1) 94%);
+}
+/*Navbar*/
 .esalid {
     color: #FFF;
     margin: 0 auto;
     text-align: center;
     font-family: 'Pattaya', sans-serif;
     text-shadow: -4px 3px 0 #808080, -8px 7px 0 #0a0e27;
-    font-size:30px;
+    font-size: 30px;
 }
 
 .navbar-brand {
@@ -26,6 +36,56 @@
     white-space: nowrap;
 }
 
+.nav .navbar-nav li a {
+    color: white !important;
+}
+
+.navbar-light .navbar-brand {
+    color: #FFF;
+}
+
+.navbar-light .navbar-brand:hover, .navbar-light .navbar-brand:focus {
+        color: #f8f9fa;
+        text-shadow: 0 0 30px #fff;
+}
+
+
+.nav-link:hover {
+    display: block;
+    padding: 0.5rem 1rem;
+    background-color: #808080;
+    color: white;
+    border-radius: 10px 10px 10px 10px;
+}
+
+.dropdown-menu.show {
+    display: block;
+    background-color: #0a0e27;
+}
+
+.dropdown-item:hover {
+    background-color: #1765d1;
+}
+
+.navbar{
+    background-color:#1765d1;
+    height:70px;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: white;
+}
+.navbar-light .navbar-nav .nav-link:hover {
+    color: white;
+}
+
+
+
+.navbar-collapse {
+    background-color: #1765d1;
+}
+
+/*Fin Navbar*/
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
@@ -51,13 +111,14 @@ textarea {
 
 
 .modal-header {
-    background-color: #6aa01c;
     color: #fff;
-    border-color: #6aa01c;
+    /*border-color: #6aa01c;*/
     border-style: solid;
     border-width: 1px;
     border-radius: 5px 5px 0px 0px;
     height: 55px;
+    background: rgb(0,212,255);
+    background: linear-gradient(90deg, rgba(0,212,255,1) 0%, rgba(9,39,121,0.865983893557423) 48%, rgba(12,41,45,1) 94%);
 }
 
 .modal-footer {
@@ -222,27 +283,3 @@ th{
 .border-0 {
     border: 0 !important;
 }
-
-/*NAV DROP*/
-/*.dropdown-menu {
-    text-decoration:none;
-    position: absolute;
-    top: 50px;
-    left: 0;
-    z-index: 1000;
-    display: none;
-    float: left;
-    min-width: 10rem;
-    padding: 0.5rem 0;
-    margin: 0.125rem 0 0;
-    font-size: 1rem;
-    color: #f8f9fa;
-    text-align: left;
-    list-style: none;
-    background-color: #495057;
-    background-clip: padding-box;
-    border: 1px solid rgba(0, 0, 0, 0.15);
-    border-radius: 0.25rem;
-    padding: 10px;
-}*/
-
