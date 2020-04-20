@@ -9,7 +9,7 @@
 }
 
 .card-header {
-    background-color: #2092ed;
+    background-color: #d2e3f6;
 }
 /*Navbar*/
 .esalid {
@@ -58,11 +58,11 @@
 }
 
 .dropdown-item:hover {
-    background-color: #0070e8;
+    background-color: #141e34;
 }
 
 .navbar {
-    background-color: #0070e8;
+    background-color: #141e34;
     height: 70px;
 }
 
@@ -76,7 +76,7 @@
 
 
 .navbar-collapse {
-    background-color: #0070e8;
+    background-color: #141e34;
 }
 
 /*Fin Navbar*/
