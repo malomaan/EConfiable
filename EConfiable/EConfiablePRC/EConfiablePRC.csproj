@@ -45,6 +45,7 @@
     <Compile Include="DepartamentoPRC.cs" />
     <Compile Include="PaisPRC.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TiposociedadPRC.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EConfiableBD\EConfiableBD.csproj">

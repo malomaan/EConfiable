@@ -111,6 +111,8 @@
     <Compile Include="TipoSociedad.cs">
       <DependentUpon>EConfiableModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="TiposociedadBD.cs" />
+    <Compile Include="TipoSociedadMetadata.cs" />
     <Compile Include="Tiposociedad_List_Result.cs">
       <DependentUpon>EConfiableModel.tt</DependentUpon>
     </Compile>
