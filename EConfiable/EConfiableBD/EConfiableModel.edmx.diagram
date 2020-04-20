@@ -5,11 +5,19 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="3507301c2cf54063a59748a957402642" Name="Diagram1">
-        <EntityTypeShape EntityType="EConfiableModel.Pais" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EConfiableModel.Departamento" Width="1.5" PointX="3" PointY="0.875" />
+        <EntityTypeShape EntityType="EConfiableModel.Pais" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EConfiableModel.Departamento" Width="1.5" PointX="3" PointY="3.875" />
         <AssociationConnector Association="EConfiableModel.FK_Departamento_Pais" />
-        <EntityTypeShape EntityType="EConfiableModel.Ciudad" Width="1.5" PointX="5.25" PointY="5" />
+        <EntityTypeShape EntityType="EConfiableModel.Ciudad" Width="1.5" PointX="5.25" PointY="3.625" />
         <AssociationConnector Association="EConfiableModel.FK_Ciudad_Departamento" />
+        <EntityTypeShape EntityType="EConfiableModel.TipoSociedad" Width="1.5" PointX="5.25" PointY="7.125" />
+        <EntityTypeShape EntityType="EConfiableModel.Empresa" Width="1.5" PointX="7.5" PointY="1.375" />
+        <EntityTypeShape EntityType="EConfiableModel.TipoCategoriaMatricula" Width="1.5" PointX="5.25" PointY="9.5" />
+        <EntityTypeShape EntityType="EConfiableModel.TipoOrganizacion" Width="1.5" PointX="5.25" PointY="0.75" />
+        <AssociationConnector Association="EConfiableModel.FK_Empresa_Ciudad" />
+        <AssociationConnector Association="EConfiableModel.FK_Empresa_TipoCategoriaMatricula" />
+        <AssociationConnector Association="EConfiableModel.FK_Empresa_TipoOrganizacion" />
+        <AssociationConnector Association="EConfiableModel.FK_Empresa_TipoSociedad" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

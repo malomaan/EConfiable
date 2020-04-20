@@ -24,6 +24,38 @@
           <Property Name="dep_nombre" Type="varchar" MaxLength="250" />
           <Property Name="pai_codigo" Type="varchar" MaxLength="20" />
         </EntityType>
+        <EntityType Name="Empresa">
+          <Key>
+            <PropertyRef Name="emp_id" />
+          </Key>
+          <Property Name="emp_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="emp_nit" Type="varchar" MaxLength="20" />
+          <Property Name="emp_digverificacion" Type="int" />
+          <Property Name="emp_nombre" Type="varchar" MaxLength="250" />
+          <Property Name="emp_direccion" Type="varchar" MaxLength="250" />
+          <Property Name="ciu_codigo" Type="varchar" MaxLength="20" />
+          <Property Name="emp_telefonos" Type="varchar" MaxLength="150" />
+          <Property Name="emp_email" Type="varchar" MaxLength="250" />
+          <Property Name="emp_url" Type="varchar" MaxLength="250" />
+          <Property Name="emp_logotipo" Type="varchar" MaxLength="250" />
+          <Property Name="emp_longitud" Type="float" />
+          <Property Name="emp_latitud" Type="float" />
+          <Property Name="emp_nummatricula" Type="varchar" MaxLength="20" />
+          <Property Name="emp_fechamatricula" Type="datetime" />
+          <Property Name="emp_fecharenovacion" Type="datetime" />
+          <Property Name="emp_fechacancelacion" Type="datetime" />
+          <Property Name="emp_fechavigencia" Type="datetime" />
+          <Property Name="emp_ultanorenovado" Type="int" />
+          <Property Name="emp_rup" Type="varchar" MaxLength="20" />
+          <Property Name="emp_runeol" Type="varchar" MaxLength="20" />
+          <Property Name="emp_rut" Type="varchar" MaxLength="20" />
+          <Property Name="tso_id" Type="int" />
+          <Property Name="tor_id" Type="int" />
+          <Property Name="tcm_id" Type="int" />
+          <Property Name="emp_numeroempleados" Type="int" />
+          <Property Name="emp_afiliadocamcomercio" Type="bit" />
+          <Property Name="emp_activa" Type="bit" />
+        </EntityType>
         <EntityType Name="Pais">
           <Key>
             <PropertyRef Name="pai_codigo" />
@@ -32,6 +64,27 @@
           <Property Name="pai_nombre" Type="varchar" MaxLength="250" />
           <Property Name="pai_codigointernacional" Type="varchar" MaxLength="20" />
           <Property Name="pai_predeterminado" Type="bit" />
+        </EntityType>
+        <EntityType Name="TipoCategoriaMatricula">
+          <Key>
+            <PropertyRef Name="tcm_id" />
+          </Key>
+          <Property Name="tcm_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tcm_descripcion" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="TipoOrganizacion">
+          <Key>
+            <PropertyRef Name="tor_id" />
+          </Key>
+          <Property Name="tor_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tor_descripcion" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="TipoSociedad">
+          <Key>
+            <PropertyRef Name="tso_id" />
+          </Key>
+          <Property Name="tso_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tso_descripcion" Type="varchar" MaxLength="250" />
         </EntityType>
         <Association Name="FK_Ciudad_Departamento">
           <End Role="Departamento" Type="Self.Departamento" Multiplicity="0..1" />
@@ -54,6 +107,54 @@
             </Principal>
             <Dependent Role="Departamento">
               <PropertyRef Name="pai_codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empresa_Ciudad">
+          <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="0..1" />
+          <End Role="Empresa" Type="Self.Empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ciudad">
+              <PropertyRef Name="ciu_codigo" />
+            </Principal>
+            <Dependent Role="Empresa">
+              <PropertyRef Name="ciu_codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empresa_TipoCategoriaMatricula">
+          <End Role="TipoCategoriaMatricula" Type="Self.TipoCategoriaMatricula" Multiplicity="0..1" />
+          <End Role="Empresa" Type="Self.Empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoCategoriaMatricula">
+              <PropertyRef Name="tcm_id" />
+            </Principal>
+            <Dependent Role="Empresa">
+              <PropertyRef Name="tcm_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empresa_TipoOrganizacion">
+          <End Role="TipoOrganizacion" Type="Self.TipoOrganizacion" Multiplicity="0..1" />
+          <End Role="Empresa" Type="Self.Empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoOrganizacion">
+              <PropertyRef Name="tor_id" />
+            </Principal>
+            <Dependent Role="Empresa">
+              <PropertyRef Name="tor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empresa_TipoSociedad">
+          <End Role="TipoSociedad" Type="Self.TipoSociedad" Multiplicity="0..1" />
+          <End Role="Empresa" Type="Self.Empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoSociedad">
+              <PropertyRef Name="tso_id" />
+            </Principal>
+            <Dependent Role="Empresa">
+              <PropertyRef Name="tso_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -95,6 +196,69 @@
           <Parameter Name="dep_nombre" Type="varchar" Mode="In" />
           <Parameter Name="pai_codigo" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="Empresa_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="emp_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Empresa_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="emp_nit" Type="varchar" Mode="In" />
+          <Parameter Name="emp_digverificacion" Type="int" Mode="In" />
+          <Parameter Name="emp_nombre" Type="varchar" Mode="In" />
+          <Parameter Name="emp_direccion" Type="varchar" Mode="In" />
+          <Parameter Name="ciu_codigo" Type="varchar" Mode="In" />
+          <Parameter Name="emp_telefonos" Type="varchar" Mode="In" />
+          <Parameter Name="emp_email" Type="varchar" Mode="In" />
+          <Parameter Name="emp_url" Type="varchar" Mode="In" />
+          <Parameter Name="emp_logotipo" Type="varchar" Mode="In" />
+          <Parameter Name="emp_longitud" Type="float" Mode="In" />
+          <Parameter Name="emp_latitud" Type="float" Mode="In" />
+          <Parameter Name="emp_nummatricula" Type="varchar" Mode="In" />
+          <Parameter Name="emp_fechamatricula" Type="datetime" Mode="In" />
+          <Parameter Name="emp_fecharenovacion" Type="datetime" Mode="In" />
+          <Parameter Name="emp_fechacancelacion" Type="datetime" Mode="In" />
+          <Parameter Name="emp_fechavigencia" Type="datetime" Mode="In" />
+          <Parameter Name="emp_ultanorenovado" Type="int" Mode="In" />
+          <Parameter Name="emp_rup" Type="varchar" Mode="In" />
+          <Parameter Name="emp_runeol" Type="varchar" Mode="In" />
+          <Parameter Name="emp_rut" Type="varchar" Mode="In" />
+          <Parameter Name="tso_id" Type="int" Mode="In" />
+          <Parameter Name="tor_id" Type="int" Mode="In" />
+          <Parameter Name="tcm_id" Type="int" Mode="In" />
+          <Parameter Name="emp_numeroempleados" Type="int" Mode="In" />
+          <Parameter Name="emp_afiliadocamcomercio" Type="bit" Mode="In" />
+          <Parameter Name="emp_activa" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="Empresa_List" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="emp_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Empresa_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="emp_id" Type="int" Mode="In" />
+          <Parameter Name="emp_nit" Type="varchar" Mode="In" />
+          <Parameter Name="emp_digverificacion" Type="int" Mode="In" />
+          <Parameter Name="emp_nombre" Type="varchar" Mode="In" />
+          <Parameter Name="emp_direccion" Type="varchar" Mode="In" />
+          <Parameter Name="ciu_codigo" Type="varchar" Mode="In" />
+          <Parameter Name="emp_telefonos" Type="varchar" Mode="In" />
+          <Parameter Name="emp_email" Type="varchar" Mode="In" />
+          <Parameter Name="emp_url" Type="varchar" Mode="In" />
+          <Parameter Name="emp_logotipo" Type="varchar" Mode="In" />
+          <Parameter Name="emp_longitud" Type="float" Mode="In" />
+          <Parameter Name="emp_latitud" Type="float" Mode="In" />
+          <Parameter Name="emp_nummatricula" Type="varchar" Mode="In" />
+          <Parameter Name="emp_fechamatricula" Type="datetime" Mode="In" />
+          <Parameter Name="emp_fecharenovacion" Type="datetime" Mode="In" />
+          <Parameter Name="emp_fechacancelacion" Type="datetime" Mode="In" />
+          <Parameter Name="emp_fechavigencia" Type="datetime" Mode="In" />
+          <Parameter Name="emp_ultanorenovado" Type="int" Mode="In" />
+          <Parameter Name="emp_rup" Type="varchar" Mode="In" />
+          <Parameter Name="emp_runeol" Type="varchar" Mode="In" />
+          <Parameter Name="emp_rut" Type="varchar" Mode="In" />
+          <Parameter Name="tso_id" Type="int" Mode="In" />
+          <Parameter Name="tor_id" Type="int" Mode="In" />
+          <Parameter Name="tcm_id" Type="int" Mode="In" />
+          <Parameter Name="emp_numeroempleados" Type="int" Mode="In" />
+          <Parameter Name="emp_afiliadocamcomercio" Type="bit" Mode="In" />
+          <Parameter Name="emp_activa" Type="bit" Mode="In" />
+        </Function>
         <Function Name="Pais_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="pai_codigo" Type="varchar" Mode="In" />
         </Function>
@@ -113,10 +277,53 @@
           <Parameter Name="pai_codigointernacional" Type="varchar" Mode="In" />
           <Parameter Name="pai_predeterminado" Type="bit" Mode="In" />
         </Function>
+        <Function Name="Tipocategoriamatricula_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tcm_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Tipocategoriamatricula_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tcm_descripcion" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Tipocategoriamatricula_List" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tcm_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Tipocategoriamatricula_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tcm_id" Type="int" Mode="In" />
+          <Parameter Name="tcm_descripcion" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Tipoorganizacion_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tor_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Tipoorganizacion_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tor_descripcion" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Tipoorganizacion_List" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tor_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Tipoorganizacion_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tor_id" Type="int" Mode="In" />
+          <Parameter Name="tor_descripcion" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Tiposociedad_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tso_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Tiposociedad_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tso_descripcion" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Tiposociedad_List" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tso_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Tiposociedad_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tso_id" Type="int" Mode="In" />
+          <Parameter Name="tso_descripcion" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="EConfiableModelStoreContainer">
           <EntitySet Name="Ciudad" EntityType="Self.Ciudad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Departamento" EntityType="Self.Departamento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empresa" EntityType="Self.Empresa" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pais" EntityType="Self.Pais" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoCategoriaMatricula" EntityType="Self.TipoCategoriaMatricula" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoOrganizacion" EntityType="Self.TipoOrganizacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoSociedad" EntityType="Self.TipoSociedad" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Ciudad_Departamento" Association="Self.FK_Ciudad_Departamento">
             <End Role="Departamento" EntitySet="Departamento" />
             <End Role="Ciudad" EntitySet="Ciudad" />
@@ -124,6 +331,22 @@
           <AssociationSet Name="FK_Departamento_Pais" Association="Self.FK_Departamento_Pais">
             <End Role="Pais" EntitySet="Pais" />
             <End Role="Departamento" EntitySet="Departamento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empresa_Ciudad" Association="Self.FK_Empresa_Ciudad">
+            <End Role="Ciudad" EntitySet="Ciudad" />
+            <End Role="Empresa" EntitySet="Empresa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empresa_TipoCategoriaMatricula" Association="Self.FK_Empresa_TipoCategoriaMatricula">
+            <End Role="TipoCategoriaMatricula" EntitySet="TipoCategoriaMatricula" />
+            <End Role="Empresa" EntitySet="Empresa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empresa_TipoOrganizacion" Association="Self.FK_Empresa_TipoOrganizacion">
+            <End Role="TipoOrganizacion" EntitySet="TipoOrganizacion" />
+            <End Role="Empresa" EntitySet="Empresa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empresa_TipoSociedad" Association="Self.FK_Empresa_TipoSociedad">
+            <End Role="TipoSociedad" EntitySet="TipoSociedad" />
+            <End Role="Empresa" EntitySet="Empresa" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -187,7 +410,7 @@
             <End Role="Ciudad" EntitySet="Ciudad" />
           </AssociationSet>
           <FunctionImport Name="Ciudad_Delete">
-            <Parameter Name="ciu_codigo" Mode="In" Type="String" />
+          <Parameter Name="ciu_codigo" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Ciudad_Insert">
             <Parameter Name="ciu_codigo" Mode="In" Type="String" />
@@ -198,7 +421,7 @@
             <Parameter Name="dep_codigo" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Ciudad_List" ReturnType="Collection(EConfiableModel.Ciudad_List_Result)">
-            <Parameter Name="ciu_codigo" Mode="In" Type="String" />
+          <Parameter Name="ciu_codigo" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Ciudad_Update">
             <Parameter Name="ciu_codigo" Mode="In" Type="String" />
@@ -207,6 +430,128 @@
             <Parameter Name="ciu_longitud" Mode="In" Type="Double" />
             <Parameter Name="ciu_latitud" Mode="In" Type="Double" />
             <Parameter Name="dep_codigo" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="TipoSociedad" EntityType="EConfiableModel.TipoSociedad" />
+          <FunctionImport Name="Tiposociedad_Delete">
+          <Parameter Name="tso_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Tiposociedad_Insert">
+          <Parameter Name="tso_descripcion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Tiposociedad_List" ReturnType="Collection(EConfiableModel.Tiposociedad_List_Result)">
+          <Parameter Name="tso_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Tiposociedad_Update">
+            <Parameter Name="tso_id" Mode="In" Type="Int32" />
+            <Parameter Name="tso_descripcion" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Empresa" EntityType="EConfiableModel.Empresa" />
+          <EntitySet Name="TipoCategoriaMatricula" EntityType="EConfiableModel.TipoCategoriaMatricula" />
+          <EntitySet Name="TipoOrganizacion" EntityType="EConfiableModel.TipoOrganizacion" />
+          <AssociationSet Name="FK_Empresa_Ciudad" Association="EConfiableModel.FK_Empresa_Ciudad">
+            <End Role="Ciudad" EntitySet="Ciudad" />
+            <End Role="Empresa" EntitySet="Empresa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empresa_TipoCategoriaMatricula" Association="EConfiableModel.FK_Empresa_TipoCategoriaMatricula">
+            <End Role="TipoCategoriaMatricula" EntitySet="TipoCategoriaMatricula" />
+            <End Role="Empresa" EntitySet="Empresa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empresa_TipoOrganizacion" Association="EConfiableModel.FK_Empresa_TipoOrganizacion">
+            <End Role="TipoOrganizacion" EntitySet="TipoOrganizacion" />
+            <End Role="Empresa" EntitySet="Empresa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empresa_TipoSociedad" Association="EConfiableModel.FK_Empresa_TipoSociedad">
+            <End Role="TipoSociedad" EntitySet="TipoSociedad" />
+            <End Role="Empresa" EntitySet="Empresa" />
+          </AssociationSet>
+          <FunctionImport Name="Empresa_Delete">
+            <Parameter Name="emp_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Empresa_Insert">
+            <Parameter Name="emp_nit" Mode="In" Type="String" />
+            <Parameter Name="emp_digverificacion" Mode="In" Type="Int32" />
+            <Parameter Name="emp_nombre" Mode="In" Type="String" />
+            <Parameter Name="emp_direccion" Mode="In" Type="String" />
+            <Parameter Name="ciu_codigo" Mode="In" Type="String" />
+            <Parameter Name="emp_telefonos" Mode="In" Type="String" />
+            <Parameter Name="emp_email" Mode="In" Type="String" />
+            <Parameter Name="emp_url" Mode="In" Type="String" />
+            <Parameter Name="emp_logotipo" Mode="In" Type="String" />
+            <Parameter Name="emp_longitud" Mode="In" Type="Double" />
+            <Parameter Name="emp_latitud" Mode="In" Type="Double" />
+            <Parameter Name="emp_nummatricula" Mode="In" Type="String" />
+            <Parameter Name="emp_fechamatricula" Mode="In" Type="DateTime" />
+            <Parameter Name="emp_fecharenovacion" Mode="In" Type="DateTime" />
+            <Parameter Name="emp_fechacancelacion" Mode="In" Type="DateTime" />
+            <Parameter Name="emp_fechavigencia" Mode="In" Type="DateTime" />
+            <Parameter Name="emp_ultanorenovado" Mode="In" Type="Int32" />
+            <Parameter Name="emp_rup" Mode="In" Type="String" />
+            <Parameter Name="emp_runeol" Mode="In" Type="String" />
+            <Parameter Name="emp_rut" Mode="In" Type="String" />
+            <Parameter Name="tso_id" Mode="In" Type="Int32" />
+            <Parameter Name="tor_id" Mode="In" Type="Int32" />
+            <Parameter Name="tcm_id" Mode="In" Type="Int32" />
+            <Parameter Name="emp_numeroempleados" Mode="In" Type="Int32" />
+            <Parameter Name="emp_afiliadocamcomercio" Mode="In" Type="Boolean" />
+            <Parameter Name="emp_activa" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Empresa_List" ReturnType="Collection(EConfiableModel.Empresa_List_Result)">
+            <Parameter Name="emp_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Empresa_Update">
+            <Parameter Name="emp_id" Mode="In" Type="Int32" />
+            <Parameter Name="emp_nit" Mode="In" Type="String" />
+            <Parameter Name="emp_digverificacion" Mode="In" Type="Int32" />
+            <Parameter Name="emp_nombre" Mode="In" Type="String" />
+            <Parameter Name="emp_direccion" Mode="In" Type="String" />
+            <Parameter Name="ciu_codigo" Mode="In" Type="String" />
+            <Parameter Name="emp_telefonos" Mode="In" Type="String" />
+            <Parameter Name="emp_email" Mode="In" Type="String" />
+            <Parameter Name="emp_url" Mode="In" Type="String" />
+            <Parameter Name="emp_logotipo" Mode="In" Type="String" />
+            <Parameter Name="emp_longitud" Mode="In" Type="Double" />
+            <Parameter Name="emp_latitud" Mode="In" Type="Double" />
+            <Parameter Name="emp_nummatricula" Mode="In" Type="String" />
+            <Parameter Name="emp_fechamatricula" Mode="In" Type="DateTime" />
+            <Parameter Name="emp_fecharenovacion" Mode="In" Type="DateTime" />
+            <Parameter Name="emp_fechacancelacion" Mode="In" Type="DateTime" />
+            <Parameter Name="emp_fechavigencia" Mode="In" Type="DateTime" />
+            <Parameter Name="emp_ultanorenovado" Mode="In" Type="Int32" />
+            <Parameter Name="emp_rup" Mode="In" Type="String" />
+            <Parameter Name="emp_runeol" Mode="In" Type="String" />
+            <Parameter Name="emp_rut" Mode="In" Type="String" />
+            <Parameter Name="tso_id" Mode="In" Type="Int32" />
+            <Parameter Name="tor_id" Mode="In" Type="Int32" />
+            <Parameter Name="tcm_id" Mode="In" Type="Int32" />
+            <Parameter Name="emp_numeroempleados" Mode="In" Type="Int32" />
+            <Parameter Name="emp_afiliadocamcomercio" Mode="In" Type="Boolean" />
+            <Parameter Name="emp_activa" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Tipocategoriamatricula_Delete">
+            <Parameter Name="tcm_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Tipocategoriamatricula_Insert">
+            <Parameter Name="tcm_descripcion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Tipocategoriamatricula_List" ReturnType="Collection(EConfiableModel.Tipocategoriamatricula_List_Result)">
+            <Parameter Name="tcm_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Tipocategoriamatricula_Update">
+            <Parameter Name="tcm_id" Mode="In" Type="Int32" />
+            <Parameter Name="tcm_descripcion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Tipoorganizacion_Delete">
+            <Parameter Name="tor_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Tipoorganizacion_Insert">
+            <Parameter Name="tor_descripcion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Tipoorganizacion_List" ReturnType="Collection(EConfiableModel.Tipoorganizacion_List_Result)">
+            <Parameter Name="tor_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Tipoorganizacion_Update">
+            <Parameter Name="tor_id" Mode="In" Type="Int32" />
+            <Parameter Name="tor_descripcion" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Pais_List_Result">
@@ -253,6 +598,7 @@
           <Property Name="ciu_latitud" Type="Double" />
           <Property Name="dep_codigo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Departamento" Relationship="EConfiableModel.FK_Ciudad_Departamento" FromRole="Ciudad" ToRole="Departamento" />
+          <NavigationProperty Name="Empresa" Relationship="EConfiableModel.FK_Empresa_Ciudad" FromRole="Ciudad" ToRole="Empresa" />
         </EntityType>
         <Association Name="FK_Ciudad_Departamento">
           <End Type="EConfiableModel.Departamento" Role="Departamento" Multiplicity="0..1" />
@@ -273,6 +619,155 @@
           <Property Type="Double" Name="ciu_longitud" Nullable="true" />
           <Property Type="Double" Name="ciu_latitud" Nullable="true" />
           <Property Type="String" Name="dep_codigo" Nullable="true" MaxLength="20" />
+        </ComplexType>
+        <EntityType Name="TipoSociedad">
+          <Key>
+            <PropertyRef Name="tso_id" />
+          </Key>
+          <Property Name="tso_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tso_descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Empresa" Relationship="EConfiableModel.FK_Empresa_TipoSociedad" FromRole="TipoSociedad" ToRole="Empresa" />
+        </EntityType>
+        <ComplexType Name="Tiposociedad_List_Result">
+          <Property Type="Int32" Name="tso_id" Nullable="false" />
+          <Property Type="String" Name="tso_descripcion" Nullable="true" MaxLength="250" />
+        </ComplexType>
+        <EntityType Name="Empresa">
+          <Key>
+            <PropertyRef Name="emp_id" />
+          </Key>
+          <Property Name="emp_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="emp_nit" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="emp_digverificacion" Type="Int32" />
+          <Property Name="emp_nombre" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="emp_direccion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ciu_codigo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="emp_telefonos" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="emp_email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="emp_url" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="emp_logotipo" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="emp_longitud" Type="Double" />
+          <Property Name="emp_latitud" Type="Double" />
+          <Property Name="emp_nummatricula" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="emp_fechamatricula" Type="DateTime" Precision="3" />
+          <Property Name="emp_fecharenovacion" Type="DateTime" Precision="3" />
+          <Property Name="emp_fechacancelacion" Type="DateTime" Precision="3" />
+          <Property Name="emp_fechavigencia" Type="DateTime" Precision="3" />
+          <Property Name="emp_ultanorenovado" Type="Int32" />
+          <Property Name="emp_rup" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="emp_runeol" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="emp_rut" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="tso_id" Type="Int32" />
+          <Property Name="tor_id" Type="Int32" />
+          <Property Name="tcm_id" Type="Int32" />
+          <Property Name="emp_numeroempleados" Type="Int32" />
+          <Property Name="emp_afiliadocamcomercio" Type="Boolean" />
+          <Property Name="emp_activa" Type="Boolean" />
+          <NavigationProperty Name="Ciudad" Relationship="EConfiableModel.FK_Empresa_Ciudad" FromRole="Empresa" ToRole="Ciudad" />
+          <NavigationProperty Name="TipoCategoriaMatricula" Relationship="EConfiableModel.FK_Empresa_TipoCategoriaMatricula" FromRole="Empresa" ToRole="TipoCategoriaMatricula" />
+          <NavigationProperty Name="TipoOrganizacion" Relationship="EConfiableModel.FK_Empresa_TipoOrganizacion" FromRole="Empresa" ToRole="TipoOrganizacion" />
+          <NavigationProperty Name="TipoSociedad" Relationship="EConfiableModel.FK_Empresa_TipoSociedad" FromRole="Empresa" ToRole="TipoSociedad" />
+        </EntityType>
+        <EntityType Name="TipoCategoriaMatricula">
+          <Key>
+            <PropertyRef Name="tcm_id" />
+          </Key>
+          <Property Name="tcm_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tcm_descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Empresa" Relationship="EConfiableModel.FK_Empresa_TipoCategoriaMatricula" FromRole="TipoCategoriaMatricula" ToRole="Empresa" />
+        </EntityType>
+        <EntityType Name="TipoOrganizacion">
+          <Key>
+            <PropertyRef Name="tor_id" />
+          </Key>
+          <Property Name="tor_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tor_descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Empresa" Relationship="EConfiableModel.FK_Empresa_TipoOrganizacion" FromRole="TipoOrganizacion" ToRole="Empresa" />
+        </EntityType>
+        <Association Name="FK_Empresa_Ciudad">
+          <End Type="EConfiableModel.Ciudad" Role="Ciudad" Multiplicity="0..1" />
+          <End Type="EConfiableModel.Empresa" Role="Empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ciudad">
+              <PropertyRef Name="ciu_codigo" />
+            </Principal>
+            <Dependent Role="Empresa">
+              <PropertyRef Name="ciu_codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empresa_TipoCategoriaMatricula">
+          <End Type="EConfiableModel.TipoCategoriaMatricula" Role="TipoCategoriaMatricula" Multiplicity="0..1" />
+          <End Type="EConfiableModel.Empresa" Role="Empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoCategoriaMatricula">
+              <PropertyRef Name="tcm_id" />
+            </Principal>
+            <Dependent Role="Empresa">
+              <PropertyRef Name="tcm_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empresa_TipoOrganizacion">
+          <End Type="EConfiableModel.TipoOrganizacion" Role="TipoOrganizacion" Multiplicity="0..1" />
+          <End Type="EConfiableModel.Empresa" Role="Empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoOrganizacion">
+              <PropertyRef Name="tor_id" />
+            </Principal>
+            <Dependent Role="Empresa">
+              <PropertyRef Name="tor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empresa_TipoSociedad">
+          <End Type="EConfiableModel.TipoSociedad" Role="TipoSociedad" Multiplicity="0..1" />
+          <End Type="EConfiableModel.Empresa" Role="Empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoSociedad">
+              <PropertyRef Name="tso_id" />
+            </Principal>
+            <Dependent Role="Empresa">
+              <PropertyRef Name="tso_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="Empresa_List_Result">
+          <Property Type="Int32" Name="emp_id" Nullable="false" />
+          <Property Type="String" Name="emp_nit" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="emp_digverificacion" Nullable="true" />
+          <Property Type="String" Name="emp_nombre" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="emp_direccion" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="ciu_codigo" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="emp_telefonos" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="emp_email" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="emp_url" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="emp_logotipo" Nullable="true" MaxLength="250" />
+          <Property Type="Double" Name="emp_longitud" Nullable="true" />
+          <Property Type="Double" Name="emp_latitud" Nullable="true" />
+          <Property Type="String" Name="emp_nummatricula" Nullable="true" MaxLength="20" />
+          <Property Type="DateTime" Name="emp_fechamatricula" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="emp_fecharenovacion" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="emp_fechacancelacion" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="emp_fechavigencia" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="emp_ultanorenovado" Nullable="true" />
+          <Property Type="String" Name="emp_rup" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="emp_runeol" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="emp_rut" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="tso_id" Nullable="true" />
+          <Property Type="Int32" Name="tor_id" Nullable="true" />
+          <Property Type="Int32" Name="tcm_id" Nullable="true" />
+          <Property Type="Int32" Name="emp_numeroempleados" Nullable="true" />
+          <Property Type="Boolean" Name="emp_afiliadocamcomercio" Nullable="true" />
+          <Property Type="Boolean" Name="emp_activa" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Tipocategoriamatricula_List_Result">
+          <Property Type="Int32" Name="tcm_id" Nullable="false" />
+          <Property Type="String" Name="tcm_descripcion" Nullable="true" MaxLength="250" />
+        </ComplexType>
+        <ComplexType Name="Tipoorganizacion_List_Result">
+          <Property Type="Int32" Name="tor_id" Nullable="false" />
+          <Property Type="String" Name="tor_descripcion" Nullable="true" MaxLength="250" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -351,6 +846,132 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Ciudad_Update" FunctionName="EConfiableModel.Store.Ciudad_Update" />
+          <EntitySetMapping Name="TipoSociedad">
+            <EntityTypeMapping TypeName="EConfiableModel.TipoSociedad">
+              <MappingFragment StoreEntitySet="TipoSociedad">
+                <ScalarProperty Name="tso_descripcion" ColumnName="tso_descripcion" />
+                <ScalarProperty Name="tso_id" ColumnName="tso_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Tiposociedad_Delete" FunctionName="EConfiableModel.Store.Tiposociedad_Delete" />
+          <FunctionImportMapping FunctionImportName="Tiposociedad_Insert" FunctionName="EConfiableModel.Store.Tiposociedad_Insert" />
+          <FunctionImportMapping FunctionImportName="Tiposociedad_List" FunctionName="EConfiableModel.Store.Tiposociedad_List">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EConfiableModel.Tiposociedad_List_Result">
+                <ScalarProperty Name="tso_id" ColumnName="tso_id" />
+                <ScalarProperty Name="tso_descripcion" ColumnName="tso_descripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Tiposociedad_Update" FunctionName="EConfiableModel.Store.Tiposociedad_Update" />
+          <EntitySetMapping Name="Empresa">
+            <EntityTypeMapping TypeName="EConfiableModel.Empresa">
+              <MappingFragment StoreEntitySet="Empresa">
+                <ScalarProperty Name="emp_activa" ColumnName="emp_activa" />
+                <ScalarProperty Name="emp_afiliadocamcomercio" ColumnName="emp_afiliadocamcomercio" />
+                <ScalarProperty Name="emp_numeroempleados" ColumnName="emp_numeroempleados" />
+                <ScalarProperty Name="tcm_id" ColumnName="tcm_id" />
+                <ScalarProperty Name="tor_id" ColumnName="tor_id" />
+                <ScalarProperty Name="tso_id" ColumnName="tso_id" />
+                <ScalarProperty Name="emp_rut" ColumnName="emp_rut" />
+                <ScalarProperty Name="emp_runeol" ColumnName="emp_runeol" />
+                <ScalarProperty Name="emp_rup" ColumnName="emp_rup" />
+                <ScalarProperty Name="emp_ultanorenovado" ColumnName="emp_ultanorenovado" />
+                <ScalarProperty Name="emp_fechavigencia" ColumnName="emp_fechavigencia" />
+                <ScalarProperty Name="emp_fechacancelacion" ColumnName="emp_fechacancelacion" />
+                <ScalarProperty Name="emp_fecharenovacion" ColumnName="emp_fecharenovacion" />
+                <ScalarProperty Name="emp_fechamatricula" ColumnName="emp_fechamatricula" />
+                <ScalarProperty Name="emp_nummatricula" ColumnName="emp_nummatricula" />
+                <ScalarProperty Name="emp_latitud" ColumnName="emp_latitud" />
+                <ScalarProperty Name="emp_longitud" ColumnName="emp_longitud" />
+                <ScalarProperty Name="emp_logotipo" ColumnName="emp_logotipo" />
+                <ScalarProperty Name="emp_url" ColumnName="emp_url" />
+                <ScalarProperty Name="emp_email" ColumnName="emp_email" />
+                <ScalarProperty Name="emp_telefonos" ColumnName="emp_telefonos" />
+                <ScalarProperty Name="ciu_codigo" ColumnName="ciu_codigo" />
+                <ScalarProperty Name="emp_direccion" ColumnName="emp_direccion" />
+                <ScalarProperty Name="emp_nombre" ColumnName="emp_nombre" />
+                <ScalarProperty Name="emp_digverificacion" ColumnName="emp_digverificacion" />
+                <ScalarProperty Name="emp_nit" ColumnName="emp_nit" />
+                <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoCategoriaMatricula">
+            <EntityTypeMapping TypeName="EConfiableModel.TipoCategoriaMatricula">
+              <MappingFragment StoreEntitySet="TipoCategoriaMatricula">
+                <ScalarProperty Name="tcm_descripcion" ColumnName="tcm_descripcion" />
+                <ScalarProperty Name="tcm_id" ColumnName="tcm_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoOrganizacion">
+            <EntityTypeMapping TypeName="EConfiableModel.TipoOrganizacion">
+              <MappingFragment StoreEntitySet="TipoOrganizacion">
+                <ScalarProperty Name="tor_descripcion" ColumnName="tor_descripcion" />
+                <ScalarProperty Name="tor_id" ColumnName="tor_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Empresa_Delete" FunctionName="EConfiableModel.Store.Empresa_Delete" />
+          <FunctionImportMapping FunctionImportName="Empresa_Insert" FunctionName="EConfiableModel.Store.Empresa_Insert" />
+          <FunctionImportMapping FunctionImportName="Empresa_List" FunctionName="EConfiableModel.Store.Empresa_List">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EConfiableModel.Empresa_List_Result">
+                <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+                <ScalarProperty Name="emp_nit" ColumnName="emp_nit" />
+                <ScalarProperty Name="emp_digverificacion" ColumnName="emp_digverificacion" />
+                <ScalarProperty Name="emp_nombre" ColumnName="emp_nombre" />
+                <ScalarProperty Name="emp_direccion" ColumnName="emp_direccion" />
+                <ScalarProperty Name="ciu_codigo" ColumnName="ciu_codigo" />
+                <ScalarProperty Name="emp_telefonos" ColumnName="emp_telefonos" />
+                <ScalarProperty Name="emp_email" ColumnName="emp_email" />
+                <ScalarProperty Name="emp_url" ColumnName="emp_url" />
+                <ScalarProperty Name="emp_logotipo" ColumnName="emp_logotipo" />
+                <ScalarProperty Name="emp_longitud" ColumnName="emp_longitud" />
+                <ScalarProperty Name="emp_latitud" ColumnName="emp_latitud" />
+                <ScalarProperty Name="emp_nummatricula" ColumnName="emp_nummatricula" />
+                <ScalarProperty Name="emp_fechamatricula" ColumnName="emp_fechamatricula" />
+                <ScalarProperty Name="emp_fecharenovacion" ColumnName="emp_fecharenovacion" />
+                <ScalarProperty Name="emp_fechacancelacion" ColumnName="emp_fechacancelacion" />
+                <ScalarProperty Name="emp_fechavigencia" ColumnName="emp_fechavigencia" />
+                <ScalarProperty Name="emp_ultanorenovado" ColumnName="emp_ultanorenovado" />
+                <ScalarProperty Name="emp_rup" ColumnName="emp_rup" />
+                <ScalarProperty Name="emp_runeol" ColumnName="emp_runeol" />
+                <ScalarProperty Name="emp_rut" ColumnName="emp_rut" />
+                <ScalarProperty Name="tso_id" ColumnName="tso_id" />
+                <ScalarProperty Name="tor_id" ColumnName="tor_id" />
+                <ScalarProperty Name="tcm_id" ColumnName="tcm_id" />
+                <ScalarProperty Name="emp_numeroempleados" ColumnName="emp_numeroempleados" />
+                <ScalarProperty Name="emp_afiliadocamcomercio" ColumnName="emp_afiliadocamcomercio" />
+                <ScalarProperty Name="emp_activa" ColumnName="emp_activa" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Empresa_Update" FunctionName="EConfiableModel.Store.Empresa_Update" />
+          <FunctionImportMapping FunctionImportName="Tipocategoriamatricula_Delete" FunctionName="EConfiableModel.Store.Tipocategoriamatricula_Delete" />
+          <FunctionImportMapping FunctionImportName="Tipocategoriamatricula_Insert" FunctionName="EConfiableModel.Store.Tipocategoriamatricula_Insert" />
+          <FunctionImportMapping FunctionImportName="Tipocategoriamatricula_List" FunctionName="EConfiableModel.Store.Tipocategoriamatricula_List">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EConfiableModel.Tipocategoriamatricula_List_Result">
+                <ScalarProperty Name="tcm_id" ColumnName="tcm_id" />
+                <ScalarProperty Name="tcm_descripcion" ColumnName="tcm_descripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Tipocategoriamatricula_Update" FunctionName="EConfiableModel.Store.Tipocategoriamatricula_Update" />
+          <FunctionImportMapping FunctionImportName="Tipoorganizacion_Delete" FunctionName="EConfiableModel.Store.Tipoorganizacion_Delete" />
+          <FunctionImportMapping FunctionImportName="Tipoorganizacion_Insert" FunctionName="EConfiableModel.Store.Tipoorganizacion_Insert" />
+          <FunctionImportMapping FunctionImportName="Tipoorganizacion_List" FunctionName="EConfiableModel.Store.Tipoorganizacion_List">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EConfiableModel.Tipoorganizacion_List_Result">
+                <ScalarProperty Name="tor_id" ColumnName="tor_id" />
+                <ScalarProperty Name="tor_descripcion" ColumnName="tor_descripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Tipoorganizacion_Update" FunctionName="EConfiableModel.Store.Tipoorganizacion_Update" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

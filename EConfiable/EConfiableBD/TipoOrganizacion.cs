@@ -12,22 +12,17 @@ namespace EConfiableBD
     using System;
     using System.Collections.Generic;
     
-    public partial class Ciudad
+    public partial class TipoOrganizacion
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Ciudad()
+        public TipoOrganizacion()
         {
             this.Empresa = new HashSet<Empresa>();
         }
     
-        public string ciu_codigo { get; set; }
-        public string ciu_nombre { get; set; }
-        public Nullable<bool> ciu_predeterminado { get; set; }
-        public Nullable<double> ciu_longitud { get; set; }
-        public Nullable<double> ciu_latitud { get; set; }
-        public string dep_codigo { get; set; }
+        public int tor_id { get; set; }
+        public string tor_descripcion { get; set; }
     
-        public virtual Departamento Departamento { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Empresa> Empresa { get; set; }
     }

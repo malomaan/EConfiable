@@ -81,6 +81,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EConfiableModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Empresa.cs">
+      <DependentUpon>EConfiableModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Empresa_List_Result.cs">
+      <DependentUpon>EConfiableModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Pais.cs">
       <DependentUpon>EConfiableModel.tt</DependentUpon>
     </Compile>
@@ -90,6 +96,24 @@
       <DependentUpon>EConfiableModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TipoCategoriaMatricula.cs">
+      <DependentUpon>EConfiableModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tipocategoriamatricula_List_Result.cs">
+      <DependentUpon>EConfiableModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoOrganizacion.cs">
+      <DependentUpon>EConfiableModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tipoorganizacion_List_Result.cs">
+      <DependentUpon>EConfiableModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoSociedad.cs">
+      <DependentUpon>EConfiableModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tiposociedad_List_Result.cs">
+      <DependentUpon>EConfiableModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="EConfiableModel.edmx">
