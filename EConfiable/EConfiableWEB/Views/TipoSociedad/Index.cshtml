@@ -1,20 +1,20 @@
-﻿@model EConfiableBD.Pais
+﻿@model EConfiableBD.TipoSociedad
 
 @{
     ViewBag.Title = "Pais";
 }
 
 <div class="card">
-    <div class="card-header  cardheader" >
+    <div class="card-header  cardheader">
         <h2>@ViewBag.Title</h2>
     </div>
     <div class="card-body">
-            <div class="form-group">
-                <button type="button" id="btnSubmit" onclick="addview()" class="btn btn-outline-success btn-sm">
-                    <i class="far fa-file"></i> Nuevo
-                </button>
-            </div>
-            <br />
+        <div class="form-group">
+            <button type="button" id="btnSubmit" onclick="addview()" class="btn btn-outline-success btn-sm">
+                <i class="far fa-file"></i> Nuevo
+            </button>
+        </div>
+        <br />
         <table id="Data" class="table table-striped table-bordered table-hover table-responsive table-sm" width="100%">
             <thead class="thead-dark">
                 <tr>
@@ -22,16 +22,10 @@
                         Acciones
                     </th>
                     <th>
-                        Codigo
+                        Id
                     </th>
                     <th>
-                        Nombre
-                    </th>
-                    <th>
-                        CodigoInternacional
-                    </th>
-                    <th>
-                        Predeterminado
+                        Descripcion
                     </th>
                 </tr>
             </thead>
@@ -54,49 +48,17 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-horizontal">
-
-
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.tso_id)
                         <div class="form-group">
-                            @Html.LabelFor(model => model.pai_codigo, htmlAttributes: new { @class = "control-label" })
-                            <div class="input-group mb-2 mr-sm-2">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text"><i class="fas fa-barcode"></i></div>
-                                </div>
-                                @Html.EditorFor(model => model.pai_codigo, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.pai_codigo) + " *" } })
-                            </div>
-                            @Html.ValidationMessageFor(model => model.pai_codigo, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.pai_nombre, htmlAttributes: new { @class = "control-label" })
+                            @Html.LabelFor(model => model.tso_descripcion, htmlAttributes: new { @class = "control-label" })
                             <div class="input-group mb-2 mr-sm-2">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text"><i class="fas fa-user-tie"></i></div>
                                 </div>
-                                @Html.EditorFor(model => model.pai_nombre, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.pai_nombre) + " *" } })
+                                @Html.EditorFor(model => model.tso_descripcion, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.tso_descripcion) + " *" } })
                             </div>
-                            @Html.ValidationMessageFor(model => model.pai_nombre, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.pai_codigointernacional, htmlAttributes: new { @class = "control-label" })
-                            <div class="input-group mb-2 mr-sm-2">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text"><i class="fas fa-globe-americas"></i></div>
-                                </div>
-                                @Html.EditorFor(model => model.pai_codigointernacional, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.pai_codigointernacional) + " *" } })
-                            </div>
-                            @Html.ValidationMessageFor(model => model.pai_codigointernacional, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.pai_predeterminado, htmlAttributes: new { @class = "control-label" })
-                            <div class="input-group mb-2 mr-sm-2">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text"><i class="fas fa-chevron-circle-down"></i></div>
-                                </div>
-                                @Html.EditorFor(model => model.pai_predeterminado, new { htmlAttributes = new { @class = "form-control" } })
-                            </div>
-                            @Html.ValidationMessageFor(model => model.pai_predeterminado, "", new { @class = "text-danger" })
-
+                            @Html.ValidationMessageFor(model => model.tso_descripcion, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
@@ -104,7 +66,7 @@
                     <div class="form-group">
                         <button type="button" id="submitdata" class="btn btn-outline-success btn-sm" onclick="btnsubmit(0)"> <span class="fas fa-check"></span> Guardar</button>
                         <button type="button" id="updatedata" class="btn btn-outline-success btn-sm" onclick="btnsubmit(1)"> <span class="fas fa-check"></span> Actualizar</button>
-                        <button type="button" id="my-button" class="btn btn-outline-danger btn-sm btn-grid" onclick="location.href='@Url.Action("Index", "Pais")'"><span class="fas fa-times"></span> Cancelar</button>
+                        <button type="button" id="my-button" class="btn btn-outline-danger btn-sm btn-grid" onclick="location.href='@Url.Action("Index", "TipoSociedad")'"><span class="fas fa-times"></span> Cancelar</button>
                     </div>
                 </div>
             </div>
@@ -125,35 +87,23 @@
             $('#Data').DataTable({
                 "ajax": {
                     "type": "GET",
-                    "url": "@Url.Action("GetData", "Pais")",
+                    "url": "@Url.Action("GetData", "TipoSociedad")",
                     "datatype":"JSON",
                 },
                 "columns": [
-
                     {
-                        "data": "pai_codigo", "render": function (data) {
-                            return "<button type='button' id='btnSubmit' onclick='editterow(\"" + data + "\")' class='btn btn-outline-success btn-sm'><i class='far fa-edit'></i> Editar</button> <button type='button' id='btnSubmit' onclick='deleterow(\"" + data + "\")' class='btn btn-outline-danger btn-sm'><i class='far fa-trash-alt'></i> Eliminar</button>";
+                        "data": "tso_id", "render": function (data) {
+                            return "<button type='button' id='btnSubmit' onclick='editterow(" + data + ")' class='btn btn-outline-success btn-sm'><i class='far fa-edit'></i> Editar</button> <button type='button' id='btnSubmit' onclick='deleterow(" + data + ")' class='btn btn-outline-danger btn-sm'><i class='far fa-trash-alt'></i> Eliminar</button>";
                         },
                         "orderable": false,
                         "width": "40%"
                     },
                     {
-                        "data": "pai_codigo"
+                        "data": "tso_id"
                     },
                     {
-                        "data": "pai_nombre",
+                        "data": "tso_descripcion",
                         "width": "60%"
-                    },
-                    { "data": "pai_codigointernacional" },
-                    {
-                        "data": "pai_predeterminado", "render": function (data) {
-                            if (data == true) {
-                                return "SI"
-                            }
-                            else {
-                                return "NO"
-                            }
-                        }
                     }
                 ],
                 "lengthMenu": [5, 10, 25, 50, 75, 100],
@@ -186,15 +136,15 @@
             });
         });
 
-
     //Metodo que permite mostrar la ventana popup new
     function addview() {
         $('#WindowsModal').modal('show');
         $('#submitdata').show();
         $('#updatedata').hide();
+        $("#tso_id").remove();
 
             $(document).on('shown.bs.modal', '#WindowsModal', function () {
-                document.getElementById('pai_codigo').focus();
+                document.getElementById('tso_descripcion').focus();
             });
         }
 
@@ -204,7 +154,7 @@
                 var Data = $("#formsubmit").serialize();
                 $.ajax({
                     type: 'POST',
-                    url: '@Url.Action("PostData", "Pais")/' + id,
+                    url: '@Url.Action("PostData", "TipoSociedad")/' + id,
                     data: Data,
                     datatype: 'JSON',
 
@@ -234,11 +184,11 @@
         }
 
     //Metodo que permite Eliminar Registros de la tabla Pais
-    function deleterow(pai_codigo) {
+    function deleterow(id) {
         if (confirm("Deseas eliminar este registro")) {
             $.ajax({
                 type: 'POST',
-                url: '@Url.Action("DeleteRow", "Pais")/' + pai_codigo,
+                url: '@Url.Action("DeleteRow", "TipoSociedad")/' + id,
                 datatype: 'JSON',
                 success: function (response) {
                     if (response == "success") {
@@ -259,18 +209,15 @@
         }
     }
 
-
     //Metodo que permite editar registros en la Tabla Pais
-    function editterow(id) {
+        function editterow(id) {
         $.ajax({
             type: 'GET',
-            url: '@Url.Action("GetEdit", "Pais")/' + id,
+            url: '@Url.Action("GetEdit", "TipoSociedad")/' + id,
             datatype: 'JSON',
             success: function (rs) {
-                $("#pai_codigo").val(rs.pai_codigo);
-                $("#pai_nombre").val(rs.pai_nombre);
-                $("#pai_codigointernacional").val(rs.pai_codigointernacional);
-                $("#pai_predeterminado").val(rs.pai_predeterminado.toString());
+                $("#tso_id").val(rs.tso_id);
+                $("#tso_descripcion").val(rs.tso_descripcion);
                 $('#WindowsModal').modal('show');
                 $('#submitdata').hide();
                 $('#updatedata').show();

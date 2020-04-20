@@ -95,7 +95,7 @@ namespace EConfiablePRC
         /// Método que permite listar de la tabla Tiposociedad capa PRC
         /// </summary>
         // ******************* = Método List = ******************************
-        public List<Tiposociedad_List_Result> Tiposociedad_List(int tso_id)
+        public List<Tiposociedad_List_Result> Tiposociedad_List(int? tso_id)
         {
             try
             {
