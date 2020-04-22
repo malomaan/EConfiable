@@ -7,7 +7,7 @@
     <ul class="nav navbar-nav navbar-right">
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span style="color:yellow;" class="fas fa-user-circle fa-2x"></span> @User.Identity.GetUserName()
+                <span style="color:black;" class="fas fa-user-circle fa-2x"></span> @User.Identity.GetUserName()
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <a class="dropdown-item" href="~/Account/myaccount"><span class="fas fa-user"></span> Mi Cuenta</a>
@@ -28,15 +28,18 @@ else
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item">
-                <a class="nav-link" href="/Home/About"><i class="fas fa-info-circle fa-2x" style="color:#00ff21;"></i> About</a>
+                <a class="nav-link" onclick="abaut()"><i class="fas fa-info-circle fa-2x" style="color:black;"></i> About</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/Home/Contact"><i class="fas fa-question-circle fa-2x" style="color:#ff6a00;"></i> Contacto</a>
+                 <a class="nav-link" onclick="contac()"><i class="fas fa-question-circle fa-2x" style="color:black;"></i> Contacto</a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="~/Account/Login" data-toggle="tooltip" data-placement="top" title="Iniciar Sesión"><i class="fas fa-lock fa-2x" style="color:magenta;"></i> <span class="sr-only">(current)</span>Iniciar Sesión</a>
+                <a class="nav-link" href="~/Account/Login" data-toggle="tooltip" data-placement="top" title="Iniciar Sesión"><i class="fas fa-lock fa-2x" style="color:black;"></i> <span class="sr-only">(current)</span>Iniciar Sesión</a>
             </li>
+
+
+
         </ul>
     </div>
 }

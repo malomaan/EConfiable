@@ -1,5 +1,5 @@
 ﻿body {
-    padding-top: 75px;
+    padding-top: 60px;
     padding-bottom: 20px;
     font-family: 'Roboto Condensed', sans-serif;
     background-image: url("Imagenes/background.jpg");
@@ -9,44 +9,31 @@
 }
 
 .card-header {
-    background-color: #d2e3f6;
-    height:45px;
-    padding-top:0;
-}
-}
-/*Navbar*/
-.esalid {
-    color: #FFF;
-    margin: 0 auto;
-    text-align: center;
-    font-family: 'Pattaya', sans-serif;
-    text-shadow: -4px 3px 0 #808080, -8px 7px 0 #0a0e27;
-    font-size: 30px;
+    background-color: #F2F2F2;
+    height: 45px;
+    padding-top: 0;
+    color:black;
 }
 
+/*Navbar*/
 .navbar-brand {
     display: inline-block;
     padding-top: 0.3125rem;
     padding-bottom: 0.3125rem;
     margin-right: 1rem;
     line-height: inherit;
-    white-space: nowrap;
+    white-space: nowrap;  
 }
-
 .nav .navbar-nav li a {
-    color: white !important;
-}
-
+        color: white;
+    }
 .navbar-light .navbar-brand {
-    color: #FFF;
+    color: black;
 }
-
 .navbar-light .navbar-brand:hover, .navbar-light .navbar-brand:focus {
-        color: #f8f9fa;
+        color: black;
         text-shadow: 0 0 30px #fff;
 }
-
-
 .nav-link:hover {
     display: block;
     padding: 0.5rem 1rem;
@@ -54,35 +41,28 @@
     color: white;
     border-radius: 5px 5px 5px 5px;
 }
-
 .dropdown-menu.show {
     display: block;
     background-color: #0a0e27;
 }
-
 .dropdown-item:hover {
-    background-color: #141e34;
+    background-color: #4d9cf0; /*Barra sub menu login*/
 }
-
 .navbar {
-    background-color: #141e34;
+    background-color: #F2F2F2;
     height: 50px;
 }
-
 .navbar-light .navbar-nav .nav-link {
-    color: white;
+    color: black;
 }
 .navbar-light .navbar-nav .nav-link:hover {
     color: white;
 }
-
-
-
 .navbar-collapse {
-    background-color: #141e34;
+    background-color: #F2F2F2;
 }
-
 /*Fin Navbar*/
+
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
@@ -163,15 +143,11 @@ th{
     background-size: cover;
     z-index: 0;
 }
-
-
-
     .masthead svg.wave {
         position: absolute;
         bottom: -1px;
         left: 0
     }
-
     .masthead h1 {
         color: #fff;
         font-weight: 700;
@@ -179,24 +155,20 @@ th{
         line-height: 1.1;
         z-index: 1
     }
-
     .masthead h2 {
         color: rgba(255, 255, 255, .6);
         font-weight: 600;
         z-index: 1;
         font-size: 1.2rem
     }
-
     .masthead a {
         color: rgba(255, 255, 255, .8);
         text-decoration: underline;
         z-index: 1
     }
-
         .masthead a:hover {
             color: #fff
         }
-
         .masthead a:active {
             text-decoration: none
         }
@@ -215,7 +187,6 @@ th{
     position: relative;
     z-index: 1
 }
-
     .masthead .masthead-cards .shape {
         position: absolute;
         height: 100%;
@@ -226,7 +197,6 @@ th{
         z-index: -1;
         border-radius: 30% 70% 70% 30%/30% 30% 70% 70%
     }
-
     .masthead .masthead-cards .card {
         opacity: 1;
         font-size: .8rem;
@@ -236,29 +206,23 @@ th{
         color: #212529;
         transition: .15s all
     }
-
         .masthead .masthead-cards .card:hover {
             margin-top: -.25rem;
             margin-bottom: .25rem
         }
-
         .masthead .masthead-cards .card:active {
             margin-top: inherit;
             margin-bottom: inherit
         }
-
         .masthead .masthead-cards .card.border-bottom-blue:hover {
             color: #2092ed
         }
-
         .masthead .masthead-cards .card.border-bottom-green:hover {
             color: #28a745
         }
-
         .masthead .masthead-cards .card.border-bottom-red:hover {
             color: #dd3d31
         }
-
         .masthead .masthead-cards .card.border-bottom-yellow:hover {
             color: #ffc107
         }

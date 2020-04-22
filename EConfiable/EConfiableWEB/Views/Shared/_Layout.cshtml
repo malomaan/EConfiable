@@ -21,11 +21,11 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand esalid" href="#">E-Confiable</a>
+        <a class="navbar-brand" href="">E-Confiable</a>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="/Home/Index"><i class="fas fa-home fa-2x" style="color:yellow;"></i> Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/Home/Index"><i class="fas fa-home fa-2x" style="color:black;"></i> Inicio <span class="sr-only">(current)</span></a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -33,20 +33,87 @@
             </ul>
         </div>
     </nav>
+
     <div class="container body-content">
         @RenderBody()
     </div>
+
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-
-
-   
 
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
     <script src="~/Scripts/notify.min.js"></script>
+
+    @* Modal de About y Contacto *@
+    <div class="modal fade" id="WindowsModalAbout" tabindex="-1" data-backdrop="false" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalCenterTitle"><i class="fas fa-info-circle" style="color:white;"></i> @ViewBag.Title.</h4>
+                    <a class='close' href="@Url.Action("Index","Home")">
+                        <i class="far fa-times-circle" style="color:white;"></i>
+                    </a>
+                </div>
+                <div class="modal-body">
+                    <h3>@ViewBag.Message</h3>
+                    <p>Use this area to provide additional information.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="my-button" class="btn btn-outline-success btn-sm btn-grid" onclick="location.href='@Url.Action("Index")'"><span class="fas fa-check"></span> Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" data-backdrop="false" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalCenterTitle"><i class="fas fa-question-circle" style="color:white;"></i> @ViewBag.Title.</h4>
+                    <a class='close' href="@Url.Action("Index","Home")">
+                        <i class="far fa-times-circle" style="color:#FFF;"></i>
+                    </a>
+                </div>
+                <div class="modal-body">
+                    <h2>@ViewBag.Title.</h2>
+                    <h3>@ViewBag.Message</h3>
+
+                    <address>
+                        One Microsoft Way<br />
+                        Redmond, WA 98052-6399<br />
+                        <abbr title="Phone">P:</abbr>
+                        425.555.0100
+                    </address>
+
+                    <address>
+                        <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
+                        <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+                    </address>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="my-button" class="btn btn-outline-success btn-sm btn-grid" onclick="location.href='@Url.Action("Index")'"><span class="fas fa-check"></span> Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </body>
 </html>
+
+<script type="text/javascript">
+    function abaut() {
+        $('#WindowsModalAbout').modal('show');
+        }
+
+    function contac() {
+        $('#exampleModal').modal('show');
+    }
+
+</script>
