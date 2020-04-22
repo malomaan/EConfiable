@@ -10,6 +10,9 @@
 
 .card-header {
     background-color: #d2e3f6;
+    height:45px;
+    padding-top:0;
+}
 }
 /*Navbar*/
 .esalid {
@@ -63,7 +66,7 @@
 
 .navbar {
     background-color: #141e34;
-    height: 70px;
+    height: 50px;
 }
 
 .navbar-light .navbar-nav .nav-link {
@@ -110,8 +113,9 @@ textarea {
     border-style: solid;
     border-width: 1px;
     border-radius: 5px 5px 0px 0px;
-    height: 55px;
+    height: 40px;
     background-color: #2092ed;
+    padding-top:5px;
 }
 
 .modal-footer {
@@ -152,7 +156,7 @@ th{
     z-index: 0;
 }*/
 .masthead {
-    padding: 3rem 0 7rem;
+    padding: 0rem 0 7rem;
     position: relative;
     background-color: #0062cc;
     background-image: url(https://startbootstrap.com/assets/img/overlay.svg), linear-gradient(45deg, rgba(0, 123, 255, 0.5) 0%, #007bff 100%);
