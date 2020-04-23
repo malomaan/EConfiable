@@ -11,8 +11,9 @@
 .card-header {
     background-color: #F2F2F2;
     height: 45px;
-    padding-top: 0;
+    padding-top: 4px;
     color:black;
+    
 }
 
 /*Navbar*/

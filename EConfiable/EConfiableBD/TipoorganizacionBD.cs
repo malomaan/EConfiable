@@ -96,7 +96,7 @@ namespace EConfiableBD
         /// Método que permite listar de la tabla Tipoorganizacion capa BD
         /// </summary>
         // ******************* = Método List = ******************************
-        public List<Tipoorganizacion_List_Result> Tipoorganizacion_List(int tor_id)
+        public List<Tipoorganizacion_List_Result> Tipoorganizacion_List(int? tor_id)
         {
             try
             {

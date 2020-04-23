@@ -1,7 +1,7 @@
-﻿@model EConfiableBD.TipoSociedad
+﻿@model EConfiableBD.TipoOrganizacion
 
 @{
-    ViewBag.Title = "Tipo Sociedad";
+    ViewBag.Title = "Tipo Organización";
 }
 
 <div class="card">
@@ -35,30 +35,29 @@
 <br />
 <div class="modal fade" id="WindowsModal" tabindex="-1" data-backdrop="false" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        @*@using (Html.BeginForm())*@
-        @using (Html.BeginForm("PostData", "TipoSociedad", FormMethod.Post, new { @id = "formsubmit" }))
+        @using (Html.BeginForm("PostData", "TipoOrganizacion", FormMethod.Post, new { @id = "formsubmit" }))
         {
             @Html.AntiForgeryToken()
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalCenterTitle"><i class="far fa-file" style="color:white;"></i> @ViewBag.Title</h5>
-                    <a class='close' href="@Url.Action("Index", "TipoSociedad")">
+                    <a class='close' href="@Url.Action("Index", "TipoOrganizacion")">
                         <i class="fas fa-window-close" style="color:white;"></i>
                     </a>
                 </div>
                 <div class="modal-body">
                     <div class="form-horizontal">
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        @Html.HiddenFor(model => model.tso_id)
+                        @Html.HiddenFor(model => model.tor_id)
                         <div class="form-group">
-                            @Html.LabelFor(model => model.tso_descripcion, htmlAttributes: new { @class = "control-label" })
+                            @Html.LabelFor(model => model.tor_descripcion, htmlAttributes: new { @class = "control-label" })
                             <div class="input-group mb-2 mr-sm-2">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text"><i class="fas fa-user-tie"></i></div>
                                 </div>
-                                @Html.EditorFor(model => model.tso_descripcion, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.tso_descripcion) + " *" } })
+                                @Html.EditorFor(model => model.tor_descripcion, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.tor_descripcion) + " *" } })
                             </div>
-                            @Html.ValidationMessageFor(model => model.tso_descripcion, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.tor_descripcion, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
@@ -66,7 +65,7 @@
                     <div class="form-group">
                         <button type="button" id="submitdata" class="btn btn-outline-success btn-sm" onclick="btnsubmit(0)"> <span class="fas fa-check"></span> Guardar</button>
                         <button type="button" id="updatedata" class="btn btn-outline-success btn-sm" onclick="btnsubmit(1)"> <span class="fas fa-check"></span> Actualizar</button>
-                        <button type="button" id="my-button" class="btn btn-outline-danger btn-sm btn-grid" onclick="location.href='@Url.Action("Index", "TipoSociedad")'"><span class="fas fa-times"></span> Cancelar</button>
+                        <button type="button" id="my-button" class="btn btn-outline-danger btn-sm btn-grid" onclick="location.href='@Url.Action("Index", "TipoOrganizacion")'"><span class="fas fa-times"></span> Cancelar</button>
                     </div>
                 </div>
             </div>
@@ -87,22 +86,22 @@
             $('#Data').DataTable({
                 "ajax": {
                     "type": "GET",
-                    "url": "@Url.Action("GetData", "TipoSociedad")",
+                    "url": "@Url.Action("GetData", "TipoOrganizacion")",
                     "datatype":"JSON",
                 },
                 "columns": [
                     {
-                        "data": "tso_id", "render": function (data) {
+                        "data": "tor_id", "render": function (data) {
                             return "<button type='button' id='btnSubmit' onclick='editterow(" + data + ")' class='btn btn-outline-success btn-sm'><i class='far fa-edit'></i> Editar</button> <button type='button' id='btnSubmit' onclick='deleterow(" + data + ")' class='btn btn-outline-danger btn-sm'><i class='far fa-trash-alt'></i> Eliminar</button>";
                         },
                         "orderable": false,
                         "width": "40%"
                     },
                     {
-                        "data": "tso_id"
+                        "data": "tor_id"
                     },
                     {
-                        "data": "tso_descripcion",
+                        "data": "tor_descripcion",
                         "width": "60%"
                     }
                 ],
@@ -141,10 +140,10 @@
         $('#WindowsModal').modal('show');
         $('#submitdata').show();
         $('#updatedata').hide();
-        $("#tso_id").remove();
+        $("#tor_id").remove();
 
             $(document).on('shown.bs.modal', '#WindowsModal', function () {
-                document.getElementById('tso_descripcion').focus();
+                document.getElementById('tor_descripcion').focus();
             });
         }
 
@@ -154,7 +153,7 @@
                 var Data = $("#formsubmit").serialize();
                 $.ajax({
                     type: 'POST',
-                    url: '@Url.Action("PostData", "TipoSociedad")/' + id,
+                    url: '@Url.Action("PostData", "TipoOrganizacion")/' + id,
                     data: Data,
                     datatype: 'JSON',
 
@@ -188,7 +187,7 @@
         if (confirm("Deseas eliminar este registro")) {
             $.ajax({
                 type: 'POST',
-                url: '@Url.Action("DeleteRow", "TipoSociedad")/' + id,
+                url: '@Url.Action("DeleteRow", "TipoOrganizacion")/' + id,
                 datatype: 'JSON',
                 success: function (response) {
                     if (response == "success") {
@@ -213,11 +212,11 @@
         function editterow(id) {
         $.ajax({
             type: 'GET',
-            url: '@Url.Action("GetEdit", "TipoSociedad")/' + id,
+            url: '@Url.Action("GetEdit", "TipoOrganizacion")/' + id,
             datatype: 'JSON',
             success: function (rs) {
-                $("#tso_id").val(rs.tso_id);
-                $("#tso_descripcion").val(rs.tso_descripcion);
+                $("#tor_id").val(rs.tor_id);
+                $("#tor_descripcion").val(rs.tor_descripcion);
                 $('#WindowsModal').modal('show');
                 $('#submitdata').hide();
                 $('#updatedata').show();
