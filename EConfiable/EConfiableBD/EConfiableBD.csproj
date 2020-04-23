@@ -99,6 +99,8 @@
     <Compile Include="TipoCategoriaMatricula.cs">
       <DependentUpon>EConfiableModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="TipocategoriamatriculaBD.cs" />
+    <Compile Include="TipoCategoriaMatriculaMetadata.cs" />
     <Compile Include="Tipocategoriamatricula_List_Result.cs">
       <DependentUpon>EConfiableModel.tt</DependentUpon>
     </Compile>
