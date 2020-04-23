@@ -105,6 +105,8 @@
     <Compile Include="TipoOrganizacion.cs">
       <DependentUpon>EConfiableModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="TipoorganizacionBD.cs" />
+    <Compile Include="TipoOrganizacionMetadata.cs" />
     <Compile Include="Tipoorganizacion_List_Result.cs">
       <DependentUpon>EConfiableModel.tt</DependentUpon>
     </Compile>
