@@ -95,7 +95,7 @@ namespace EConfiablePRC
         /// Método que permite listar de la tabla Tipocategoriamatricula capa PRC
         /// </summary>
         // ******************* = Método List = ******************************
-        public List<Tipocategoriamatricula_List_Result> Tipocategoriamatricula_List(int tcm_id)
+        public List<Tipocategoriamatricula_List_Result> Tipocategoriamatricula_List(int? tcm_id)
         {
             try
             {

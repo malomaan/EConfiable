@@ -1,0 +1,232 @@
+﻿@model EConfiableBD.TipoCategoriaMatricula
+
+@{
+    ViewBag.Title = "Categoria de Matricula";
+}
+
+<div class="card">
+    <div class="card-header  cardheader">
+        <h2><i class="far fa-window-restore"></i> @ViewBag.Title</h2>
+    </div>
+    <div class="card-body">
+        <div class="form-group">
+            <button type="button" id="btnSubmit" onclick="addview()" class="btn btn-outline-success btn-sm">
+                <i class="far fa-file"></i> Nuevo
+            </button>
+        </div>
+        <br />
+        <table id="Data" class="table table-striped table-bordered table-hover table-responsive table-sm" width="100%">
+            <thead class="thead-dark">
+                <tr>
+                    <th>
+                        Acciones
+                    </th>
+                    <th>
+                        Id
+                    </th>
+                    <th>
+                        Descripcion
+                    </th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+<br />
+<div class="modal fade" id="WindowsModal" tabindex="-1" data-backdrop="false" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        @using (Html.BeginForm("PostData", "TipoOrganizacion", FormMethod.Post, new { @id = "formsubmit" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle"><i class="far fa-file" style="color:white;"></i> @ViewBag.Title</h5>
+                    <a class='close' href="@Url.Action("Index", "TipoCategoriaMatricula")">
+                        <i class="fas fa-window-close" style="color:white;"></i>
+                    </a>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.tcm_id)
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.tcm_descripcion, htmlAttributes: new { @class = "control-label" })
+                            <div class="input-group mb-2 mr-sm-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fas fa-user-tie"></i></div>
+                                </div>
+                                @Html.EditorFor(model => model.tcm_descripcion, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.tcm_descripcion) + " *" } })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.tcm_descripcion, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="form-group">
+                        <button type="button" id="submitdata" class="btn btn-outline-success btn-sm" onclick="btnsubmit(0)"> <span class="fas fa-check"></span> Guardar</button>
+                        <button type="button" id="updatedata" class="btn btn-outline-success btn-sm" onclick="btnsubmit(1)"> <span class="fas fa-check"></span> Actualizar</button>
+                        <button type="button" id="my-button" class="btn btn-outline-danger btn-sm btn-grid" onclick="location.href='@Url.Action("Index", "TipoCategoriaMatricula")'"><span class="fas fa-times"></span> Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+    //LLenar datos de la tabla Pais con AJAX
+    $(document).ready(function () {
+            function convertJsonDateToShortDate(data) {
+                const dateValue = new Date(parseInt(data.substr(6)));
+                return dateValue.toLocaleDateString();
+            }
+            $('#Data').DataTable({
+                "ajax": {
+                    "type": "GET",
+                    "url": "@Url.Action("GetData", "TipoCategoriaMatricula")",
+                    "datatype":"JSON",
+                },
+                "columns": [
+                    {
+                        "data": "tcm_id", "render": function (data) {
+                            return "<button type='button' id='btnSubmit' onclick='editterow(" + data + ")' class='btn btn-outline-success btn-sm'><i class='far fa-edit'></i> Editar</button> <button type='button' id='btnSubmit' onclick='deleterow(" + data + ")' class='btn btn-outline-danger btn-sm'><i class='far fa-trash-alt'></i> Eliminar</button>";
+                        },
+                        "orderable": false,
+                        "width": "40%"
+                    },
+                    {
+                        "data": "tcm_id"
+                    },
+                    {
+                        "data": "tcm_descripcion",
+                        "width": "60%"
+                    }
+                ],
+                "lengthMenu": [5, 10, 25, 50, 75, 100],
+                "pageLength": 5,
+                "records": 5,
+                "recordsFiltered": 10,
+                "language": {
+                    "processing": "<img src='/Content/Imagenes/Loading.gif' />",
+                    "sProcessing": "Procesando...",
+                    "sLengthMenu": "Mostrar _MENU_ Registros",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sEmptyTable": "Ningún dato disponible en esta tabla",
+                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ Registros",
+                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 Registros",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ Registros)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Buscar:",
+                    "sUrl": "",
+                    "sInfoThousands": ",",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    }
+
+                },
+                processing: true
+            });
+        });
+
+    //Metodo que permite mostrar la ventana popup new
+    function addview() {
+        $('#WindowsModal').modal('show');
+        $('#submitdata').show();
+        $('#updatedata').hide();
+        $("#tcm_id").remove();
+
+            $(document).on('shown.bs.modal', '#WindowsModal', function () {
+                document.getElementById('tcm_descripcion').focus();
+            });
+        }
+
+    //Metodo que permite Insertar o Actualizar Registros en la tabla Paises
+    function btnsubmit(id) {
+            if ($("#formsubmit").valid()) {
+                var Data = $("#formsubmit").serialize();
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("PostData", "TipoCategoriaMatricula")/' + id,
+                    data: Data,
+                    datatype: 'JSON',
+
+                    success: function (response) {
+                        if (response == "success") {
+                            $('#ModalAddNew').modal('hide');
+                            $.notify("Registro Almacenado", {
+                                className: 'info',
+                                clickToHide: false,
+                                autoHide: false,
+                                globalPosition: 'top center'
+                            });
+                            setTimeout(function () { window.location.reload(); }, 1000);
+                        }
+                        else {
+                            $.notify("Error en en formulario", {
+                                className: 'error',
+                                globalPosition: 'top center'
+                            });
+                        }
+                    },
+                    error: function (msg) {
+                        alert(msg.responseText);
+                    }
+                })
+            }
+        }
+
+    //Metodo que permite Eliminar Registros de la tabla Pais
+    function deleterow(id) {
+        if (confirm("Deseas eliminar este registro")) {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("DeleteRow", "TipoCategoriaMatricula")/' + id,
+                datatype: 'JSON',
+                success: function (response) {
+                    if (response == "success") {
+                        $.notify("Registro Eliminado", {
+                            className: 'error',
+                            clickToHide: false,
+                            autoHide: false,
+                            globalPosition: 'top center'
+                        });
+
+                        setTimeout(function () { window.location.reload(); }, 900);
+                    }
+                },
+                error: function (msg) {
+                    alert(alert(msg.responseText));
+                }
+            })
+        }
+    }
+
+    //Metodo que permite editar registros en la Tabla Pais
+        function editterow(id) {
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("GetEdit", "TipoCategoriaMatricula")/' + id,
+            datatype: 'JSON',
+            success: function (rs) {
+                $("#tcm_id").val(rs.tcm_id);
+                $("#tcm_descripcion").val(rs.tcm_descripcion);
+                $('#WindowsModal').modal('show');
+                $('#submitdata').hide();
+                $('#updatedata').show();
+            },
+            error: function (msg) {
+                alert(msg.responseText);
+            }
+        });
+        }
+
+
+    </script>
+}
