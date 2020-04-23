@@ -11,9 +11,9 @@
         <EntityTypeShape EntityType="EConfiableModel.Ciudad" Width="1.5" PointX="5.25" PointY="3.625" />
         <AssociationConnector Association="EConfiableModel.FK_Ciudad_Departamento" />
         <EntityTypeShape EntityType="EConfiableModel.TipoSociedad" Width="1.5" PointX="5.25" PointY="7.125" />
-        <EntityTypeShape EntityType="EConfiableModel.Empresa" Width="1.5" PointX="7.5" PointY="1.375" />
         <EntityTypeShape EntityType="EConfiableModel.TipoCategoriaMatricula" Width="1.5" PointX="5.25" PointY="9.5" />
         <EntityTypeShape EntityType="EConfiableModel.TipoOrganizacion" Width="1.5" PointX="5.25" PointY="0.75" />
+        <EntityTypeShape EntityType="EConfiableModel.Empresa" Width="1.5" PointX="7.5" PointY="2.25" />
         <AssociationConnector Association="EConfiableModel.FK_Empresa_Ciudad" />
         <AssociationConnector Association="EConfiableModel.FK_Empresa_TipoCategoriaMatricula" />
         <AssociationConnector Association="EConfiableModel.FK_Empresa_TipoOrganizacion" />

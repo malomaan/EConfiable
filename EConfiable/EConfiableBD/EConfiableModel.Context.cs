@@ -31,9 +31,9 @@ namespace EConfiableBD
         public virtual DbSet<Departamento> Departamento { get; set; }
         public virtual DbSet<Ciudad> Ciudad { get; set; }
         public virtual DbSet<TipoSociedad> TipoSociedad { get; set; }
-        public virtual DbSet<Empresa> Empresa { get; set; }
         public virtual DbSet<TipoCategoriaMatricula> TipoCategoriaMatricula { get; set; }
         public virtual DbSet<TipoOrganizacion> TipoOrganizacion { get; set; }
+        public virtual DbSet<Empresa> Empresa { get; set; }
     
         public virtual int Pais_Delete(string pai_codigo)
         {
@@ -263,246 +263,6 @@ namespace EConfiableBD
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Tiposociedad_Update", tso_idParameter, tso_descripcionParameter);
         }
     
-        public virtual int Empresa_Delete(Nullable<int> emp_id)
-        {
-            var emp_idParameter = emp_id.HasValue ?
-                new ObjectParameter("emp_id", emp_id) :
-                new ObjectParameter("emp_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Empresa_Delete", emp_idParameter);
-        }
-    
-        public virtual int Empresa_Insert(string emp_nit, Nullable<int> emp_digverificacion, string emp_nombre, string emp_direccion, string ciu_codigo, string emp_telefonos, string emp_email, string emp_url, string emp_logotipo, Nullable<double> emp_longitud, Nullable<double> emp_latitud, string emp_nummatricula, Nullable<System.DateTime> emp_fechamatricula, Nullable<System.DateTime> emp_fecharenovacion, Nullable<System.DateTime> emp_fechacancelacion, Nullable<System.DateTime> emp_fechavigencia, Nullable<int> emp_ultanorenovado, string emp_rup, string emp_runeol, string emp_rut, Nullable<int> tso_id, Nullable<int> tor_id, Nullable<int> tcm_id, Nullable<int> emp_numeroempleados, Nullable<bool> emp_afiliadocamcomercio, Nullable<bool> emp_activa)
-        {
-            var emp_nitParameter = emp_nit != null ?
-                new ObjectParameter("emp_nit", emp_nit) :
-                new ObjectParameter("emp_nit", typeof(string));
-    
-            var emp_digverificacionParameter = emp_digverificacion.HasValue ?
-                new ObjectParameter("emp_digverificacion", emp_digverificacion) :
-                new ObjectParameter("emp_digverificacion", typeof(int));
-    
-            var emp_nombreParameter = emp_nombre != null ?
-                new ObjectParameter("emp_nombre", emp_nombre) :
-                new ObjectParameter("emp_nombre", typeof(string));
-    
-            var emp_direccionParameter = emp_direccion != null ?
-                new ObjectParameter("emp_direccion", emp_direccion) :
-                new ObjectParameter("emp_direccion", typeof(string));
-    
-            var ciu_codigoParameter = ciu_codigo != null ?
-                new ObjectParameter("ciu_codigo", ciu_codigo) :
-                new ObjectParameter("ciu_codigo", typeof(string));
-    
-            var emp_telefonosParameter = emp_telefonos != null ?
-                new ObjectParameter("emp_telefonos", emp_telefonos) :
-                new ObjectParameter("emp_telefonos", typeof(string));
-    
-            var emp_emailParameter = emp_email != null ?
-                new ObjectParameter("emp_email", emp_email) :
-                new ObjectParameter("emp_email", typeof(string));
-    
-            var emp_urlParameter = emp_url != null ?
-                new ObjectParameter("emp_url", emp_url) :
-                new ObjectParameter("emp_url", typeof(string));
-    
-            var emp_logotipoParameter = emp_logotipo != null ?
-                new ObjectParameter("emp_logotipo", emp_logotipo) :
-                new ObjectParameter("emp_logotipo", typeof(string));
-    
-            var emp_longitudParameter = emp_longitud.HasValue ?
-                new ObjectParameter("emp_longitud", emp_longitud) :
-                new ObjectParameter("emp_longitud", typeof(double));
-    
-            var emp_latitudParameter = emp_latitud.HasValue ?
-                new ObjectParameter("emp_latitud", emp_latitud) :
-                new ObjectParameter("emp_latitud", typeof(double));
-    
-            var emp_nummatriculaParameter = emp_nummatricula != null ?
-                new ObjectParameter("emp_nummatricula", emp_nummatricula) :
-                new ObjectParameter("emp_nummatricula", typeof(string));
-    
-            var emp_fechamatriculaParameter = emp_fechamatricula.HasValue ?
-                new ObjectParameter("emp_fechamatricula", emp_fechamatricula) :
-                new ObjectParameter("emp_fechamatricula", typeof(System.DateTime));
-    
-            var emp_fecharenovacionParameter = emp_fecharenovacion.HasValue ?
-                new ObjectParameter("emp_fecharenovacion", emp_fecharenovacion) :
-                new ObjectParameter("emp_fecharenovacion", typeof(System.DateTime));
-    
-            var emp_fechacancelacionParameter = emp_fechacancelacion.HasValue ?
-                new ObjectParameter("emp_fechacancelacion", emp_fechacancelacion) :
-                new ObjectParameter("emp_fechacancelacion", typeof(System.DateTime));
-    
-            var emp_fechavigenciaParameter = emp_fechavigencia.HasValue ?
-                new ObjectParameter("emp_fechavigencia", emp_fechavigencia) :
-                new ObjectParameter("emp_fechavigencia", typeof(System.DateTime));
-    
-            var emp_ultanorenovadoParameter = emp_ultanorenovado.HasValue ?
-                new ObjectParameter("emp_ultanorenovado", emp_ultanorenovado) :
-                new ObjectParameter("emp_ultanorenovado", typeof(int));
-    
-            var emp_rupParameter = emp_rup != null ?
-                new ObjectParameter("emp_rup", emp_rup) :
-                new ObjectParameter("emp_rup", typeof(string));
-    
-            var emp_runeolParameter = emp_runeol != null ?
-                new ObjectParameter("emp_runeol", emp_runeol) :
-                new ObjectParameter("emp_runeol", typeof(string));
-    
-            var emp_rutParameter = emp_rut != null ?
-                new ObjectParameter("emp_rut", emp_rut) :
-                new ObjectParameter("emp_rut", typeof(string));
-    
-            var tso_idParameter = tso_id.HasValue ?
-                new ObjectParameter("tso_id", tso_id) :
-                new ObjectParameter("tso_id", typeof(int));
-    
-            var tor_idParameter = tor_id.HasValue ?
-                new ObjectParameter("tor_id", tor_id) :
-                new ObjectParameter("tor_id", typeof(int));
-    
-            var tcm_idParameter = tcm_id.HasValue ?
-                new ObjectParameter("tcm_id", tcm_id) :
-                new ObjectParameter("tcm_id", typeof(int));
-    
-            var emp_numeroempleadosParameter = emp_numeroempleados.HasValue ?
-                new ObjectParameter("emp_numeroempleados", emp_numeroempleados) :
-                new ObjectParameter("emp_numeroempleados", typeof(int));
-    
-            var emp_afiliadocamcomercioParameter = emp_afiliadocamcomercio.HasValue ?
-                new ObjectParameter("emp_afiliadocamcomercio", emp_afiliadocamcomercio) :
-                new ObjectParameter("emp_afiliadocamcomercio", typeof(bool));
-    
-            var emp_activaParameter = emp_activa.HasValue ?
-                new ObjectParameter("emp_activa", emp_activa) :
-                new ObjectParameter("emp_activa", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Empresa_Insert", emp_nitParameter, emp_digverificacionParameter, emp_nombreParameter, emp_direccionParameter, ciu_codigoParameter, emp_telefonosParameter, emp_emailParameter, emp_urlParameter, emp_logotipoParameter, emp_longitudParameter, emp_latitudParameter, emp_nummatriculaParameter, emp_fechamatriculaParameter, emp_fecharenovacionParameter, emp_fechacancelacionParameter, emp_fechavigenciaParameter, emp_ultanorenovadoParameter, emp_rupParameter, emp_runeolParameter, emp_rutParameter, tso_idParameter, tor_idParameter, tcm_idParameter, emp_numeroempleadosParameter, emp_afiliadocamcomercioParameter, emp_activaParameter);
-        }
-    
-        public virtual ObjectResult<Empresa_List_Result> Empresa_List(Nullable<int> emp_id)
-        {
-            var emp_idParameter = emp_id.HasValue ?
-                new ObjectParameter("emp_id", emp_id) :
-                new ObjectParameter("emp_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Empresa_List_Result>("Empresa_List", emp_idParameter);
-        }
-    
-        public virtual int Empresa_Update(Nullable<int> emp_id, string emp_nit, Nullable<int> emp_digverificacion, string emp_nombre, string emp_direccion, string ciu_codigo, string emp_telefonos, string emp_email, string emp_url, string emp_logotipo, Nullable<double> emp_longitud, Nullable<double> emp_latitud, string emp_nummatricula, Nullable<System.DateTime> emp_fechamatricula, Nullable<System.DateTime> emp_fecharenovacion, Nullable<System.DateTime> emp_fechacancelacion, Nullable<System.DateTime> emp_fechavigencia, Nullable<int> emp_ultanorenovado, string emp_rup, string emp_runeol, string emp_rut, Nullable<int> tso_id, Nullable<int> tor_id, Nullable<int> tcm_id, Nullable<int> emp_numeroempleados, Nullable<bool> emp_afiliadocamcomercio, Nullable<bool> emp_activa)
-        {
-            var emp_idParameter = emp_id.HasValue ?
-                new ObjectParameter("emp_id", emp_id) :
-                new ObjectParameter("emp_id", typeof(int));
-    
-            var emp_nitParameter = emp_nit != null ?
-                new ObjectParameter("emp_nit", emp_nit) :
-                new ObjectParameter("emp_nit", typeof(string));
-    
-            var emp_digverificacionParameter = emp_digverificacion.HasValue ?
-                new ObjectParameter("emp_digverificacion", emp_digverificacion) :
-                new ObjectParameter("emp_digverificacion", typeof(int));
-    
-            var emp_nombreParameter = emp_nombre != null ?
-                new ObjectParameter("emp_nombre", emp_nombre) :
-                new ObjectParameter("emp_nombre", typeof(string));
-    
-            var emp_direccionParameter = emp_direccion != null ?
-                new ObjectParameter("emp_direccion", emp_direccion) :
-                new ObjectParameter("emp_direccion", typeof(string));
-    
-            var ciu_codigoParameter = ciu_codigo != null ?
-                new ObjectParameter("ciu_codigo", ciu_codigo) :
-                new ObjectParameter("ciu_codigo", typeof(string));
-    
-            var emp_telefonosParameter = emp_telefonos != null ?
-                new ObjectParameter("emp_telefonos", emp_telefonos) :
-                new ObjectParameter("emp_telefonos", typeof(string));
-    
-            var emp_emailParameter = emp_email != null ?
-                new ObjectParameter("emp_email", emp_email) :
-                new ObjectParameter("emp_email", typeof(string));
-    
-            var emp_urlParameter = emp_url != null ?
-                new ObjectParameter("emp_url", emp_url) :
-                new ObjectParameter("emp_url", typeof(string));
-    
-            var emp_logotipoParameter = emp_logotipo != null ?
-                new ObjectParameter("emp_logotipo", emp_logotipo) :
-                new ObjectParameter("emp_logotipo", typeof(string));
-    
-            var emp_longitudParameter = emp_longitud.HasValue ?
-                new ObjectParameter("emp_longitud", emp_longitud) :
-                new ObjectParameter("emp_longitud", typeof(double));
-    
-            var emp_latitudParameter = emp_latitud.HasValue ?
-                new ObjectParameter("emp_latitud", emp_latitud) :
-                new ObjectParameter("emp_latitud", typeof(double));
-    
-            var emp_nummatriculaParameter = emp_nummatricula != null ?
-                new ObjectParameter("emp_nummatricula", emp_nummatricula) :
-                new ObjectParameter("emp_nummatricula", typeof(string));
-    
-            var emp_fechamatriculaParameter = emp_fechamatricula.HasValue ?
-                new ObjectParameter("emp_fechamatricula", emp_fechamatricula) :
-                new ObjectParameter("emp_fechamatricula", typeof(System.DateTime));
-    
-            var emp_fecharenovacionParameter = emp_fecharenovacion.HasValue ?
-                new ObjectParameter("emp_fecharenovacion", emp_fecharenovacion) :
-                new ObjectParameter("emp_fecharenovacion", typeof(System.DateTime));
-    
-            var emp_fechacancelacionParameter = emp_fechacancelacion.HasValue ?
-                new ObjectParameter("emp_fechacancelacion", emp_fechacancelacion) :
-                new ObjectParameter("emp_fechacancelacion", typeof(System.DateTime));
-    
-            var emp_fechavigenciaParameter = emp_fechavigencia.HasValue ?
-                new ObjectParameter("emp_fechavigencia", emp_fechavigencia) :
-                new ObjectParameter("emp_fechavigencia", typeof(System.DateTime));
-    
-            var emp_ultanorenovadoParameter = emp_ultanorenovado.HasValue ?
-                new ObjectParameter("emp_ultanorenovado", emp_ultanorenovado) :
-                new ObjectParameter("emp_ultanorenovado", typeof(int));
-    
-            var emp_rupParameter = emp_rup != null ?
-                new ObjectParameter("emp_rup", emp_rup) :
-                new ObjectParameter("emp_rup", typeof(string));
-    
-            var emp_runeolParameter = emp_runeol != null ?
-                new ObjectParameter("emp_runeol", emp_runeol) :
-                new ObjectParameter("emp_runeol", typeof(string));
-    
-            var emp_rutParameter = emp_rut != null ?
-                new ObjectParameter("emp_rut", emp_rut) :
-                new ObjectParameter("emp_rut", typeof(string));
-    
-            var tso_idParameter = tso_id.HasValue ?
-                new ObjectParameter("tso_id", tso_id) :
-                new ObjectParameter("tso_id", typeof(int));
-    
-            var tor_idParameter = tor_id.HasValue ?
-                new ObjectParameter("tor_id", tor_id) :
-                new ObjectParameter("tor_id", typeof(int));
-    
-            var tcm_idParameter = tcm_id.HasValue ?
-                new ObjectParameter("tcm_id", tcm_id) :
-                new ObjectParameter("tcm_id", typeof(int));
-    
-            var emp_numeroempleadosParameter = emp_numeroempleados.HasValue ?
-                new ObjectParameter("emp_numeroempleados", emp_numeroempleados) :
-                new ObjectParameter("emp_numeroempleados", typeof(int));
-    
-            var emp_afiliadocamcomercioParameter = emp_afiliadocamcomercio.HasValue ?
-                new ObjectParameter("emp_afiliadocamcomercio", emp_afiliadocamcomercio) :
-                new ObjectParameter("emp_afiliadocamcomercio", typeof(bool));
-    
-            var emp_activaParameter = emp_activa.HasValue ?
-                new ObjectParameter("emp_activa", emp_activa) :
-                new ObjectParameter("emp_activa", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Empresa_Update", emp_idParameter, emp_nitParameter, emp_digverificacionParameter, emp_nombreParameter, emp_direccionParameter, ciu_codigoParameter, emp_telefonosParameter, emp_emailParameter, emp_urlParameter, emp_logotipoParameter, emp_longitudParameter, emp_latitudParameter, emp_nummatriculaParameter, emp_fechamatriculaParameter, emp_fecharenovacionParameter, emp_fechacancelacionParameter, emp_fechavigenciaParameter, emp_ultanorenovadoParameter, emp_rupParameter, emp_runeolParameter, emp_rutParameter, tso_idParameter, tor_idParameter, tcm_idParameter, emp_numeroempleadosParameter, emp_afiliadocamcomercioParameter, emp_activaParameter);
-        }
-    
         public virtual int Tipocategoriamatricula_Delete(Nullable<int> tcm_id)
         {
             var tcm_idParameter = tcm_id.HasValue ?
@@ -581,6 +341,262 @@ namespace EConfiableBD
                 new ObjectParameter("tor_descripcion", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Tipoorganizacion_Update", tor_idParameter, tor_descripcionParameter);
+        }
+    
+        public virtual int Empresa_Delete(Nullable<int> emp_id)
+        {
+            var emp_idParameter = emp_id.HasValue ?
+                new ObjectParameter("emp_id", emp_id) :
+                new ObjectParameter("emp_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Empresa_Delete", emp_idParameter);
+        }
+    
+        public virtual int Empresa_Insert(string emp_nit, Nullable<int> emp_digverificacion, string emp_nombre, string emp_direccion, string ciu_codigo, string emp_telefonos, string emp_email, string emp_url, string emp_logotipo, Nullable<double> emp_longitud, Nullable<double> emp_latitud, string emp_nummatricula, Nullable<System.DateTime> emp_fechamatricula, Nullable<System.DateTime> emp_fecharenovacion, Nullable<System.DateTime> emp_fechacancelacion, Nullable<System.DateTime> emp_fechavigencia, Nullable<int> emp_ultanorenovado, string emp_rup, string emp_runeol, string emp_rut, Nullable<int> tso_id, Nullable<int> tor_id, Nullable<int> tcm_id, Nullable<int> emp_numeroempleados, Nullable<bool> emp_afiliadocamcomercio, Nullable<bool> emp_activa, string emp_sigla, string emp_camaracomercio)
+        {
+            var emp_nitParameter = emp_nit != null ?
+                new ObjectParameter("emp_nit", emp_nit) :
+                new ObjectParameter("emp_nit", typeof(string));
+    
+            var emp_digverificacionParameter = emp_digverificacion.HasValue ?
+                new ObjectParameter("emp_digverificacion", emp_digverificacion) :
+                new ObjectParameter("emp_digverificacion", typeof(int));
+    
+            var emp_nombreParameter = emp_nombre != null ?
+                new ObjectParameter("emp_nombre", emp_nombre) :
+                new ObjectParameter("emp_nombre", typeof(string));
+    
+            var emp_direccionParameter = emp_direccion != null ?
+                new ObjectParameter("emp_direccion", emp_direccion) :
+                new ObjectParameter("emp_direccion", typeof(string));
+    
+            var ciu_codigoParameter = ciu_codigo != null ?
+                new ObjectParameter("ciu_codigo", ciu_codigo) :
+                new ObjectParameter("ciu_codigo", typeof(string));
+    
+            var emp_telefonosParameter = emp_telefonos != null ?
+                new ObjectParameter("emp_telefonos", emp_telefonos) :
+                new ObjectParameter("emp_telefonos", typeof(string));
+    
+            var emp_emailParameter = emp_email != null ?
+                new ObjectParameter("emp_email", emp_email) :
+                new ObjectParameter("emp_email", typeof(string));
+    
+            var emp_urlParameter = emp_url != null ?
+                new ObjectParameter("emp_url", emp_url) :
+                new ObjectParameter("emp_url", typeof(string));
+    
+            var emp_logotipoParameter = emp_logotipo != null ?
+                new ObjectParameter("emp_logotipo", emp_logotipo) :
+                new ObjectParameter("emp_logotipo", typeof(string));
+    
+            var emp_longitudParameter = emp_longitud.HasValue ?
+                new ObjectParameter("emp_longitud", emp_longitud) :
+                new ObjectParameter("emp_longitud", typeof(double));
+    
+            var emp_latitudParameter = emp_latitud.HasValue ?
+                new ObjectParameter("emp_latitud", emp_latitud) :
+                new ObjectParameter("emp_latitud", typeof(double));
+    
+            var emp_nummatriculaParameter = emp_nummatricula != null ?
+                new ObjectParameter("emp_nummatricula", emp_nummatricula) :
+                new ObjectParameter("emp_nummatricula", typeof(string));
+    
+            var emp_fechamatriculaParameter = emp_fechamatricula.HasValue ?
+                new ObjectParameter("emp_fechamatricula", emp_fechamatricula) :
+                new ObjectParameter("emp_fechamatricula", typeof(System.DateTime));
+    
+            var emp_fecharenovacionParameter = emp_fecharenovacion.HasValue ?
+                new ObjectParameter("emp_fecharenovacion", emp_fecharenovacion) :
+                new ObjectParameter("emp_fecharenovacion", typeof(System.DateTime));
+    
+            var emp_fechacancelacionParameter = emp_fechacancelacion.HasValue ?
+                new ObjectParameter("emp_fechacancelacion", emp_fechacancelacion) :
+                new ObjectParameter("emp_fechacancelacion", typeof(System.DateTime));
+    
+            var emp_fechavigenciaParameter = emp_fechavigencia.HasValue ?
+                new ObjectParameter("emp_fechavigencia", emp_fechavigencia) :
+                new ObjectParameter("emp_fechavigencia", typeof(System.DateTime));
+    
+            var emp_ultanorenovadoParameter = emp_ultanorenovado.HasValue ?
+                new ObjectParameter("emp_ultanorenovado", emp_ultanorenovado) :
+                new ObjectParameter("emp_ultanorenovado", typeof(int));
+    
+            var emp_rupParameter = emp_rup != null ?
+                new ObjectParameter("emp_rup", emp_rup) :
+                new ObjectParameter("emp_rup", typeof(string));
+    
+            var emp_runeolParameter = emp_runeol != null ?
+                new ObjectParameter("emp_runeol", emp_runeol) :
+                new ObjectParameter("emp_runeol", typeof(string));
+    
+            var emp_rutParameter = emp_rut != null ?
+                new ObjectParameter("emp_rut", emp_rut) :
+                new ObjectParameter("emp_rut", typeof(string));
+    
+            var tso_idParameter = tso_id.HasValue ?
+                new ObjectParameter("tso_id", tso_id) :
+                new ObjectParameter("tso_id", typeof(int));
+    
+            var tor_idParameter = tor_id.HasValue ?
+                new ObjectParameter("tor_id", tor_id) :
+                new ObjectParameter("tor_id", typeof(int));
+    
+            var tcm_idParameter = tcm_id.HasValue ?
+                new ObjectParameter("tcm_id", tcm_id) :
+                new ObjectParameter("tcm_id", typeof(int));
+    
+            var emp_numeroempleadosParameter = emp_numeroempleados.HasValue ?
+                new ObjectParameter("emp_numeroempleados", emp_numeroempleados) :
+                new ObjectParameter("emp_numeroempleados", typeof(int));
+    
+            var emp_afiliadocamcomercioParameter = emp_afiliadocamcomercio.HasValue ?
+                new ObjectParameter("emp_afiliadocamcomercio", emp_afiliadocamcomercio) :
+                new ObjectParameter("emp_afiliadocamcomercio", typeof(bool));
+    
+            var emp_activaParameter = emp_activa.HasValue ?
+                new ObjectParameter("emp_activa", emp_activa) :
+                new ObjectParameter("emp_activa", typeof(bool));
+    
+            var emp_siglaParameter = emp_sigla != null ?
+                new ObjectParameter("emp_sigla", emp_sigla) :
+                new ObjectParameter("emp_sigla", typeof(string));
+    
+            var emp_camaracomercioParameter = emp_camaracomercio != null ?
+                new ObjectParameter("emp_camaracomercio", emp_camaracomercio) :
+                new ObjectParameter("emp_camaracomercio", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Empresa_Insert", emp_nitParameter, emp_digverificacionParameter, emp_nombreParameter, emp_direccionParameter, ciu_codigoParameter, emp_telefonosParameter, emp_emailParameter, emp_urlParameter, emp_logotipoParameter, emp_longitudParameter, emp_latitudParameter, emp_nummatriculaParameter, emp_fechamatriculaParameter, emp_fecharenovacionParameter, emp_fechacancelacionParameter, emp_fechavigenciaParameter, emp_ultanorenovadoParameter, emp_rupParameter, emp_runeolParameter, emp_rutParameter, tso_idParameter, tor_idParameter, tcm_idParameter, emp_numeroempleadosParameter, emp_afiliadocamcomercioParameter, emp_activaParameter, emp_siglaParameter, emp_camaracomercioParameter);
+        }
+    
+        public virtual ObjectResult<Empresa_List_Result> Empresa_List(Nullable<int> emp_id)
+        {
+            var emp_idParameter = emp_id.HasValue ?
+                new ObjectParameter("emp_id", emp_id) :
+                new ObjectParameter("emp_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Empresa_List_Result>("Empresa_List", emp_idParameter);
+        }
+    
+        public virtual int Empresa_Update(Nullable<int> emp_id, string emp_nit, Nullable<int> emp_digverificacion, string emp_nombre, string emp_direccion, string ciu_codigo, string emp_telefonos, string emp_email, string emp_url, string emp_logotipo, Nullable<double> emp_longitud, Nullable<double> emp_latitud, string emp_nummatricula, Nullable<System.DateTime> emp_fechamatricula, Nullable<System.DateTime> emp_fecharenovacion, Nullable<System.DateTime> emp_fechacancelacion, Nullable<System.DateTime> emp_fechavigencia, Nullable<int> emp_ultanorenovado, string emp_rup, string emp_runeol, string emp_rut, Nullable<int> tso_id, Nullable<int> tor_id, Nullable<int> tcm_id, Nullable<int> emp_numeroempleados, Nullable<bool> emp_afiliadocamcomercio, Nullable<bool> emp_activa, string emp_sigla, string emp_camaracomercio)
+        {
+            var emp_idParameter = emp_id.HasValue ?
+                new ObjectParameter("emp_id", emp_id) :
+                new ObjectParameter("emp_id", typeof(int));
+    
+            var emp_nitParameter = emp_nit != null ?
+                new ObjectParameter("emp_nit", emp_nit) :
+                new ObjectParameter("emp_nit", typeof(string));
+    
+            var emp_digverificacionParameter = emp_digverificacion.HasValue ?
+                new ObjectParameter("emp_digverificacion", emp_digverificacion) :
+                new ObjectParameter("emp_digverificacion", typeof(int));
+    
+            var emp_nombreParameter = emp_nombre != null ?
+                new ObjectParameter("emp_nombre", emp_nombre) :
+                new ObjectParameter("emp_nombre", typeof(string));
+    
+            var emp_direccionParameter = emp_direccion != null ?
+                new ObjectParameter("emp_direccion", emp_direccion) :
+                new ObjectParameter("emp_direccion", typeof(string));
+    
+            var ciu_codigoParameter = ciu_codigo != null ?
+                new ObjectParameter("ciu_codigo", ciu_codigo) :
+                new ObjectParameter("ciu_codigo", typeof(string));
+    
+            var emp_telefonosParameter = emp_telefonos != null ?
+                new ObjectParameter("emp_telefonos", emp_telefonos) :
+                new ObjectParameter("emp_telefonos", typeof(string));
+    
+            var emp_emailParameter = emp_email != null ?
+                new ObjectParameter("emp_email", emp_email) :
+                new ObjectParameter("emp_email", typeof(string));
+    
+            var emp_urlParameter = emp_url != null ?
+                new ObjectParameter("emp_url", emp_url) :
+                new ObjectParameter("emp_url", typeof(string));
+    
+            var emp_logotipoParameter = emp_logotipo != null ?
+                new ObjectParameter("emp_logotipo", emp_logotipo) :
+                new ObjectParameter("emp_logotipo", typeof(string));
+    
+            var emp_longitudParameter = emp_longitud.HasValue ?
+                new ObjectParameter("emp_longitud", emp_longitud) :
+                new ObjectParameter("emp_longitud", typeof(double));
+    
+            var emp_latitudParameter = emp_latitud.HasValue ?
+                new ObjectParameter("emp_latitud", emp_latitud) :
+                new ObjectParameter("emp_latitud", typeof(double));
+    
+            var emp_nummatriculaParameter = emp_nummatricula != null ?
+                new ObjectParameter("emp_nummatricula", emp_nummatricula) :
+                new ObjectParameter("emp_nummatricula", typeof(string));
+    
+            var emp_fechamatriculaParameter = emp_fechamatricula.HasValue ?
+                new ObjectParameter("emp_fechamatricula", emp_fechamatricula) :
+                new ObjectParameter("emp_fechamatricula", typeof(System.DateTime));
+    
+            var emp_fecharenovacionParameter = emp_fecharenovacion.HasValue ?
+                new ObjectParameter("emp_fecharenovacion", emp_fecharenovacion) :
+                new ObjectParameter("emp_fecharenovacion", typeof(System.DateTime));
+    
+            var emp_fechacancelacionParameter = emp_fechacancelacion.HasValue ?
+                new ObjectParameter("emp_fechacancelacion", emp_fechacancelacion) :
+                new ObjectParameter("emp_fechacancelacion", typeof(System.DateTime));
+    
+            var emp_fechavigenciaParameter = emp_fechavigencia.HasValue ?
+                new ObjectParameter("emp_fechavigencia", emp_fechavigencia) :
+                new ObjectParameter("emp_fechavigencia", typeof(System.DateTime));
+    
+            var emp_ultanorenovadoParameter = emp_ultanorenovado.HasValue ?
+                new ObjectParameter("emp_ultanorenovado", emp_ultanorenovado) :
+                new ObjectParameter("emp_ultanorenovado", typeof(int));
+    
+            var emp_rupParameter = emp_rup != null ?
+                new ObjectParameter("emp_rup", emp_rup) :
+                new ObjectParameter("emp_rup", typeof(string));
+    
+            var emp_runeolParameter = emp_runeol != null ?
+                new ObjectParameter("emp_runeol", emp_runeol) :
+                new ObjectParameter("emp_runeol", typeof(string));
+    
+            var emp_rutParameter = emp_rut != null ?
+                new ObjectParameter("emp_rut", emp_rut) :
+                new ObjectParameter("emp_rut", typeof(string));
+    
+            var tso_idParameter = tso_id.HasValue ?
+                new ObjectParameter("tso_id", tso_id) :
+                new ObjectParameter("tso_id", typeof(int));
+    
+            var tor_idParameter = tor_id.HasValue ?
+                new ObjectParameter("tor_id", tor_id) :
+                new ObjectParameter("tor_id", typeof(int));
+    
+            var tcm_idParameter = tcm_id.HasValue ?
+                new ObjectParameter("tcm_id", tcm_id) :
+                new ObjectParameter("tcm_id", typeof(int));
+    
+            var emp_numeroempleadosParameter = emp_numeroempleados.HasValue ?
+                new ObjectParameter("emp_numeroempleados", emp_numeroempleados) :
+                new ObjectParameter("emp_numeroempleados", typeof(int));
+    
+            var emp_afiliadocamcomercioParameter = emp_afiliadocamcomercio.HasValue ?
+                new ObjectParameter("emp_afiliadocamcomercio", emp_afiliadocamcomercio) :
+                new ObjectParameter("emp_afiliadocamcomercio", typeof(bool));
+    
+            var emp_activaParameter = emp_activa.HasValue ?
+                new ObjectParameter("emp_activa", emp_activa) :
+                new ObjectParameter("emp_activa", typeof(bool));
+    
+            var emp_siglaParameter = emp_sigla != null ?
+                new ObjectParameter("emp_sigla", emp_sigla) :
+                new ObjectParameter("emp_sigla", typeof(string));
+    
+            var emp_camaracomercioParameter = emp_camaracomercio != null ?
+                new ObjectParameter("emp_camaracomercio", emp_camaracomercio) :
+                new ObjectParameter("emp_camaracomercio", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Empresa_Update", emp_idParameter, emp_nitParameter, emp_digverificacionParameter, emp_nombreParameter, emp_direccionParameter, ciu_codigoParameter, emp_telefonosParameter, emp_emailParameter, emp_urlParameter, emp_logotipoParameter, emp_longitudParameter, emp_latitudParameter, emp_nummatriculaParameter, emp_fechamatriculaParameter, emp_fecharenovacionParameter, emp_fechacancelacionParameter, emp_fechavigenciaParameter, emp_ultanorenovadoParameter, emp_rupParameter, emp_runeolParameter, emp_rutParameter, tso_idParameter, tor_idParameter, tcm_idParameter, emp_numeroempleadosParameter, emp_afiliadocamcomercioParameter, emp_activaParameter, emp_siglaParameter, emp_camaracomercioParameter);
         }
     }
 }

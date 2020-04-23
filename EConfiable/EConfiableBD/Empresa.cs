@@ -41,6 +41,8 @@ namespace EConfiableBD
         public Nullable<int> emp_numeroempleados { get; set; }
         public Nullable<bool> emp_afiliadocamcomercio { get; set; }
         public Nullable<bool> emp_activa { get; set; }
+        public string emp_sigla { get; set; }
+        public string emp_camaracomercio { get; set; }
     
         public virtual Ciudad Ciudad { get; set; }
         public virtual TipoCategoriaMatricula TipoCategoriaMatricula { get; set; }

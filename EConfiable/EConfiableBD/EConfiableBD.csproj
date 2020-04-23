@@ -84,6 +84,8 @@
     <Compile Include="Empresa.cs">
       <DependentUpon>EConfiableModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EmpresaBD.cs" />
+    <Compile Include="EmpresaMetadata.cs" />
     <Compile Include="Empresa_List_Result.cs">
       <DependentUpon>EConfiableModel.tt</DependentUpon>
     </Compile>

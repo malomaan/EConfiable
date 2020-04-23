@@ -55,6 +55,8 @@
           <Property Name="emp_numeroempleados" Type="int" />
           <Property Name="emp_afiliadocamcomercio" Type="bit" />
           <Property Name="emp_activa" Type="bit" />
+          <Property Name="emp_sigla" Type="varchar" MaxLength="250" />
+          <Property Name="emp_camaracomercio" Type="varchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="Pais">
           <Key>
@@ -226,6 +228,8 @@
           <Parameter Name="emp_numeroempleados" Type="int" Mode="In" />
           <Parameter Name="emp_afiliadocamcomercio" Type="bit" Mode="In" />
           <Parameter Name="emp_activa" Type="bit" Mode="In" />
+          <Parameter Name="emp_sigla" Type="varchar" Mode="In" />
+          <Parameter Name="emp_camaracomercio" Type="varchar" Mode="In" />
         </Function>
         <Function Name="Empresa_List" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="emp_id" Type="int" Mode="In" />
@@ -258,6 +262,8 @@
           <Parameter Name="emp_numeroempleados" Type="int" Mode="In" />
           <Parameter Name="emp_afiliadocamcomercio" Type="bit" Mode="In" />
           <Parameter Name="emp_activa" Type="bit" Mode="In" />
+          <Parameter Name="emp_sigla" Type="varchar" Mode="In" />
+          <Parameter Name="emp_camaracomercio" Type="varchar" Mode="In" />
         </Function>
         <Function Name="Pais_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="pai_codigo" Type="varchar" Mode="In" />
@@ -445,9 +451,35 @@
             <Parameter Name="tso_id" Mode="In" Type="Int32" />
             <Parameter Name="tso_descripcion" Mode="In" Type="String" />
           </FunctionImport>
-          <EntitySet Name="Empresa" EntityType="EConfiableModel.Empresa" />
           <EntitySet Name="TipoCategoriaMatricula" EntityType="EConfiableModel.TipoCategoriaMatricula" />
           <EntitySet Name="TipoOrganizacion" EntityType="EConfiableModel.TipoOrganizacion" />
+          <FunctionImport Name="Tipocategoriamatricula_Delete">
+          <Parameter Name="tcm_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Tipocategoriamatricula_Insert">
+          <Parameter Name="tcm_descripcion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Tipocategoriamatricula_List" ReturnType="Collection(EConfiableModel.Tipocategoriamatricula_List_Result)">
+          <Parameter Name="tcm_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Tipocategoriamatricula_Update">
+            <Parameter Name="tcm_id" Mode="In" Type="Int32" />
+            <Parameter Name="tcm_descripcion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Tipoorganizacion_Delete">
+          <Parameter Name="tor_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Tipoorganizacion_Insert">
+          <Parameter Name="tor_descripcion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Tipoorganizacion_List" ReturnType="Collection(EConfiableModel.Tipoorganizacion_List_Result)">
+          <Parameter Name="tor_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Tipoorganizacion_Update">
+            <Parameter Name="tor_id" Mode="In" Type="Int32" />
+            <Parameter Name="tor_descripcion" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Empresa" EntityType="EConfiableModel.Empresa" />
           <AssociationSet Name="FK_Empresa_Ciudad" Association="EConfiableModel.FK_Empresa_Ciudad">
             <End Role="Ciudad" EntitySet="Ciudad" />
             <End Role="Empresa" EntitySet="Empresa" />
@@ -494,6 +526,8 @@
             <Parameter Name="emp_numeroempleados" Mode="In" Type="Int32" />
             <Parameter Name="emp_afiliadocamcomercio" Mode="In" Type="Boolean" />
             <Parameter Name="emp_activa" Mode="In" Type="Boolean" />
+            <Parameter Name="emp_sigla" Mode="In" Type="String" />
+            <Parameter Name="emp_camaracomercio" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Empresa_List" ReturnType="Collection(EConfiableModel.Empresa_List_Result)">
             <Parameter Name="emp_id" Mode="In" Type="Int32" />
@@ -526,32 +560,8 @@
             <Parameter Name="emp_numeroempleados" Mode="In" Type="Int32" />
             <Parameter Name="emp_afiliadocamcomercio" Mode="In" Type="Boolean" />
             <Parameter Name="emp_activa" Mode="In" Type="Boolean" />
-          </FunctionImport>
-          <FunctionImport Name="Tipocategoriamatricula_Delete">
-            <Parameter Name="tcm_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="Tipocategoriamatricula_Insert">
-            <Parameter Name="tcm_descripcion" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="Tipocategoriamatricula_List" ReturnType="Collection(EConfiableModel.Tipocategoriamatricula_List_Result)">
-            <Parameter Name="tcm_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="Tipocategoriamatricula_Update">
-            <Parameter Name="tcm_id" Mode="In" Type="Int32" />
-            <Parameter Name="tcm_descripcion" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="Tipoorganizacion_Delete">
-            <Parameter Name="tor_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="Tipoorganizacion_Insert">
-            <Parameter Name="tor_descripcion" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="Tipoorganizacion_List" ReturnType="Collection(EConfiableModel.Tipoorganizacion_List_Result)">
-            <Parameter Name="tor_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="Tipoorganizacion_Update">
-            <Parameter Name="tor_id" Mode="In" Type="Int32" />
-            <Parameter Name="tor_descripcion" Mode="In" Type="String" />
+            <Parameter Name="emp_sigla" Mode="In" Type="String" />
+            <Parameter Name="emp_camaracomercio" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Pais_List_Result">
@@ -632,6 +642,30 @@
           <Property Type="Int32" Name="tso_id" Nullable="false" />
           <Property Type="String" Name="tso_descripcion" Nullable="true" MaxLength="250" />
         </ComplexType>
+        <EntityType Name="TipoCategoriaMatricula">
+          <Key>
+            <PropertyRef Name="tcm_id" />
+          </Key>
+          <Property Name="tcm_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tcm_descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Empresa" Relationship="EConfiableModel.FK_Empresa_TipoCategoriaMatricula" FromRole="TipoCategoriaMatricula" ToRole="Empresa" />
+        </EntityType>
+        <EntityType Name="TipoOrganizacion">
+          <Key>
+            <PropertyRef Name="tor_id" />
+          </Key>
+          <Property Name="tor_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tor_descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Empresa" Relationship="EConfiableModel.FK_Empresa_TipoOrganizacion" FromRole="TipoOrganizacion" ToRole="Empresa" />
+        </EntityType>
+        <ComplexType Name="Tipocategoriamatricula_List_Result">
+          <Property Type="Int32" Name="tcm_id" Nullable="false" />
+          <Property Type="String" Name="tcm_descripcion" Nullable="true" MaxLength="250" />
+        </ComplexType>
+        <ComplexType Name="Tipoorganizacion_List_Result">
+          <Property Type="Int32" Name="tor_id" Nullable="false" />
+          <Property Type="String" Name="tor_descripcion" Nullable="true" MaxLength="250" />
+        </ComplexType>
         <EntityType Name="Empresa">
           <Key>
             <PropertyRef Name="emp_id" />
@@ -663,26 +697,12 @@
           <Property Name="emp_numeroempleados" Type="Int32" />
           <Property Name="emp_afiliadocamcomercio" Type="Boolean" />
           <Property Name="emp_activa" Type="Boolean" />
+          <Property Name="emp_sigla" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="emp_camaracomercio" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Ciudad" Relationship="EConfiableModel.FK_Empresa_Ciudad" FromRole="Empresa" ToRole="Ciudad" />
           <NavigationProperty Name="TipoCategoriaMatricula" Relationship="EConfiableModel.FK_Empresa_TipoCategoriaMatricula" FromRole="Empresa" ToRole="TipoCategoriaMatricula" />
           <NavigationProperty Name="TipoOrganizacion" Relationship="EConfiableModel.FK_Empresa_TipoOrganizacion" FromRole="Empresa" ToRole="TipoOrganizacion" />
           <NavigationProperty Name="TipoSociedad" Relationship="EConfiableModel.FK_Empresa_TipoSociedad" FromRole="Empresa" ToRole="TipoSociedad" />
-        </EntityType>
-        <EntityType Name="TipoCategoriaMatricula">
-          <Key>
-            <PropertyRef Name="tcm_id" />
-          </Key>
-          <Property Name="tcm_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="tcm_descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Empresa" Relationship="EConfiableModel.FK_Empresa_TipoCategoriaMatricula" FromRole="TipoCategoriaMatricula" ToRole="Empresa" />
-        </EntityType>
-        <EntityType Name="TipoOrganizacion">
-          <Key>
-            <PropertyRef Name="tor_id" />
-          </Key>
-          <Property Name="tor_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="tor_descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Empresa" Relationship="EConfiableModel.FK_Empresa_TipoOrganizacion" FromRole="TipoOrganizacion" ToRole="Empresa" />
         </EntityType>
         <Association Name="FK_Empresa_Ciudad">
           <End Type="EConfiableModel.Ciudad" Role="Ciudad" Multiplicity="0..1" />
@@ -760,14 +780,8 @@
           <Property Type="Int32" Name="emp_numeroempleados" Nullable="true" />
           <Property Type="Boolean" Name="emp_afiliadocamcomercio" Nullable="true" />
           <Property Type="Boolean" Name="emp_activa" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="Tipocategoriamatricula_List_Result">
-          <Property Type="Int32" Name="tcm_id" Nullable="false" />
-          <Property Type="String" Name="tcm_descripcion" Nullable="true" MaxLength="250" />
-        </ComplexType>
-        <ComplexType Name="Tipoorganizacion_List_Result">
-          <Property Type="Int32" Name="tor_id" Nullable="false" />
-          <Property Type="String" Name="tor_descripcion" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="emp_sigla" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="emp_camaracomercio" Nullable="true" MaxLength="250" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -865,9 +879,49 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Tiposociedad_Update" FunctionName="EConfiableModel.Store.Tiposociedad_Update" />
+          <EntitySetMapping Name="TipoCategoriaMatricula">
+            <EntityTypeMapping TypeName="EConfiableModel.TipoCategoriaMatricula">
+              <MappingFragment StoreEntitySet="TipoCategoriaMatricula">
+                <ScalarProperty Name="tcm_descripcion" ColumnName="tcm_descripcion" />
+                <ScalarProperty Name="tcm_id" ColumnName="tcm_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoOrganizacion">
+            <EntityTypeMapping TypeName="EConfiableModel.TipoOrganizacion">
+              <MappingFragment StoreEntitySet="TipoOrganizacion">
+                <ScalarProperty Name="tor_descripcion" ColumnName="tor_descripcion" />
+                <ScalarProperty Name="tor_id" ColumnName="tor_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Tipocategoriamatricula_Delete" FunctionName="EConfiableModel.Store.Tipocategoriamatricula_Delete" />
+          <FunctionImportMapping FunctionImportName="Tipocategoriamatricula_Insert" FunctionName="EConfiableModel.Store.Tipocategoriamatricula_Insert" />
+          <FunctionImportMapping FunctionImportName="Tipocategoriamatricula_List" FunctionName="EConfiableModel.Store.Tipocategoriamatricula_List">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EConfiableModel.Tipocategoriamatricula_List_Result">
+                <ScalarProperty Name="tcm_id" ColumnName="tcm_id" />
+                <ScalarProperty Name="tcm_descripcion" ColumnName="tcm_descripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Tipocategoriamatricula_Update" FunctionName="EConfiableModel.Store.Tipocategoriamatricula_Update" />
+          <FunctionImportMapping FunctionImportName="Tipoorganizacion_Delete" FunctionName="EConfiableModel.Store.Tipoorganizacion_Delete" />
+          <FunctionImportMapping FunctionImportName="Tipoorganizacion_Insert" FunctionName="EConfiableModel.Store.Tipoorganizacion_Insert" />
+          <FunctionImportMapping FunctionImportName="Tipoorganizacion_List" FunctionName="EConfiableModel.Store.Tipoorganizacion_List">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EConfiableModel.Tipoorganizacion_List_Result">
+                <ScalarProperty Name="tor_id" ColumnName="tor_id" />
+                <ScalarProperty Name="tor_descripcion" ColumnName="tor_descripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Tipoorganizacion_Update" FunctionName="EConfiableModel.Store.Tipoorganizacion_Update" />
           <EntitySetMapping Name="Empresa">
             <EntityTypeMapping TypeName="EConfiableModel.Empresa">
               <MappingFragment StoreEntitySet="Empresa">
+                <ScalarProperty Name="emp_camaracomercio" ColumnName="emp_camaracomercio" />
+                <ScalarProperty Name="emp_sigla" ColumnName="emp_sigla" />
                 <ScalarProperty Name="emp_activa" ColumnName="emp_activa" />
                 <ScalarProperty Name="emp_afiliadocamcomercio" ColumnName="emp_afiliadocamcomercio" />
                 <ScalarProperty Name="emp_numeroempleados" ColumnName="emp_numeroempleados" />
@@ -895,22 +949,6 @@
                 <ScalarProperty Name="emp_digverificacion" ColumnName="emp_digverificacion" />
                 <ScalarProperty Name="emp_nit" ColumnName="emp_nit" />
                 <ScalarProperty Name="emp_id" ColumnName="emp_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TipoCategoriaMatricula">
-            <EntityTypeMapping TypeName="EConfiableModel.TipoCategoriaMatricula">
-              <MappingFragment StoreEntitySet="TipoCategoriaMatricula">
-                <ScalarProperty Name="tcm_descripcion" ColumnName="tcm_descripcion" />
-                <ScalarProperty Name="tcm_id" ColumnName="tcm_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TipoOrganizacion">
-            <EntityTypeMapping TypeName="EConfiableModel.TipoOrganizacion">
-              <MappingFragment StoreEntitySet="TipoOrganizacion">
-                <ScalarProperty Name="tor_descripcion" ColumnName="tor_descripcion" />
-                <ScalarProperty Name="tor_id" ColumnName="tor_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -946,32 +984,12 @@
                 <ScalarProperty Name="emp_numeroempleados" ColumnName="emp_numeroempleados" />
                 <ScalarProperty Name="emp_afiliadocamcomercio" ColumnName="emp_afiliadocamcomercio" />
                 <ScalarProperty Name="emp_activa" ColumnName="emp_activa" />
+                <ScalarProperty Name="emp_sigla" ColumnName="emp_sigla" />
+                <ScalarProperty Name="emp_camaracomercio" ColumnName="emp_camaracomercio" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Empresa_Update" FunctionName="EConfiableModel.Store.Empresa_Update" />
-          <FunctionImportMapping FunctionImportName="Tipocategoriamatricula_Delete" FunctionName="EConfiableModel.Store.Tipocategoriamatricula_Delete" />
-          <FunctionImportMapping FunctionImportName="Tipocategoriamatricula_Insert" FunctionName="EConfiableModel.Store.Tipocategoriamatricula_Insert" />
-          <FunctionImportMapping FunctionImportName="Tipocategoriamatricula_List" FunctionName="EConfiableModel.Store.Tipocategoriamatricula_List">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="EConfiableModel.Tipocategoriamatricula_List_Result">
-                <ScalarProperty Name="tcm_id" ColumnName="tcm_id" />
-                <ScalarProperty Name="tcm_descripcion" ColumnName="tcm_descripcion" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Tipocategoriamatricula_Update" FunctionName="EConfiableModel.Store.Tipocategoriamatricula_Update" />
-          <FunctionImportMapping FunctionImportName="Tipoorganizacion_Delete" FunctionName="EConfiableModel.Store.Tipoorganizacion_Delete" />
-          <FunctionImportMapping FunctionImportName="Tipoorganizacion_Insert" FunctionName="EConfiableModel.Store.Tipoorganizacion_Insert" />
-          <FunctionImportMapping FunctionImportName="Tipoorganizacion_List" FunctionName="EConfiableModel.Store.Tipoorganizacion_List">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="EConfiableModel.Tipoorganizacion_List_Result">
-                <ScalarProperty Name="tor_id" ColumnName="tor_id" />
-                <ScalarProperty Name="tor_descripcion" ColumnName="tor_descripcion" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Tipoorganizacion_Update" FunctionName="EConfiableModel.Store.Tipoorganizacion_Update" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
