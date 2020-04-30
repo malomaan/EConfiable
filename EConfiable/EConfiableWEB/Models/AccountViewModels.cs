@@ -48,12 +48,12 @@ namespace EConfiableWEB.Models
 
     public class LoginViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Debe ingresar el {0}")]
         [Display(Name = "Correo electrónico")]
         [EmailAddress]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Debe ingresar el {0}")]
         [DataType(DataType.Password)]
         [Display(Name = "Contraseña")]
         public string Password { get; set; }

@@ -172,6 +172,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CiudadController.cs" />
     <Compile Include="Controllers\DepartamentoController.cs" />
+    <Compile Include="Controllers\EmpresaController.cs" />
     <Compile Include="Controllers\ErrorPagesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -361,6 +362,7 @@
     <Content Include="Views\TipoSociedad\Index.cshtml" />
     <Content Include="Views\TipoOrganizacion\Index.cshtml" />
     <Content Include="Views\TipoCategoriaMatricula\Index.cshtml" />
+    <Content Include="Views\Empresa\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
