@@ -1,23 +1,551 @@
-﻿
-@{
-    ViewBag.Title = "Información de la Empresa";
-}
+﻿@model EConfiableBD.Empresa
 
+@{
+    ViewBag.Title = "Empresa";
+}
+@using (Html.BeginForm("PostData", "Ciudad", FormMethod.Post, new { @id = "formsubmit" }))
+{
     <div class="card">
-        <div class="card-header bg-secondary text-lg-center" style="color:white;">
-            <h2><i class="far fa-building"></i> @ViewBag.Title</h2>
+        <div class="card-header bg-dark" style="color:white;">
+            <h3><i class="far fa-building"></i> @ViewBag.Title</h3>
         </div>
         <div class="card-body">
             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>Configurar la Empresa!</strong> Debes ingresar por primer vez la información de la Compañia.
+                <i class="fas fa-lightbulb fa-2x" style="color:orangered;"></i> <strong>Configurar la Empresa!</strong> Debes ingresar por primer vez la información de la Compañia.
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="row">
-                <div class="col-sm-4">.col-sm-4</div>
-                <div class="col-sm-4">.col-sm-4</div>
-                <div class="col-sm-4">.col-sm-4</div>
+            <div class="card">
+                <div class="card-header">
+                    <nav>
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true"><i class="fas fa-database"></i> 1. Información Básica</a>
+                            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false"><i class="fas fa-gavel"></i> 2. Registro Mercantil</a>
+                            <a class="nav-item nav-link" id="nav-tributaria-tab" data-toggle="tab" href="#nav-tributaria" role="tab" aria-controls="nav-tributaria" aria-selected="false"><i class="fas fa-balance-scale"></i> 3. Otros Registros</a>
+                            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false"><i class="fas fa-globe-americas"></i> 4. Ubicación</a>
+                            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-logo" role="tab" aria-controls="nav-logo" aria-selected="false"><i class="far fa-image"></i> 5. Logo</a>
+                        </div>
+                    </nav>
+                </div>
+                <div class=" card-body">
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                            <br />
+                            <div class="form-horizontal">
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.emp_nit, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-sm-10">
+                                        <div class="input-group mb-2 mr-sm-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="fas fa-barcode"></i></div>
+                                            </div>
+                                            @Html.EditorFor(model => model.emp_nit, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.emp_nit) + " *" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.emp_nit, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.emp_digverificacion, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-sm-10">
+                                        <div class="input-group mb-2 mr-sm-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="fas fa-certificate"></i></div>
+                                            </div>
+                                            @Html.EditorFor(model => model.emp_digverificacion, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.emp_digverificacion) + " *" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.emp_digverificacion, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.emp_nombre, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-sm-10">
+                                        <div class="input-group mb-2 mr-sm-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="far fa-address-card"></i></div>
+                                            </div>
+                                            @Html.EditorFor(model => model.emp_nombre, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.emp_nombre) + " *" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.emp_nombre, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.emp_direccion, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-sm-10">
+                                        <div class="input-group mb-2 mr-sm-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="far fa-address-card"></i></div>
+                                            </div>
+                                            @Html.EditorFor(model => model.emp_direccion, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.emp_direccion) + " *" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.emp_direccion, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.emp_telefonos, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-sm-10">
+                                        <div class="input-group mb-2 mr-sm-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="fas fa-phone-alt"></i></div>
+                                            </div>
+                                            @Html.EditorFor(model => model.emp_telefonos, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.emp_telefonos) + " *" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.emp_telefonos, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.emp_email, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-sm-10">
+                                        <div class="input-group mb-2 mr-sm-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="fas fa-at"></i></div>
+                                            </div>
+                                            @Html.EditorFor(model => model.emp_email, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.emp_email) + " *" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.emp_email, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.emp_url, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-sm-10">
+                                        <div class="input-group mb-2 mr-sm-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="far fa-id-card"></i></div>
+                                            </div>
+                                            @Html.EditorFor(model => model.emp_url, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.emp_url) + " *" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.emp_url, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.emp_sigla, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-sm-10">
+                                        <div class="input-group mb-2 mr-sm-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="far fa-id-card"></i></div>
+                                            </div>
+                                            @Html.EditorFor(model => model.emp_sigla, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.emp_sigla) + " *" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.emp_sigla, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                            <br />
+                            <div class="form-horizontal">
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.emp_nummatricula, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-sm-10">
+                                        <div class="input-group mb-2 mr-sm-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="fas fa-barcode"></i></div>
+                                            </div>
+                                            @Html.EditorFor(model => model.emp_nummatricula, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.emp_nummatricula) + " *" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.emp_nummatricula, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.emp_fechamatricula, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-sm-10">
+                                        <div class="input-group mb-2 mr-sm-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="fas fa-certificate"></i></div>
+                                            </div>
+                                            @Html.EditorFor(model => model.emp_fechamatricula, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.emp_fechamatricula) + " *" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.emp_fechamatricula, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.emp_fecharenovacion, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-sm-10">
+                                        <div class="input-group mb-2 mr-sm-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="far fa-address-card"></i></div>
+                                            </div>
+                                            @Html.EditorFor(model => model.emp_fecharenovacion, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.emp_fecharenovacion) + " *" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.emp_fecharenovacion, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.emp_fechacancelacion, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-sm-10">
+                                        <div class="input-group mb-2 mr-sm-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="far fa-address-card"></i></div>
+                                            </div>
+                                            @Html.EditorFor(model => model.emp_fechacancelacion, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.emp_fechacancelacion) + " *" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.emp_fechacancelacion, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.emp_fechavigencia, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-sm-10">
+                                        <div class="input-group mb-2 mr-sm-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="fas fa-phone-alt"></i></div>
+                                            </div>
+                                            @Html.EditorFor(model => model.emp_fechavigencia, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.emp_fechavigencia) + " *" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.emp_fechavigencia, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.emp_ultanorenovado, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-sm-10">
+                                        <div class="input-group mb-2 mr-sm-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="fas fa-at"></i></div>
+                                            </div>
+                                            @Html.EditorFor(model => model.emp_ultanorenovado, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.emp_ultanorenovado) + " *" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.emp_ultanorenovado, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.emp_camaracomercio, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-sm-10">
+                                        <div class="input-group mb-2 mr-sm-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="far fa-id-card"></i></div>
+                                            </div>
+                                            @Html.EditorFor(model => model.emp_camaracomercio, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.emp_camaracomercio) + " *" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.emp_camaracomercio, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.emp_camaracomercio, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-sm-10">
+                                        <div class="input-group mb-2 mr-sm-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="far fa-id-card"></i></div>
+                                            </div>
+                                            @Html.EditorFor(model => model.emp_camaracomercio, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.emp_camaracomercio) + " *" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.emp_camaracomercio, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="nav-tributaria" role="tabpanel" aria-labelledby="nav-tributaria-tab">
+                            <br />
+                            <div class="form-horizontal">
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.emp_nummatricula, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-sm-10">
+                                        <div class="input-group mb-2 mr-sm-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="fas fa-barcode"></i></div>
+                                            </div>
+                                            @Html.EditorFor(model => model.emp_nummatricula, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.emp_nummatricula) + " *" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.emp_nummatricula, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.emp_fechamatricula, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-sm-10">
+                                        <div class="input-group mb-2 mr-sm-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="fas fa-certificate"></i></div>
+                                            </div>
+                                            @Html.EditorFor(model => model.emp_fechamatricula, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.emp_fechamatricula) + " *" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.emp_fechamatricula, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.emp_fecharenovacion, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-sm-10">
+                                        <div class="input-group mb-2 mr-sm-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="far fa-address-card"></i></div>
+                                            </div>
+                                            @Html.EditorFor(model => model.emp_fecharenovacion, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.emp_fecharenovacion) + " *" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.emp_fecharenovacion, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.emp_fechacancelacion, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-sm-10">
+                                        <div class="input-group mb-2 mr-sm-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="far fa-address-card"></i></div>
+                                            </div>
+                                            @Html.EditorFor(model => model.emp_fechacancelacion, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.emp_fechacancelacion) + " *" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.emp_fechacancelacion, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.emp_fechavigencia, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-sm-10">
+                                        <div class="input-group mb-2 mr-sm-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="fas fa-phone-alt"></i></div>
+                                            </div>
+                                            @Html.EditorFor(model => model.emp_fechavigencia, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.emp_fechavigencia) + " *" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.emp_fechavigencia, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.emp_ultanorenovado, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-sm-10">
+                                        <div class="input-group mb-2 mr-sm-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="fas fa-at"></i></div>
+                                            </div>
+                                            @Html.EditorFor(model => model.emp_ultanorenovado, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.emp_ultanorenovado) + " *" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.emp_ultanorenovado, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.emp_rup, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-sm-10">
+                                        <div class="input-group mb-2 mr-sm-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="far fa-id-card"></i></div>
+                                            </div>
+                                            @Html.EditorFor(model => model.emp_rup, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.emp_rup) + " *" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.emp_rup, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.emp_runeol, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-sm-10">
+                                        <div class="input-group mb-2 mr-sm-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="far fa-id-card"></i></div>
+                                            </div>
+                                            @Html.EditorFor(model => model.emp_runeol, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.emp_runeol) + " *" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.emp_runeol, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.emp_runeol, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-sm-10">
+                                        <div class="input-group mb-2 mr-sm-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="far fa-id-card"></i></div>
+                                            </div>
+                                            @Html.EditorFor(model => model.emp_runeol, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.emp_runeol) + " *" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.emp_runeol, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.emp_rut, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-sm-10">
+                                        <div class="input-group mb-2 mr-sm-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="far fa-id-card"></i></div>
+                                            </div>
+                                            @Html.EditorFor(model => model.emp_rut, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.emp_rut) + " *" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.emp_rut, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.tso_id, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-sm-10">
+                                        <div class="input-group mb-2 mr-sm-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="far fa-id-card"></i></div>
+                                            </div>
+                                            @Html.EditorFor(model => model.tso_id, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.tso_id) + " *" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.tso_id, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.tor_id, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-sm-10">
+                                        <div class="input-group mb-2 mr-sm-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="far fa-id-card"></i></div>
+                                            </div>
+                                            @Html.EditorFor(model => model.tor_id, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.tor_id) + " *" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.tor_id, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.tcm_id, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-sm-10">
+                                        <div class="input-group mb-2 mr-sm-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="far fa-id-card"></i></div>
+                                            </div>
+                                            @Html.EditorFor(model => model.tcm_id, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.tcm_id) + " *" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.tcm_id, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.emp_numeroempleados, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-sm-10">
+                                        <div class="input-group mb-2 mr-sm-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="far fa-id-card"></i></div>
+                                            </div>
+                                            @Html.EditorFor(model => model.emp_numeroempleados, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.emp_numeroempleados) + " *" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.emp_numeroempleados, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.emp_afiliadocamcomercio, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-sm-10">
+                                        <div class="input-group mb-2 mr-sm-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="far fa-id-card"></i></div>
+                                            </div>
+                                            @Html.EditorFor(model => model.emp_afiliadocamcomercio, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.emp_afiliadocamcomercio) + " *" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.emp_afiliadocamcomercio, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.emp_activa, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-sm-10">
+                                        <div class="input-group mb-2 mr-sm-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="far fa-id-card"></i></div>
+                                            </div>
+                                            @Html.EditorFor(model => model.emp_activa, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.emp_activa) + " *" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.emp_activa, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                            <br />
+                            <div class="form-horizontal">
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.emp_nit, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-sm-10">
+                                        <div class="input-group mb-2 mr-sm-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="fas fa-barcode"></i></div>
+                                            </div>
+                                            @Html.EditorFor(model => model.emp_nit, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.emp_nit) + " *" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.emp_nit, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.emp_digverificacion, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-sm-10">
+                                        <div class="input-group mb-2 mr-sm-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="fas fa-certificate"></i></div>
+                                            </div>
+                                            @Html.EditorFor(model => model.emp_digverificacion, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.emp_digverificacion) + " *" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.emp_digverificacion, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.emp_nombre, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-sm-10">
+                                        <div class="input-group mb-2 mr-sm-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="far fa-address-card"></i></div>
+                                            </div>
+                                            @Html.EditorFor(model => model.emp_nombre, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.emp_nombre) + " *" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.emp_nombre, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.emp_direccion, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-sm-10">
+                                        <div class="input-group mb-2 mr-sm-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="far fa-address-card"></i></div>
+                                            </div>
+                                            @Html.EditorFor(model => model.emp_direccion, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.emp_direccion) + " *" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.emp_direccion, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.emp_telefonos, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-sm-10">
+                                        <div class="input-group mb-2 mr-sm-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="fas fa-phone-alt"></i></div>
+                                            </div>
+                                            @Html.EditorFor(model => model.emp_telefonos, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.emp_telefonos) + " *" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.emp_telefonos, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.emp_email, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-sm-10">
+                                        <div class="input-group mb-2 mr-sm-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="fas fa-at"></i></div>
+                                            </div>
+                                            @Html.EditorFor(model => model.emp_email, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.emp_email) + " *" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.emp_email, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.emp_url, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-sm-10">
+                                        <div class="input-group mb-2 mr-sm-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="far fa-id-card"></i></div>
+                                            </div>
+                                            @Html.EditorFor(model => model.emp_url, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.emp_url) + " *" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.emp_url, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    @Html.LabelFor(model => model.emp_sigla, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+                                    <div class="col-sm-10">
+                                        <div class="input-group mb-2 mr-sm-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="far fa-id-card"></i></div>
+                                            </div>
+                                            @Html.EditorFor(model => model.emp_sigla, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.emp_sigla) + " *" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.emp_sigla, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="nav-logo" role="tabpanel" aria-labelledby="nav-logo-tab">
+                            <h1>Logo</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class=" card-footer text-center">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <button type="button" id="submitdata" class="btn btn-outline-success btn-sm" onclick="btnsubmit(0)"> <span class="fas fa-check"></span> Guardar</button>
+                            <button type="button" id="updatedata" class="btn btn-outline-success btn-sm" onclick="btnsubmit(1)"> <span class="fas fa-check"></span> Actualizar</button>
+                            <button type="button" id="my-button" class="btn btn-outline-danger btn-sm btn-grid" onclick="location.href='@Url.Action("Index", "Ciudad")'"><span class="fas fa-times"></span> Cancelar</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+}

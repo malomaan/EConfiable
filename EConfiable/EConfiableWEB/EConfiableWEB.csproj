@@ -363,6 +363,7 @@
     <Content Include="Views\TipoOrganizacion\Index.cshtml" />
     <Content Include="Views\TipoCategoriaMatricula\Index.cshtml" />
     <Content Include="Views\Empresa\Index.cshtml" />
+    <Content Include="Views\Empresa\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

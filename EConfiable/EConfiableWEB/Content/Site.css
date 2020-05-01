@@ -87,6 +87,15 @@ textarea {
     margin-bottom: 0;
 }
 
+.col-form-label {
+    padding-top: calc(1px + 0.37rem);
+    padding-bottom: calc(1px + 0.37rem);
+    margin-bottom: 0px;
+    font-size: inherit;
+    line-height: 1.5;
+    text-align: left;
+}
+
 
 .modal-header {
     color: #fff;
