@@ -182,7 +182,6 @@ th{
         .masthead a:active {
             text-decoration: none
         }
-
 @media(min-width:992px) {
     .masthead h1 {
         font-size: 3rem
@@ -192,7 +191,6 @@ th{
         font-size: 1.5rem
     }
 }
-
 .masthead .masthead-cards {
     position: relative;
     z-index: 1
@@ -236,41 +234,32 @@ th{
         .masthead .masthead-cards .card.border-bottom-yellow:hover {
             color: #ffc107
         }
-
 .masthead-page {
     padding: 1rem 0 4rem
 }
-
 @media(min-width:992px) {
     .masthead-page h1 {
         font-size: 2.5rem
     }
 }
-
 .border-bottom-yellow {
     border-color: #ffc107 !important;
 }
-
 .border-bottom-red {
     border-color: #dd3d31 !important;
 }
-
 .border-bottom-blue {
     border-color: #2092ed !important;
 }
-
 .border-bottom-green {
     border-color: #28a745 !important;
 }
-
 .border-bottom-blue, .border-bottom-green, .border-bottom-red, .border-bottom-yellow {
     border-bottom: .4rem solid !important;
 }
-
 .shadow-lg {
     box-shadow: 0 2rem 1.5rem -1.5rem rgba(33,37,41,.15),0 0 1.5rem .5rem rgba(33,37,41,.05) !important;
 }
-
 .border-0 {
     border: 0 !important;
 }

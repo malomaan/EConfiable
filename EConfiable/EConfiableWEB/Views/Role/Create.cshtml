@@ -1,0 +1,72 @@
+﻿@model Microsoft.AspNet.Identity.EntityFramework.IdentityRole
+
+
+@{
+    ViewBag.Title = "Crear";
+}
+@using (Html.BeginForm())
+{
+
+    <div class="modal fade" id="WindowsModal" tabindex="-1" data-backdrop="false" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    @Html.ActionLink(" ", "Index", "Role", "Home", new { @class = "close boxclose" })
+                    <h4 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-file"></span> @ViewBag.Title</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div id="divLoader" class="modal fade in Loading" role="dialog" style="display:none;">
+                        <center class="centrado">
+                            Procesando
+                            <p></p>
+                            <img src="~/Content/Imagenes/Imagen/Loading.gif" alt="Loader" />
+                        </center>
+                    </div>
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    @if (ViewBag.Err != null)
+                    {
+                        <div class="alert alert-danger">@ViewBag.Err</div>
+                    }
+
+                    <button type="submit" id="btnSubmit" class="btn btn-info btn-sm">
+                        <span class="glyphicon glyphicon-ok"></span> Guardar
+                    </button>
+                    <a class='btn btn-danger btn-sm' href="@Url.Action("Index")">
+                        <span class="glyphicon glyphicon-remove"></span> Cancelar
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $('#WindowsModal').modal('show');
+
+        //$(document).on('shown.bs.modal', '#WindowsModal', function () {
+        //    document.getElementById('Email').focus();
+        //});
+
+        //$('[data-toggle="tooltip"]').tooltip();
+
+    </script>
+}

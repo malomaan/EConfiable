@@ -3,6 +3,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace EConfiableWEB.Models
 {
+    
+    
+    
+    
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
@@ -79,6 +83,12 @@ namespace EConfiableWEB.Models
         [Display(Name = "Confirmar contraseña")]
         [Compare("Password", ErrorMessage = "La contraseña y la contraseña de confirmación no coinciden.")]
         public string ConfirmPassword { get; set; }
+
+        //variable para el rol
+
+        [Required(ErrorMessage = "Debe ingresar el {0}")]
+        public string Name { get; set; }
+
     }
 
     public class ResetPasswordViewModel
