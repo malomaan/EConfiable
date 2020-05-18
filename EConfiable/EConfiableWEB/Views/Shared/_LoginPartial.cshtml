@@ -6,12 +6,12 @@
         @Html.AntiForgeryToken()
     <ul class="nav navbar-nav navbar-right">
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span style="color:black;" class="fas fa-user-circle fa-2x"></span> @User.Identity.GetUserName()
+            <a class="nav-link dropdown-toggle" style="color:var(--coloriconnavbar);" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span style="color:#FFFF;" class="far fa-user-circle fa-2x"></span> @User.Identity.GetUserName()
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="~/Account/myaccount"><span class="fas fa-user"></span> Mi Cuenta</a>
-                <a class="dropdown-item" href="~/Account/ForgotPassword"><span class="fas fa-key"></span> Cambiar Contraseña</a>
+                <a class="dropdown-item" style="color:var(--coloriconnavbar);" href="~/Account/myaccount"><span class="fas fa-user"></span> Mi Cuenta</a>
+                <a class="dropdown-item" style="color:var(--coloriconnavbar);" href="~/Account/ForgotPassword"><span class="fas fa-key"></span> Cambiar Contraseña</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="~/Role/Index"><i class="fa fa-users" aria-hidden="true"></i> Roles</a>
                 <a class="dropdown-item" href="~/Account/Index"><i class="fa fa-user-plus" aria-hidden="true"></i> Usuarios</a>
@@ -28,14 +28,14 @@ else
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item">
-                <a class="nav-link" onclick="abaut()"><i class="fas fa-info-circle fa-2x" style="color:black;"></i> About</a>
+                <a class="nav-link" style="color:var(--coloriconnavbar);" onclick="abaut()"><i class="fas fa-info-circle fa-2x"></i> About</a>
             </li>
             <li class="nav-item">
-                 <a class="nav-link" onclick="contac()"><i class="fas fa-question-circle fa-2x" style="color:black;"></i> Contacto</a>
+                 <a class="nav-link" style="color:var(--coloriconnavbar);" onclick="contac()"><i class="fas fa-question-circle fa-2x" ></i> Contacto</a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="~/Account/Login" data-toggle="tooltip" data-placement="top" title="Iniciar Sesión"><i class="fas fa-lock fa-2x" style="color:black;"></i> <span class="sr-only">(current)</span>Iniciar Sesión</a>
+                <a class="nav-link" style="color:var(--coloriconnavbar);" href="~/Account/Login" data-toggle="tooltip" data-placement="top" title="Iniciar Sesión"><i class="fas fa-lock fa-2x"></i> <span class="sr-only">(current)</span>Iniciar Sesión</a>
             </li>
 
 

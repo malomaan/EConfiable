@@ -1,5 +1,18 @@
-﻿body {
-    padding-top: 60px;
+﻿:root {
+    --colorbaknavbar: #1D4461;
+    --colornavbar: #ffffff;
+    --colorselnavbar: #235071;
+    --coloriconnavbar: #ffffff;
+    --colorselsmnavbar: #4d9cf0;
+    --colorback: #c1b5e0;
+    --colorheadermodal: #2B648F;
+    --colorbakcard: #2B648F;
+    --colorbakheradertable: #d0ddea;
+    --colorfontheadertable: #2092ed;
+}
+
+body {
+    padding-top: 70px;
     padding-bottom: 20px;
     font-family: 'Roboto Condensed', sans-serif;
     background-image: url("Imagenes/background.jpg");
@@ -9,66 +22,66 @@
 }
 
 .card-header {
-    background-color: #F2F2F2;
+    background-color: var(--colorbakcard) !important;
     height: 45px;
     padding-top: 4px;
-    color:black;
-    
+    color: white;
 }
 
-/*Navbar*/
+/*Bootstrap Navbar Aplication*/
+.navbar {
+    color: var(--colornavbar) !important;
+    background-color: var(--colorbaknavbar) !important;
+    height: 60px;
+}
 .navbar-brand {
-    display: inline-block;
-    padding-top: 0.3125rem;
-    padding-bottom: 0.3125rem;
-    margin-right: 1rem;
-    line-height: inherit;
-    white-space: nowrap;  
+    color: ghostwhite !important;
+    font-weight: bold;
+    font-size:25px;
+
 }
-.nav .navbar-nav li a {
-        color: white;
-    }
-.navbar-light .navbar-brand {
-    color: black;
+.navbar-nav {
+    background: var(--colorbaknavbar) !important;
 }
-.navbar-light .navbar-brand:hover, .navbar-light .navbar-brand:focus {
-        color: black;
-        text-shadow: 0 0 30px #fff;
+.nav-link {
+    padding: 10px !important;
+    cursor: pointer !important;
+    color: var(--colornavbar) !important;
+    font-weight: bold;
 }
-.nav-link:hover {
-    display: block;
-    padding: 0.5rem 1rem;
-    background-color: #4d9cf0;
-    color: white;
+.nav-item :hover {
+    background-color: var(--colorselnavbar) !important; /*Color del Backgroud de la opciones de la barra de navegación*/
+    color: var(--colornavbar) !important;
     border-radius: 5px 5px 5px 5px;
 }
+.dropdown-item {
+    background-color: var(--colorbaknavbar) !important; /*Color del Background de los item de un drowdown de la barra del navegación*/
+    color: var(--colornavbar) !important;
+    font-weight: bold;
+}
 .dropdown-menu.show {
-    display: block;
-    background-color: #0a0e27;
+    background-color: var(--colorbaknavbar) !important; /*Color del Backgroud de dropdown*/
+    border-radius: 5px 5px 5px 5px !important;
 }
 .dropdown-item:hover {
-    background-color: #4d9cf0; /*Barra sub menu login*/
+    background-color: var(--colorselsmnavbar) !important; /*Barra sub menu login*/
 }
-.navbar {
-    background-color: #F2F2F2;
-    height: 50px;
+.navbar-dark .navbar-nav .nav-link {
+    color: var(--colornavbar) !important; /*Todos los items*/
 }
-.navbar-light .navbar-nav .nav-link {
-    color: black;
-}
-.navbar-light .navbar-nav .nav-link:hover {
-    color: white;
-}
-.navbar-collapse {
-    background-color: #F2F2F2;
-}
-/*Fin Navbar*/
 
+
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+    color: #495057;
+    background-color: #235071;
+    border-color: #dee2e6 #dee2e6 #fff;
+}
+
+/*Fin Bootstrap Navbar Aplication*/
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
 }
-
 .dl-horizontal dt {
     white-space: normal;
 }
@@ -78,15 +91,12 @@ select,
 textarea {
     max-width: 99%;
 }
-
 .form-control{
     max-width: 95%;
 }
-
 .form-group {
     margin-bottom: 0;
 }
-
 .col-form-label {
     padding-top: calc(1px + 0.37rem);
     padding-bottom: calc(1px + 0.37rem);
@@ -95,38 +105,40 @@ textarea {
     line-height: 1.5;
     text-align: left;
 }
-
-
 .modal-header {
     color: #fff;
-    border-color: #2092ed;
+    border-color: var(--colorbakcard);
     border-style: solid;
     border-width: 1px;
     border-radius: 5px 5px 0px 0px;
     height: 40px;
-    background-color: #2092ed;
-    padding-top:5px;
+    background-color: var(--colorbakcard);
+    padding-top: 5px;
 }
-
 .modal-footer {
     padding: 15px;
     border-top: 1px solid #e5e5e5;
     text-align: right;
 }
 
-/*Boton Grid*/
-.btn-grid {   
-    text-decoration:none;
+/*Estilos de tablas*/
+/*Boton Table*/
+th {
+    background-color: var(--colorbakheradertable) !important;
+    color: var(--colorfontheadertable) !important;
+    border: 1px solid #e5e5e5 !important;
+    font-style: italic;
+}
+
+
+.btn-grid {
+    text-decoration: none;
     width: 90px;
     font-size: 14px;
 }
 
-th{
-    background-color:#e9eae2;
-}
-
 /*Formato de Menu Panel*/
-/*RED*/
+/*Red*/
 /*.masthead {
     padding: 3rem 0 7rem;
     position: relative;
@@ -136,7 +148,7 @@ th{
     z-index: 0
 }*/
 
-/*Greeen*/
+/*Green*/
 /*.masthead {
     padding: 3rem 0 7rem;
     position: relative;
@@ -145,11 +157,13 @@ th{
     background-size: cover;
     z-index: 0;
 }*/
+
+/*Blue*/
 .masthead {
     padding: 0rem 0 7rem;
     position: relative;
     background-color: #0062cc;
-    background-image: url(https://startbootstrap.com/assets/img/overlay.svg), linear-gradient(45deg, rgba(0, 123, 255, 0.5) 0%, #007bff 100%);
+    background-image: url(https://startbootstrap.com/assets/img/overlay.svg), linear-gradient(45deg, rgba(0, 123, 255, 0.5) 0%, #d0ddea 100%);
     background-size: cover;
     z-index: 0;
 }
@@ -211,8 +225,12 @@ th{
         text-transform: uppercase;
         font-weight: 800;
         letter-spacing: .05rem;
-        color: #212529;
-        transition: .15s all
+        color: #ffffff;
+        transition: .15s all;
+        background-color:#000000;
+        
+
+
     }
         .masthead .masthead-cards .card:hover {
             margin-top: -.25rem;
@@ -229,7 +247,7 @@ th{
             color: #28a745
         }
         .masthead .masthead-cards .card.border-bottom-red:hover {
-            color: #dd3d31
+            color: #4d9cf0;
         }
         .masthead .masthead-cards .card.border-bottom-yellow:hover {
             color: #ffc107
