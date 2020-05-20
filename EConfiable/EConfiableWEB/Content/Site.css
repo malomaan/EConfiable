@@ -1,7 +1,7 @@
 ﻿:root {
-    --colorbaknavbar: #1D4461;
+    --colorbaknavbar: rgba(0, 35, 140, 0.5);
     --colornavbar: #ffffff;
-    --colorselnavbar: #235071;
+    --colorselnavbar: #4d9cf0;
     --coloriconnavbar: #ffffff;
     --colorselsmnavbar: #4d9cf0;
     --colorback: #c1b5e0;
@@ -9,6 +9,7 @@
     --colorbakcard: #2B648F;
     --colorbakheradertable: #d0ddea;
     --colorfontheadertable: #2092ed;
+    --coloriconsidebar: #ffffff;
 }
 
 body {
@@ -69,8 +70,7 @@ body {
 .navbar-dark .navbar-nav .nav-link {
     color: var(--colornavbar) !important; /*Todos los items*/
 }
-
-
+/*Tabs*/
 .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
     color: #495057;
     background-color: #235071;
@@ -121,6 +121,9 @@ textarea {
     text-align: right;
 }
 
+/*.control-label{
+    font-size:12px !important;
+}*/
 /*Estilos de tablas*/
 /*Boton Table*/
 th {
@@ -163,7 +166,7 @@ th {
     padding: 0rem 0 7rem;
     position: relative;
     background-color: #0062cc;
-    background-image: url(https://startbootstrap.com/assets/img/overlay.svg), linear-gradient(45deg, rgba(0, 123, 255, 0.5) 0%, #d0ddea 100%);
+    background-image: url(https://startbootstrap.com/assets/img/overlay.svg), linear-gradient(45deg, rgba(0, 35, 140, 0.5) 0%, #d0ddea 100%);
     background-size: cover;
     z-index: 0;
 }
@@ -227,10 +230,7 @@ th {
         letter-spacing: .05rem;
         color: #ffffff;
         transition: .15s all;
-        background-color:#000000;
-        
-
-
+        background-color:#000000;       
     }
         .masthead .masthead-cards .card:hover {
             margin-top: -.25rem;
@@ -280,4 +280,68 @@ th {
 }
 .border-0 {
     border: 0 !important;
+}
+
+/*Menu Side*/
+
+.sidenav {
+    height: 100%;
+    width: 190px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: var(--colorbaknavbar);
+    overflow-x: hidden;
+    padding-top: 20px;
+    padding: 10px;
+}
+    .sidenav ul {
+        background-color: var(--colorbaknavbar) !important;
+    }
+    .sidenav ul a:hover {
+        background-color: #4d9cf0 !important;
+ }
+    .sidenav a {
+        padding: 6px 8px 6px 16px;
+        text-decoration: none;
+        color: #ffffff;
+        display: block;
+        font-size: 12px !important;
+        font-weight: normal;
+    }
+    .sidenav a:hover {
+        color: #ffffff !important;
+    }
+    .sidenav i:hover {
+        color: #ffffff !important;
+        background-color: var(--colorselnavbar) !important;
+    }
+    .sidenav a:hover {
+            color: #f1f1f1;
+}
+.main {
+    margin-left: 160px; /* Same as the width of the sidenav */
+    /*font-size: 28px;*/ /* Increased text to enable scrolling */
+    padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+        .sidenav a {
+            font-size: 18px;
+        }
+}
+
+@media screen and (max-width: 980px) {
+    /*.sidenav {
+        margin-left: 0;
+        width: 0;
+        display: none;
+    }*/
+    .main {
+        margin-left: 0;
+    }
 }

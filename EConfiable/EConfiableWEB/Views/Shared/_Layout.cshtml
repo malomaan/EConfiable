@@ -10,8 +10,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
-
-
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -20,6 +18,8 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <a id="Menu" class="navbar-brand btn"><i style="color:var(--coloriconnavbar);" class="far fa-caret-square-down "></i></a>
+
         <a class="navbar-brand" href="" style="color:var(--coloriconnavbar);">E-Confiable</a>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
@@ -32,75 +32,103 @@
             </ul>
         </div>
     </nav>
-
-    <div class="container body-content">
-        @RenderBody()
+    <div class="sidenav">
+        <br /><br /><br />
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/Home/Index"><i style="color:var(--coloriconsidebar);" class="far fa-address-card fa-2x"></i> Registro <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/Home/Index"><i style="color:var(--coloriconsidebar);" class="fas fa-book-reader fa-2x"></i> Evaluar <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/Home/Index"><i style="color:var(--coloriconsidebar);" class="far fa-calendar-alt fa-2x"></i> Agendar <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/Home/Index"><i style="color:var(--coloriconsidebar);" class="far fa-chart-bar fa-2x"></i> Resultados <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/Home/Index"><i style="color:var(--coloriconsidebar);" class="fas fa-home fa-2x"></i> Inicio <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+    </div>
+    <div class="main">
+        <div class="container body-content">
+            @RenderBody()
+        </div>
     </div>
 
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+        <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+        <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
+        <script src="~/Scripts/notify.min.js"></script>
 
-    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
-    <script src="~/Scripts/notify.min.js"></script>
-
-    @* Modal de About y Contacto *@
-    <div class="modal fade" id="WindowsModalAbout" tabindex="-1" data-backdrop="false" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalCenterTitle"><i class="fas fa-info-circle" style="color:white;"></i> @ViewBag.Title.</h4>
-                    <a class='close' href="@Url.Action("Index","Home")">
-                        <i class="far fa-times-circle" style="color:white;"></i>
-                    </a>
-                </div>
-                <div class="modal-body">
-                    <h3>@ViewBag.Message</h3>
-                    <p>Use this area to provide additional information.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" id="my-button" class="btn btn-outline-success btn-sm btn-grid" onclick="location.href='@Url.Action("Index")'"><span class="fas fa-check"></span> Aceptar</button>
+        @* Modal de About y Contacto *@
+        <div class="modal fade" id="WindowsModalAbout" tabindex="-1" data-backdrop="false" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="exampleModalCenterTitle"><i class="fas fa-info-circle" style="color:white;"></i> @ViewBag.Title.</h4>
+                        <a class='close' href="@Url.Action("Index","Home")">
+                            <i class="far fa-times-circle" style="color:white;"></i>
+                        </a>
+                    </div>
+                    <div class="modal-body">
+                        <h3>@ViewBag.Message</h3>
+                        <p>Use this area to provide additional information.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="my-button" class="btn btn-outline-success btn-sm btn-grid" onclick="location.href='@Url.Action("Index")'"><span class="fas fa-check"></span> Aceptar</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="modal fade" id="exampleModal" tabindex="-1" data-backdrop="false" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalCenterTitle"><i class="fas fa-question-circle" style="color:white;"></i> @ViewBag.Title.</h4>
-                    <a class='close' href="@Url.Action("Index","Home")">
-                        <i class="far fa-times-circle" style="color:#FFF;"></i>
-                    </a>
-                </div>
-                <div class="modal-body">
-                    <h2>@ViewBag.Title.</h2>
-                    <h3>@ViewBag.Message</h3>
+        <div class="modal fade" id="exampleModal" tabindex="-1" data-backdrop="false" data-keyboard="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="exampleModalCenterTitle"><i class="fas fa-question-circle" style="color:white;"></i> @ViewBag.Title.</h4>
+                        <a class='close' href="@Url.Action("Index","Home")">
+                            <i class="far fa-times-circle" style="color:#FFF;"></i>
+                        </a>
+                    </div>
+                    <div class="modal-body">
+                        <h2>@ViewBag.Title.</h2>
+                        <h3>@ViewBag.Message</h3>
 
-                    <address>
-                        One Microsoft Way<br />
-                        Redmond, WA 98052-6399<br />
-                        <abbr title="Phone">P:</abbr>
-                        425.555.0100
-                    </address>
+                        <address>
+                            One Microsoft Way<br />
+                            Redmond, WA 98052-6399<br />
+                            <abbr title="Phone">P:</abbr>
+                            425.555.0100
+                        </address>
 
-                    <address>
-                        <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-                        <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-                    </address>
+                        <address>
+                            <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
+                            <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+                        </address>
 
 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" id="my-button" class="btn btn-outline-success btn-sm btn-grid" onclick="location.href='@Url.Action("Index")'"><span class="fas fa-check"></span> Aceptar</button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="my-button" class="btn btn-outline-success btn-sm btn-grid" onclick="location.href='@Url.Action("Index")'"><span class="fas fa-check"></span> Aceptar</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
 
 </body>
@@ -110,9 +138,10 @@
     function abaut() {
         $('#WindowsModalAbout').modal('show');
         }
-
+    $("#Menu").on("click", function () {
+        $('.sidenav').toggle();
+    });
     function contac() {
         $('#exampleModal').modal('show');
     }
-
 </script>
