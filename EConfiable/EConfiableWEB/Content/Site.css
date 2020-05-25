@@ -1,15 +1,17 @@
 ﻿:root {
-    --colorbaknavbar: rgba(0, 35, 140, 0.5);
+    --colorbaknavbar: #33344A;
     --colornavbar: #ffffff;
-    --colorselnavbar: #4d9cf0;
+    --colorselnavbar: #d0ddea;
     --coloriconnavbar: #ffffff;
     --colorselsmnavbar: #4d9cf0;
     --colorback: #c1b5e0;
-    --colorheadermodal: #2B648F;
+    --colorheadermodal: rgba(0, 35, 140, 0.5);
     --colorbakcard: #2B648F;
     --colorbakheradertable: #d0ddea;
-    --colorfontheadertable: #2092ed;
+    --colorfontheadertable: #33344A;
     --coloriconsidebar: #ffffff;
+    --colorsidebar: #ffffff;
+    --colorbaksidebar: #32457C;
 }
 
 body {
@@ -22,21 +24,29 @@ body {
     background-attachment: fixed;
 }
 
+.close{
+    color:white;
+}
 .card-header {
-    background-color: var(--colorbakcard) !important;
+    background-color: var(--colorheadermodal) !important;
     height: 45px;
     padding-top: 4px;
     color: white;
 }
 
 /*Bootstrap Navbar Aplication*/
+.navbar-light .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='#FFFFFF' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+
 .navbar {
     color: var(--colornavbar) !important;
     background-color: var(--colorbaknavbar) !important;
     height: 60px;
 }
 .navbar-brand {
-    color: ghostwhite !important;
+    color: yellow !important;
     font-weight: bold;
     font-size:25px;
 
@@ -76,7 +86,6 @@ body {
     background-color: #235071;
     border-color: #dee2e6 #dee2e6 #fff;
 }
-
 /*Fin Bootstrap Navbar Aplication*/
 .body-content {
     padding-left: 15px;
@@ -107,12 +116,12 @@ textarea {
 }
 .modal-header {
     color: #fff;
-    border-color: var(--colorbakcard);
+    border-color: var(--colorheadermodal);
     border-style: solid;
     border-width: 1px;
     border-radius: 5px 5px 0px 0px;
     height: 40px;
-    background-color: var(--colorbakcard);
+    background-color: var(--colorheadermodal);
     padding-top: 5px;
 }
 .modal-footer {
@@ -165,7 +174,7 @@ th {
 .masthead {
     padding: 0rem 0 7rem;
     position: relative;
-    background-color: #0062cc;
+    background-color: var(--colorbaknavbar);
     background-image: url(https://startbootstrap.com/assets/img/overlay.svg), linear-gradient(45deg, rgba(0, 35, 140, 0.5) 0%, #d0ddea 100%);
     background-size: cover;
     z-index: 0;
@@ -230,7 +239,7 @@ th {
         letter-spacing: .05rem;
         color: #ffffff;
         transition: .15s all;
-        background-color:#000000;       
+        background-color:var(--colorbaknavbar);       
     }
         .masthead .masthead-cards .card:hover {
             margin-top: -.25rem;
@@ -291,13 +300,13 @@ th {
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: var(--colorbaknavbar);
+    background-color: var(--colorbaksidebar);
     overflow-x: hidden;
     padding-top: 20px;
     padding: 10px;
 }
     .sidenav ul {
-        background-color: var(--colorbaknavbar) !important;
+        background-color: var(--colorbaksidebar) !important;
     }
     .sidenav ul a:hover {
         background-color: #4d9cf0 !important;
@@ -305,9 +314,9 @@ th {
     .sidenav a {
         padding: 6px 8px 6px 16px;
         text-decoration: none;
-        color: #ffffff;
+        color: var(--colorsidebar) !important;
         display: block;
-        font-size: 12px !important;
+        font-size: 14px !important;
         font-weight: normal;
     }
     .sidenav a:hover {
